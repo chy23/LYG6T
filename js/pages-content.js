@@ -634,78 +634,7 @@ const pagesContent = [
   // ==================== 第 19 頁 ====================
   {
     num: 19,
-    title: "留 言 板 (一)",
-    category: "旅途留念",
-    render: () => `
-      <div class="page-title">🦒 留言板 (一)</div>
-      <div style="font-size:0.9rem; color:#64748b; margin-bottom:10px;">手寫塗鴉、簽名與插畫紀念（原書長頸鹿與小豬插畫畫框）</div>
-
-      <div style="background:#ffffff; border:2px solid #cbd5e1; border-radius:12px; padding:14px; position:relative;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
-          <span style="font-size:0.85rem; font-weight:700;">畫筆顏色：</span>
-          <button onclick="setPenColor('#f97316')" style="width:26px; height:26px; border-radius:50%; background:#f97316; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#0284c7')" style="width:26px; height:26px; border-radius:50%; background:#0284c7; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#10b981')" style="width:26px; height:26px; border-radius:50%; background:#10b981; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#ec4899')" style="width:26px; height:26px; border-radius:50%; background:#ec4899; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#0f172a')" style="width:26px; height:26px; border-radius:50%; background:#0f172a; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenEraser()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:0.82rem; cursor:pointer;">🧹 橡皮擦</button>
-          
-          <div style="margin-left:auto; display:flex; gap:6px;">
-            <button onclick="clearBookCanvas()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:0.82rem; cursor:pointer;">清空</button>
-            <button onclick="downloadBookCanvas()" style="background:var(--primary); color:white; border:none; border-radius:4px; padding:4px 12px; font-size:0.82rem; font-weight:700; cursor:pointer;">📥 下載塗鴉</button>
-          </div>
-        </div>
-
-        <div style="width:100%; height:380px; position:relative; background:#ffffff; border:1px dashed #fdba74; border-radius:8px;">
-          <canvas id="pageDoodleCanvas" style="width:100%; height:100%; border-radius:8px; touch-action:none;"></canvas>
-        </div>
-      </div>
-    `
-  },
-
-  // ==================== 第 20 頁 ====================
-  {
-    num: 20,
-    title: "留 言 板 (二)",
-    category: "旅途留念",
-    render: () => `
-      <div class="page-title">🦒 留言板 (二)</div>
-      
-      <div class="book-photo-card" style="margin-bottom:14px;">
-        <img src="assets/images/doodle_border.jpg" alt="手冊原版長頸鹿與小豬留言框" style="max-height:280px; object-fit:contain; background:#ffffff;">
-        <div class="book-photo-caption">
-          <span>原民旅行社經典插畫留念框（手冊原圖）</span>
-        </div>
-      </div>
-
-      <div class="book-callout callout-orange">
-        ✏️ <b>旅行備忘與同學簽名：</b><br>
-        可以在此記錄這三天最想感謝的老師、最照顧你的同學，或是最讓你回味無窮的瞬間！
-      </div>
-    `
-  },
-
-  // ==================== 第 21 頁 ====================
-  {
-    num: 21,
-    title: "留 言 板 (三) ＆ 心情便條",
-    category: "旅途留念",
-    render: () => `
-      <div class="page-title">留 言 板 (三) ＆ 心情便條牆</div>
-
-      <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
-        <input type="text" id="bm_author" placeholder="你的暱稱 / 班級" style="width:140px; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.88rem;">
-        <input type="text" id="bm_msg" placeholder="寫下一句祝福或旅行心得..." style="flex:1; min-width:180px; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.88rem;">
-        <button class="nav-arrow-btn" onclick="addBookNote()" style="padding:8px 16px; font-size:0.85rem; height:auto; max-width:none;">貼上便條</button>
-      </div>
-
-      <div id="bookNotesWall" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px;"></div>
-    `
-  },
-
-  // ==================== 第 22 頁 ====================
-  {
-    num: 22,
+    scanPage: 22,
     title: "晚點名貼心小叮嚀",
     category: "生活規範",
     render: () => `
@@ -769,9 +698,10 @@ const pagesContent = [
     `
   },
 
-  // ==================== 第 23 頁 ====================
+  // ==================== 第 20 頁 ====================
   {
-    num: 23,
+    num: 20,
+    scanPage: 23,
     title: "家長聯絡單：電話與住宿一覽",
     category: "緊急聯絡",
     render: () => `
@@ -821,9 +751,10 @@ const pagesContent = [
     `
   },
 
-  // ==================== 第 24 頁 ====================
+  // ==================== 第 21 頁 ====================
   {
-    num: 24,
+    num: 21,
+    scanPage: 24,
     title: "行程表 (家長存查聯)",
     category: "行程時程",
     render: () => `

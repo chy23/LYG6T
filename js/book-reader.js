@@ -94,7 +94,8 @@ function renderBook() {
     leftContainer.innerHTML = continuousHtml;
 
     // 掛載所有互動元件
-    [1, 5, 16, 17, 18, 19, 21, 25].forEach(pn => initDynamicComponentsOnPage(pn));
+    [1, 5, 16, 17, 18].forEach(pn => initDynamicComponentsOnPage(pn));
+    if (typeof initSheetPageComponents === "function") initSheetPageComponents();
     setupScrollSpy();
     updateNavControlsContinuous();
   } else if (isMobile) {
@@ -137,13 +138,14 @@ function renderBook() {
 
 function buildPageHtml(pageData, side) {
   if (isScanMode) {
+    const scanNum = pageData.scanPage || pageData.num;
     return `
       <div class="page-header-row">
         <span>原版掃描頁面</span>
         <span>第 ${pageData.num} 頁</span>
       </div>
       <div style="flex:1; display:flex; justify-content:center; align-items:center; background:#ffffff; border-radius:8px; overflow:hidden; padding:4px;">
-        <img class="scan-view-frame" src="assets/images/p_${pageData.num}.jpg" alt="第 ${pageData.num} 頁原版手冊掃描" loading="lazy">
+        <img class="scan-view-frame" src="assets/images/p_${scanNum}.jpg" alt="第 ${pageData.num} 頁原版手冊掃描" loading="lazy">
       </div>
       <div class="page-footer-row">
         <span>新北市林口區麗園國小</span>
@@ -522,9 +524,9 @@ function initDynamicComponentsOnPage(pageNum) {
   if (pageNum === 16) renderBookQuiz1();
   if (pageNum === 17) renderBookQuiz2();
   if (pageNum === 18) renderBookQuiz3();
-  if (pageNum === 19) initBookDoodleCanvas();
-  if (pageNum === 21) renderBookNotesWall();
-  if (pageNum === 25 && typeof initSheetPageComponents === "function") initSheetPageComponents();
+  if (typeof initSheetPageComponents === "function" && pageNum === pagesContent.length) {
+    initSheetPageComponents();
+  }
 }
 
 window.saveStudentPass = function() {
@@ -870,140 +872,4 @@ window.gradeBookQuiz3 = function() {
   const banner = document.getElementById("bk_q3_score");
   banner.style.display = "block";
   banner.textContent = `🎉 麗寶樂園學習單測驗結果：${score} / ${total} 題正確！`;
-};
-
-/* --------------------------------------------------------------------------
-   9. 塗鴉板與便利貼
-   -------------------------------------------------------------------------- */
-let canvasCtx = null;
-let canvasDrawing = false;
-let canvasColor = "#f97316";
-let canvasLineWidth = 3;
-
-function initBookDoodleCanvas() {
-  const canvas = document.getElementById("pageDoodleCanvas");
-  if (!canvas) return;
-  canvasCtx = canvas.getContext("2d");
-
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width;
-  canvas.height = rect.height;
-  canvasCtx.lineCap = "round";
-  canvasCtx.lineJoin = "round";
-
-  function getP(e) {
-    const r = canvas.getBoundingClientRect();
-    const cx = e.touches ? e.touches[0].clientX : e.clientX;
-    const cy = e.touches ? e.touches[0].clientY : e.clientY;
-    return {
-      x: (cx - r.left) * (canvas.width / r.width),
-      y: (cy - r.top) * (canvas.height / r.height)
-    };
-  }
-
-  canvas.onmousedown = (e) => {
-    canvasDrawing = true;
-    const p = getP(e);
-    canvasCtx.beginPath();
-    canvasCtx.moveTo(p.x, p.y);
-  };
-  canvas.onmousemove = (e) => {
-    if (!canvasDrawing) return;
-    const p = getP(e);
-    canvasCtx.strokeStyle = canvasColor;
-    canvasCtx.lineWidth = canvasLineWidth;
-    canvasCtx.lineTo(p.x, p.y);
-    canvasCtx.stroke();
-  };
-  window.onmouseup = () => { canvasDrawing = false; };
-
-  canvas.ontouchstart = (e) => {
-    canvasDrawing = true;
-    const p = getP(e);
-    canvasCtx.beginPath();
-    canvasCtx.moveTo(p.x, p.y);
-  };
-  canvas.ontouchmove = (e) => {
-    if (!canvasDrawing) return;
-    e.preventDefault();
-    const p = getP(e);
-    canvasCtx.strokeStyle = canvasColor;
-    canvasCtx.lineWidth = canvasLineWidth;
-    canvasCtx.lineTo(p.x, p.y);
-    canvasCtx.stroke();
-  };
-  window.ontouchend = () => { canvasDrawing = false; };
-}
-
-window.setPenColor = function(c) {
-  canvasColor = c;
-  canvasLineWidth = 3;
-  if (canvasCtx) canvasCtx.globalCompositeOperation = "source-over";
-};
-
-window.setPenEraser = function() {
-  canvasLineWidth = 18;
-  if (canvasCtx) canvasCtx.globalCompositeOperation = "destination-out";
-};
-
-window.clearBookCanvas = function() {
-  const canvas = document.getElementById("pageDoodleCanvas");
-  if (canvas && canvasCtx) {
-    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-};
-
-window.downloadBookCanvas = function() {
-  const canvas = document.getElementById("pageDoodleCanvas");
-  if (!canvas) return;
-  const exp = document.createElement("canvas");
-  exp.width = canvas.width;
-  exp.height = canvas.height;
-  const expCtx = exp.getContext("2d");
-  expCtx.fillStyle = "#ffffff";
-  expCtx.fillRect(0, 0, exp.width, exp.height);
-  expCtx.drawImage(canvas, 0, 0);
-
-  const a = document.createElement("a");
-  a.download = `麗園國小塗鴉留念_${Date.now()}.png`;
-  a.href = exp.toDataURL("image/png");
-  a.click();
-};
-
-function renderBookNotesWall() {
-  const container = document.getElementById("bookNotesWall");
-  if (!container) return;
-  const defaultNotes = [
-    { author: "六年一班 小宇", text: "希望這三天都是大晴天！斷軌雲霄飛車我來了！🎢" },
-    { author: "六年二班 雅婷", text: "期待和大家在鹿港老街吃牛舌餅與麵線糊！😋" },
-    { author: "六年級導師", text: "出門在外注意安全，小組同行彼此守望照顧！❤️" }
-  ];
-  const notes = JSON.parse(localStorage.getItem("ly_book_notes") || JSON.stringify(defaultNotes));
-  container.innerHTML = "";
-  notes.forEach(n => {
-    const card = document.createElement("div");
-    card.style.background = "#fef08a";
-    card.style.borderRadius = "8px";
-    card.style.padding = "10px 12px";
-    card.style.fontSize = "0.85rem";
-    card.style.color = "#713f12";
-    card.style.boxShadow = "0 2px 6px rgba(0,0,0,0.06)";
-    card.innerHTML = `<b>📌 ${n.author}</b><div style="margin-top:4px; line-height:1.5;">${n.text}</div>`;
-    container.appendChild(card);
-  });
-}
-
-window.addBookNote = function() {
-  const authorEl = document.getElementById("bm_author");
-  const msgEl = document.getElementById("bm_msg");
-  if (!msgEl || !msgEl.value.trim()) return;
-
-  const notes = JSON.parse(localStorage.getItem("ly_book_notes") || "[]");
-  notes.unshift({
-    author: (authorEl && authorEl.value.trim()) || "麗園同學",
-    text: msgEl.value.trim()
-  });
-  localStorage.setItem("ly_book_notes", JSON.stringify(notes));
-  msgEl.value = "";
-  renderBookNotesWall();
 };

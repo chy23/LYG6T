@@ -121,11 +121,11 @@ let checkState = {
 };
 
 // ==========================================================================
-// 【關鍵實裝】：將「房桌號表 (查房表)」直接併入手冊第 25 頁（最後一頁）
+// 【關鍵實裝】：將「房桌號表 (查房表)」直接併入手冊最後一頁
 // ==========================================================================
 if (typeof pagesContent !== "undefined") {
   pagesContent.push({
-    num: 25,
+    num: pagesContent.length + 1,
     title: "學生校外教學活動房桌號表 (查房表)",
     category: "住宿查房",
     render: () => renderSheetPageHtml()
@@ -278,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 若當前頁面恰好為最後一頁，進行渲染
-  if (currentPage === 25) {
+  if (currentPage === pagesContent.length) {
     initSheetPageComponents();
   }
 });
