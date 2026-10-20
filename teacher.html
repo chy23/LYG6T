@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>麗園國小 115學年度六年級戶外教育手冊【教師專用版】</title>
+  <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊【教師專用版】，含全冊行程導覽、學生房間表與晚點名查房管理。">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="book-header" style="background: rgba(15, 23, 42, 0.98); border-bottom: 2px solid #f59e0b;">
+    <div class="header-inner">
+      <div class="book-title-group">
+        <span class="school-tag" style="background:#ea580c; color:white;">🍎 教師專用版</span>
+        <div class="book-main-title">
+          <span>六年級戶外教育 (教師版)</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- 教師專屬：學生房間總表按鈕 -->
+        <button class="header-btn" id="btnOpenRooms" style="background:linear-gradient(135deg, #f59e0b, #d97706); color:#0f172a; font-weight:800; border:none; box-shadow:0 2px 8px rgba(245, 158, 11, 0.4);" title="開啟學生房間總表與查房管理">
+          <span>🏨 房間表</span>
+        </button>
+
+        <!-- 字體放大縮小 -->
+        <button class="header-btn font-size-btn" onclick="adjustFontSize(-0.1)" title="縮小字體">A-</button>
+        <button class="header-btn font-size-btn" onclick="adjustFontSize(0.1)" title="放大字體">A+</button>
+
+        <!-- 模式切換：連續滾動 / 單頁翻閱 -->
+        <button class="header-btn" id="btnToggleLayout" title="切換閱覽模式：連續滾動 / 單頁翻閱">
+          <span id="layoutModeText">📜 連續</span>
+        </button>
+
+        <button class="header-btn" id="btnOpenToc" title="開啟章節目錄">
+          <span>📑 目錄</span>
+        </button>
+        <button class="header-btn" id="btnToggleScan" title="切換原版掃描 / 數位排版">
+          <span id="scanModeText">📷 原版</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Book Main Stage -->
+  <main class="book-stage">
+    
+    <!-- 頂部倒數與提示小條 -->
+    <div class="book-info-bar">
+      <div>
+        <span style="color:#fdba74; font-weight:700;">⏳ 啟程倒數：</span>
+        <span id="headerCountdown" style="font-weight:800; color:#38bdf8;">計算中...</span>
+      </div>
+      <div style="font-size:0.78rem; color:#94a3b8;">
+        115/11/25 (三) 06:30 集合 07:00 準時出發！
+      </div>
+    </div>
+
+    <!-- 教師專屬快捷橫幅 -->
+    <div style="width:100%; max-width:1260px; margin-bottom:12px; background:linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border:2px solid #fcd34d; border-radius:12px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; box-shadow:0 2px 8px rgba(245,158,11,0.12);">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:1.4rem;">📋</span>
+        <div>
+          <b style="color:#92400e; font-size:0.92rem;">教師專用查房系統已啟用</b>
+          <p style="margin:2px 0 0; font-size:0.78rem; color:#b45309;">支援今埔里渡假大酒店 & 麗寶福容大飯店即時巡房點名、備註儲存與房號搜尋。</p>
+        </div>
+      </div>
+      <button onclick="document.getElementById('btnOpenRooms').click()" style="background:#d97706; color:white; border:none; padding:7px 14px; border-radius:20px; font-weight:700; font-size:0.82rem; cursor:pointer; white-space:nowrap; box-shadow:0 2px 6px rgba(217,119,6,0.3);">開啟查房表 ➔</button>
+    </div>
+
+    <!-- Book Spine & Pages Container -->
+    <div class="book-spine-wrapper" id="bookWrapper">
+      <div class="book-spread" id="bookSpread">
+        <!-- Left Page (Mobile shows active page here) -->
+        <article class="book-page page-left" id="pageLeft"></article>
+        <!-- Right Page (Desktop only) -->
+        <article class="book-page page-right" id="pageRight"></article>
+      </div>
+    </div>
+
+    <!-- Bottom Page Navigation Bar (Fixed on Mobile) -->
+    <nav class="book-nav-bar">
+      <button class="nav-arrow-btn" id="btnPrevPage">
+        <span>◀ 上一頁</span>
+      </button>
+
+      <select class="page-jump-select" id="pageJumpSelect"></select>
+
+      <button class="nav-arrow-btn" id="btnNextPage">
+        <span>下一頁 ▶</span>
+      </button>
+    </nav>
+  </main>
+
+  <!-- Table of Contents Drawer (目錄側邊欄) -->
+  <div class="toc-backdrop" id="tocBackdrop"></div>
+  <aside class="toc-drawer" id="tocDrawer">
+    <div class="toc-header">
+      <h3><span>📖</span> 手冊章節目錄 (教師版)</h3>
+      <button class="header-btn" id="btnCloseToc" style="padding:4px 10px;">✕</button>
+    </div>
+    <!-- 教師專用置頂項目 -->
+    <div style="padding:10px 14px; border-bottom:1px solid #e2e8f0; background:#fffbeb;">
+      <button onclick="document.getElementById('btnOpenRooms').click(); document.getElementById('btnCloseToc').click();" style="width:100%; padding:10px; border-radius:8px; background:#f59e0b; color:#0f172a; font-weight:800; border:none; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <span>📋</span> 麗園國小學生校外教學活動房桌號表
+      </button>
+    </div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <!-- Teacher Room Allocation & Check-in Modal -->
+  <div class="room-modal-backdrop" id="roomModalBackdrop"></div>
+  <section class="room-modal-container" id="roomModalContainer">
+    
+    <!-- Modal Header -->
+    <div class="room-modal-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:1.4rem;">📋</span>
+        <div>
+          <h2 style="font-size:1.1rem; font-weight:800; color:#0f172a; margin:0;">麗園國小學生校外教學活動房桌號表</h2>
+          <span style="font-size:0.75rem; color:#64748b;">教師專用版 · 支援各班名單切換、房桌號輸入與夜間查房</span>
+        </div>
+      </div>
+      <button class="header-btn" id="btnCloseRooms" style="background:#e2e8f0; color:#334155; padding:4px 10px;">✕</button>
+    </div>
+
+    <!-- Teacher Tab Bar: 房桌號表 vs 巡房點名 -->
+    <div class="hotel-tab-bar" style="background:#f1f5f9; border-bottom:1px solid #e2e8f0;">
+      <button class="hotel-tab-btn active" id="teacherTabSheet" onclick="switchTeacherTab('sheet')">
+        📋 各班房桌號表 (實體單對應)
+      </button>
+      <button class="hotel-tab-btn" id="teacherTabPatrol" onclick="switchTeacherTab('patrol')">
+        🏨 夜間查房點名系統 (依房號打勾)
+      </button>
+    </div>
+
+    <!-- View 1: 實體單對應房桌號表 -->
+    <div id="sectionSheetView" style="flex:1; overflow-y:auto; padding:12px 14px 40px; background:#f8fafc;">
+      
+      <!-- 班級切換 Chips -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+          <span style="font-size:0.82rem; font-weight:800; color:#475569;">選擇班級：</span>
+          <div class="class-filter-chips" id="sheetClassTabs" style="display:inline-flex;"></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span id="sheetSaveNotice" style="font-size:0.75rem; color:#059669; font-weight:700; opacity:0; transition:opacity 0.3s ease;">💾 已自動儲存</span>
+          <button onclick="printRoomSheet()" style="background:#3b82f6; color:white; border:none; padding:5px 12px; border-radius:6px; font-weight:700; font-size:0.78rem; cursor:pointer;">🖨️ 列印此表</button>
+        </div>
+      </div>
+
+      <!-- 表格本體容器 -->
+      <div class="sheet-container">
+        
+        <!-- 表格標題 -->
+        <div class="sheet-title-header">
+          <div class="sheet-main-title">麗園國小學生校外教學活動房桌號表</div>
+        </div>
+
+        <!-- 班級、合計、導師欄位 -->
+        <div class="sheet-meta-bar">
+          <div>
+            <span>班級：</span>
+            <span id="sheetDisplayClass" style="color:#2563eb; font-weight:800;">6年1班</span>
+          </div>
+          <div>
+            <span>合計：</span>
+            <input type="number" id="sheetInputTotal" class="sheet-meta-input" style="width:55px; text-align:center;" placeholder="人數" onchange="updateSheetMeta('totalCount', this.value)">
+            <span>人</span>
+          </div>
+          <div>
+            <span>導師：</span>
+            <input type="text" id="sheetInputTeacher" class="sheet-meta-input" style="width:110px;" placeholder="填寫導師姓名" onchange="updateSheetMeta('teacher', this.value)">
+          </div>
+        </div>
+
+        <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:8px 12px; margin-bottom:12px; font-size:0.8rem; color:#1e40af; display:flex; align-items:center; gap:6px;">
+          <span>💡</span>
+          <span><b>使用說明：</b>表格對應紙本原樣（第一晚今埔里、第二晚麗寶福容）。點擊欄位即可直接修改或編輯，輸入後會自動即時儲存！</span>
+        </div>
+
+        <!-- 雙欄表格：左男生 (1~25)、右女生 (1~25) -->
+        <div class="sheet-tables-wrap">
+          
+          <!-- 男生表格 -->
+          <div class="table-box">
+            <div class="table-box-header boys">👦 男生房桌號表 (編號 1 ~ 25)</div>
+            <table class="room-sheet-table">
+              <thead>
+                <tr>
+                  <th class="col-no">編號</th>
+                  <th class="col-name">男生姓名</th>
+                  <th class="col-room">第一晚<br>房號</th>
+                  <th class="col-room">第二晚<br>房號</th>
+                  <th class="col-table">桌號</th>
+                </tr>
+              </thead>
+              <tbody id="sheetBoysTbody"></tbody>
+            </table>
+          </div>
+
+          <!-- 女生表格 -->
+          <div class="table-box">
+            <div class="table-box-header girls">👧 女生房桌號表 (編號 1 ~ 25)</div>
+            <table class="room-sheet-table">
+              <thead>
+                <tr>
+                  <th class="col-no">編號</th>
+                  <th class="col-name">女生姓名</th>
+                  <th class="col-room">第一晚<br>房號</th>
+                  <th class="col-room">第二晚<br>房號</th>
+                  <th class="col-table">桌號</th>
+                </tr>
+              </thead>
+              <tbody id="sheetGirlsTbody"></tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- View 2: 夜間查房點名系統 -->
+    <div id="sectionPatrolView" style="display:none; flex:1; flex-direction:column; overflow:hidden;">
+      
+      <!-- 飯店選擇 -->
+      <div class="hotel-tab-bar">
+        <button class="hotel-tab-btn active" id="tabHotel1" onclick="switchHotel(1)">
+          🏨 第一晚：今埔里渡假大酒店
+        </button>
+        <button class="hotel-tab-btn" id="tabHotel2" onclick="switchHotel(2)">
+          🏨 第二晚：麗寶福容大飯店
+        </button>
+      </div>
+
+      <!-- 搜尋與過濾 -->
+      <div class="room-toolbar">
+        <div class="room-search-box">
+          <input type="text" id="roomSearchInput" placeholder="🔍 搜尋房號、學生姓名或班級..." oninput="filterRooms()">
+        </div>
+      </div>
+
+      <!-- 進度與統計 -->
+      <div class="room-stats-card">
+        <div class="stats-text">
+          <span>查房進度：<b id="checkedCount" style="color:#059669;">0</b> / <span id="totalRoomsCount">0</span> 間 (<span id="progressPct">0%</span>)</span>
+          <button class="reset-stats-btn" onclick="resetCurrentHotelChecks()">🔄 重置打勾</button>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- 房間卡片列表 -->
+      <div class="rooms-grid-scroll" id="roomsGrid"></div>
+    </div>
+
+  </section>
+
+  <!-- Scripts -->
+  <script src="js/quiz-data.js"></script>
+  <script src="js/pages-content.js"></script>
+  <script src="js/book-reader.js"></script>
+  <script src="js/teacher-rooms.js"></script>
+</body>
+</html>
