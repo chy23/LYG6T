@@ -3,852 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>新北市林口區麗園國小 115學年度六年級戶外教育參觀活動 電子手冊</title>
-  <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊，含完整三天兩夜行程、隨身行李清單、景點圖文導覽、線上互動學習單與緊急聯絡資訊。">
+  <title>新北市林口區麗園國小 115學年度六年級戶外教育參觀活動 電子手冊書</title>
+  <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊書，以立體數位書籍形式閱覽，收錄三天兩夜完整行程、真實景點照片輔助、行李打包清單、線上學習單與緊急聯絡資訊。">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎒</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body>
 
-  <!-- Site Header -->
-  <header class="site-header">
-    <div class="header-container">
-      <div class="logo-group">
-        <div class="school-badge">麗</div>
-        <div class="brand-title">
-          <span class="main">麗園國小 六年級戶外教育</span>
-          <span class="sub">115學年度畢業旅行電子手冊</span>
+  <!-- Top Navigation Bar -->
+  <header class="book-header">
+    <div class="header-inner">
+      <div class="book-title-group">
+        <span class="school-tag">新北市麗園國小</span>
+        <div class="book-main-title">
+          <span>115學年度六年級戶外教育電子手冊</span>
+          <span class="sub-txt" style="font-size:0.8rem; color:#94a3b8; font-weight:normal;">(民國115年11月25日～27日)</span>
         </div>
       </div>
 
-      <!-- Desktop Nav -->
-      <nav class="desktop-nav">
-        <a href="#scheduleSection" class="nav-link">活動行程</a>
-        <a href="#checklistSection" class="nav-link">行前清單</a>
-        <a href="#attractionsSection" class="nav-link">景點導覽</a>
-        <a href="#quizSection" class="nav-link">線上學習單</a>
-        <a href="#safetySection" class="nav-link">生活安全</a>
-        <a href="#contactsSection" class="nav-link">緊急聯絡</a>
-        <a href="#doodleSection" class="nav-link">留言塗鴉</a>
-      </nav>
-
-      <!-- View Mode & Actions -->
-      <div class="header-actions">
-        <div class="view-mode-toggle">
-          <button class="view-mode-btn active" id="btnModeInteractive">
-            <span>📱 智慧導覽</span>
-          </button>
-          <button class="view-mode-btn" id="btnModeFlipbook">
-            <span>📑 原書閱覽</span>
-          </button>
-        </div>
-
-        <button class="btn-icon" id="btnOpenSearch" title="全文搜尋 (快速鍵 /)">
-          🔍
+      <div class="header-controls">
+        <button class="header-btn" id="btnOpenToc" title="開啟章節目錄">
+          <span>📑 章節目錄</span>
         </button>
-        <button class="btn-icon" onclick="window.print()" title="列印手冊">
-          🖨️
+        <button class="header-btn" id="btnToggleScan" title="切換原書掃描頁 / 數位增強版">
+          <span id="scanModeText">📷 顯示原版掃描</span>
         </button>
-        <a href="assets/handbook.pdf" download="麗園國小戶外教育手冊.pdf" class="btn-icon" title="下載原版手冊 PDF">
-          📥
+        <button class="header-btn" onclick="window.print()" title="列印手冊">
+          <span>🖨️ 列印</span>
+        </button>
+        <a href="assets/handbook.pdf" download="麗園國小戶外教育手冊.pdf" class="header-btn" title="下載原版手冊 PDF">
+          <span>📥 下載原檔</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Wrapper -->
-  <main class="main-wrapper">
-
-    <!-- ==================== 1. 智慧導覽模式 ==================== -->
-    <div id="interactiveView">
-
-      <!-- Hero Card & Countdown -->
-      <section class="hero-card">
-        <div class="hero-badge-row">
-          <span class="badge badge-orange">📍 新北市林口區麗園國民小學</span>
-          <span class="badge badge-blue">🗓️ 115年11月25日～11月27日 (三天兩夜)</span>
-          <span class="badge badge-green">🚌 原民旅行社承辦</span>
-        </div>
-        <h1 class="hero-title">115 學年度 6 年級戶外教育參觀活動</h1>
-        <p class="hero-subtitle">
-          為擴大學生學習領域及生活經驗，指導學生實踐生活規範並充實生活內容，開啟一段難忘的青春學習旅程！
-        </p>
-
-        <!-- Countdown -->
-        <div class="countdown-bar">
-          <div class="countdown-label">⏳ 距離出發集合倒數：</div>
-          <div class="countdown-units">
-            <div class="countdown-unit">
-              <span class="val" id="cdDays">--</span>
-              <span class="unit-txt">天</span>
-            </div>
-            <div class="countdown-unit">
-              <span class="val" id="cdHours">--</span>
-              <span class="unit-txt">時</span>
-            </div>
-            <div class="countdown-unit">
-              <span class="val" id="cdMins">--</span>
-              <span class="unit-txt">分</span>
-            </div>
-            <div class="countdown-unit">
-              <span class="val" id="cdSecs">--</span>
-              <span class="unit-txt">秒</span>
-            </div>
-          </div>
-          <div style="margin-left:auto; font-size:0.8rem; color:#cbd5e1;">
-            ⏰ 第一天 <b>06:00～06:30</b> 集合完畢，<b>07:00</b> 準時出發！
-          </div>
-        </div>
-      </section>
-
-      <!-- Quick Action Shortcuts -->
-      <section class="quick-actions-grid">
-        <div class="action-card" onclick="document.querySelector('#scheduleSection').scrollIntoView({behavior:'smooth'})">
-          <div class="action-icon" style="background:#ffedd5; color:#ea580c;">📅</div>
-          <div class="title">三天行程表</div>
-          <div class="desc">每日站點與各天穿著</div>
-        </div>
-        <div class="action-card" onclick="document.querySelector('#checklistSection').scrollIntoView({behavior:'smooth'})">
-          <div class="action-icon" style="background:#e0f2fe; color:#0284c7;">🎒</div>
-          <div class="title">行李打包清單</div>
-          <div class="desc">隨身背包與換洗衣物</div>
-        </div>
-        <div class="action-card" onclick="document.querySelector('#quizSection').scrollIntoView({behavior:'smooth'})">
-          <div class="action-icon" style="background:#dcfce7; color:#15803d;">📝</div>
-          <div class="title">線上互動學習單</div>
-          <div class="desc">921、鹿港、麗寶樂園</div>
-        </div>
-        <div class="action-card" onclick="document.querySelector('#contactsSection').scrollIntoView({behavior:'smooth'})">
-          <div class="action-icon" style="background:#f3e8ff; color:#7e22ce;">📞</div>
-          <div class="title">緊急聯絡簿</div>
-          <div class="desc">飯店電話與一鍵導航</div>
-        </div>
-      </section>
-
-      <!-- Student Digital Pass (個人資料卡) -->
-      <section class="student-pass-card" id="studentPassSection">
-        <div class="student-pass-header">
-          <h3><span>🏷️</span> 個人數位證件卡</h3>
-          <span style="font-size:0.75rem; color:#9a3412;">資料自動儲存在手機，重開不消失</span>
-        </div>
-        <div id="passWelcomeText" style="font-weight:700; color:#c2410c; margin-bottom:14px; font-size:0.95rem;"></div>
-
-        <div class="pass-grid">
-          <div class="pass-field">
-            <label>學生姓名</label>
-            <input type="text" id="studentName" placeholder="例如：林小園">
-          </div>
-          <div class="pass-field">
-            <label>就讀班級</label>
-            <input type="text" id="studentClass" placeholder="例如：六年3班">
-          </div>
-          <div class="pass-field">
-            <label>血型</label>
-            <input type="text" id="studentBlood" placeholder="例如：O型">
-          </div>
-          <div class="pass-field">
-            <label>家長緊急電話</label>
-            <input type="tel" id="studentPhoneParent" placeholder="09xx-xxx-xxx">
-          </div>
-          <div class="pass-field">
-            <label>導師電話</label>
-            <input type="tel" id="studentPhoneTeacher" placeholder="導師手機">
-          </div>
-          <div class="pass-field">
-            <label>遊覽車車號</label>
-            <input type="text" id="studentBusNo" placeholder="請記下車牌號碼">
-          </div>
-          <div class="pass-field">
-            <label>第一晚房號（今埔里）</label>
-            <input type="text" id="studentRoomPuli" placeholder="例如：502">
-          </div>
-          <div class="pass-field">
-            <label>第二晚房號（麗寶福容）</label>
-            <input type="text" id="studentRoomLihpao" placeholder="例如：806">
-          </div>
-          <div class="pass-field">
-            <label>用餐桌號</label>
-            <input type="text" id="studentTableNo" placeholder="例如：第4桌">
-          </div>
-        </div>
-
-        <div class="pass-actions">
-          <button class="btn-secondary" id="btnPrintPass">🖨️ 列印名牌卡</button>
-          <button class="btn-primary" id="btnSavePass">💾 保存我的資料</button>
-        </div>
-      </section>
-
-      <!-- ==================== 2. 三日行程時程表 ==================== -->
-      <section class="section-container" id="scheduleSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">📅</div>
-            <span>戶外教育活動行程表</span>
-          </div>
-          <span style="font-size:0.8rem; color:var(--text-muted);">實際時間以當天路況為準</span>
-        </div>
-
-        <!-- Day Tabs -->
-        <div class="days-nav">
-          <button class="day-tab-btn active" data-day="1">
-            <span>第 1 天 (11/25 週三)</span>
-          </button>
-          <button class="day-tab-btn" data-day="2">
-            <span>第 2 天 (11/26 週四)</span>
-          </button>
-          <button class="day-tab-btn" data-day="3">
-            <span>第 3 天 (11/27 週五)</span>
-          </button>
-        </div>
-
-        <!-- Day 1 Content -->
-        <div class="day-timeline-content" data-day="1">
-          <div class="dress-code-banner">
-            <div class="label">👕 第一天服裝規定：</div>
-            <div class="dress-code-badge">著便服（輕便舒適服裝、運動鞋）</div>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">06:30</span>
-                  <span class="badge badge-orange">集合完畢</span>
-                </div>
-                <div class="timeline-title">學校集合完畢 ➔ 07:00 前準時出發</div>
-                <div class="timeline-desc">請攜帶隨身行李到班級指定位置集合點名，逾時交通請自理。認清並記下所屬遊覽車外觀、顏色及車牌號碼。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">上午</span>
-                  <span class="badge badge-blue">歷史與科學活教材</span>
-                </div>
-                <div class="timeline-title">921 地震教育園區</div>
-                <div class="timeline-desc">走訪臺中霧峰光復國中斷層遺址，實地參觀車籠埔斷層保存館、影像館、地震工程教育館與防災館，深化防災觀念。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">中午</span>
-                  <span class="badge badge-green">美味午餐</span>
-                </div>
-                <div class="timeline-title">享用午餐</div>
-                <div class="timeline-desc">各班級依安排桌號就座用餐，養成良好用餐禮儀，不浪費食物，自備環保餐具與水壺。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">下午</span>
-                  <span class="badge badge-blue">鐵道木業文化</span>
-                </div>
-                <div class="timeline-title">林班道體驗工廠（水里車埕）</div>
-                <div class="timeline-desc">漫遊最後的火車站「水里車埕」，體驗木工創作教室、特色小店聚落、樂活倉庫生活雜貨與木茶房湖畔風光。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">傍晚</span>
-                  <span class="badge badge-orange">住宿辦理</span>
-                </div>
-                <div class="timeline-title">今埔里渡假大酒店 Check in ➔ 享用晚餐</div>
-                <div class="timeline-desc">辦理入住手續，隨隊領隊引導回房放置大件行李，房內物品愛惜使用。隨後享用豐盛晚餐。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">晚上</span>
-                  <span class="badge badge-blue">團結同樂</span>
-                </div>
-                <div class="timeline-title">歡樂團康活動 ➔ 21:00 晚點名</div>
-                <div class="timeline-desc">六年級全體同學互動同樂、增進同儕情誼。21:00各房晚點名，冷氣調至25度以上，整理好明日行李，安心就寢。</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 2 Content -->
-        <div class="day-timeline-content" data-day="2" style="display:none;">
-          <div class="dress-code-banner" style="background:#e0f2fe; border-left-color:#0284c7;">
-            <div class="label" style="color:#0369a1;">👕 第二天服裝規定：</div>
-            <div class="dress-code-badge" style="background:#0284c7;">著班服（展現班級團結風采）</div>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">07:00</span>
-                  <span class="badge badge-orange">早晨甦醒</span>
-                </div>
-                <div class="timeline-title">晨喚 ➔ 享用元氣早餐 ➔ 退房出發</div>
-                <div class="timeline-desc">室友互相提醒起床，檢查行李與房卡，依序至餐廳享用早餐。將房卡繳還領隊，整理行囊準時上車。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">上午</span>
-                  <span class="badge badge-blue">自然生態步道</span>
-                </div>
-                <div class="timeline-title">薰衣草森林九九峰園區</div>
-                <div class="timeline-desc">享受山林清新空氣與芬多精，探索九九峰獨特山勢與園區自然植栽之美。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">中午</span>
-                  <span class="badge badge-green">能量補給</span>
-                </div>
-                <div class="timeline-title">享用午餐 ➔ 芬園小憩</div>
-                <div class="timeline-desc">品嚐美味佳餚後稍作歇息放鬆，整理精神準備迎接下午精彩的老街歷史漫步。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">下午</span>
-                  <span class="badge badge-blue">歷史古鎮巡禮</span>
-                </div>
-                <div class="timeline-title">鹿港老街（一府二鹿三艋舺）</div>
-                <div class="timeline-desc">穿梭瑤林街、埔頭街紅磚巷弄，探訪天后宮、新祖宮、半邊井、隘門與餓鬼埕，品味鹿港傳統特色小吃與木雕手工藝。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">晚上</span>
-                  <span class="badge badge-orange">高潮盛會</span>
-                </div>
-                <div class="timeline-title">享用晚餐 ➔ 青春晚會</div>
-                <div class="timeline-desc">享用美味晚餐後，參加最令人期待的青春晚會！勁歌熱舞、真情告白與感恩分享，留下小學生涯最璀璨的回憶！</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">21:30</span>
-                  <span class="badge badge-blue">安歇就寢</span>
-                </div>
-                <div class="timeline-title">麗寶福容大飯店 Check in ➔ 21:30 晚點名</div>
-                <div class="timeline-desc">入住五星級渡假飯店，21:30進行各房晚點名，整理行李，早睡早起儲備明日暢遊樂園的滿滿體力！</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 3 Content -->
-        <div class="day-timeline-content" data-day="3" style="display:none;">
-          <div class="dress-code-banner" style="background:#dcfce7; border-left-color:#10b981;">
-            <div class="label" style="color:#065f46;">👕 第三天服裝規定：</div>
-            <div class="dress-code-badge" style="background:#10b981;">著學校運動服（方便樂園暢玩活動）</div>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">07:00</span>
-                  <span class="badge badge-orange">晨光時光</span>
-                </div>
-                <div class="timeline-title">晨喚 ➔ 享用飯店豐盛早餐 ➔ 退房</div>
-                <div class="timeline-desc">整理全部行李裝箱，檢查有無遺漏在房間的物品。繳還房卡後，將大件行李上車。</div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">全日暢玩</span>
-                  <span class="badge badge-blue">主題樂園狂歡</span>
-                </div>
-                <div class="timeline-title">麗寶樂園探索世界（午餐：必勝客個人套餐）</div>
-                <div class="timeline-desc">
-                  暢玩三大主題園區：<br>
-                  ⚡ <b>冒險天堂：</b>挑戰全球唯一斷軌式雲霄飛車「搶救地心」、時空飛俠、火山冒險、碰碰車。<br>
-                  🎡 <b>魔法森林：</b>摩天輪、叢林泛舟、花園小舟、魔法咖啡杯。<br>
-                  🎠 <b>POPA歡樂王國：</b>採礦飛車、海盜船、旋轉木馬等童趣設施。<br>
-                  🍕 <b>午餐安排：</b>特別提供必勝客個人獨享套餐，營養又美味！
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <span class="timeline-time">16:00</span>
-                  <span class="badge badge-green">平安賦歸</span>
-                </div>
-                <div class="timeline-title">滿載收穫 ➔ 16:00 返抵學校放學</div>
-                <div class="timeline-desc">各班導師清點全體人數，確保每一位同學平安歸隊後正式放學，返家與家人分享三天精彩旅程！</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 3. 行李打包清單 ==================== -->
-      <section class="section-container" id="checklistSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">🎒</div>
-            <span>外出旅遊攜帶物品選取表</span>
-          </div>
-          <button class="btn-secondary" id="btnResetChecklist" style="font-size:0.75rem; padding:4px 10px;">重設清單</button>
-        </div>
-
-        <div class="checklist-card">
-          <div class="progress-header">
-            <span style="font-weight:700; font-size:0.92rem;">打包進度追蹤：</span>
-            <span id="checkProgressText" style="font-size:0.85rem; font-weight:700; color:var(--accent-green);">已準備 0 / 0 項 (0%)</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="checkProgressFill"></div>
-          </div>
-
-          <!-- Dynamic Items Grid -->
-          <div class="checklist-columns" id="checklistItemsWrapper"></div>
-
-          <!-- Add custom item -->
-          <div style="display:flex; gap:8px; margin-top:20px; flex-wrap:wrap;">
-            <select id="customItemCat" style="padding:8px 12px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm); font-size:0.85rem;">
-              <option value="隨身背包">隨身背包</option>
-              <option value="行李袋/行李箱">行李袋/行李箱</option>
-            </select>
-            <input type="text" id="customItemInput" placeholder="新增自訂攜帶物品（如：相機、平安符）" style="flex:1; min-width:180px; padding:8px 12px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm); font-size:0.85rem;">
-            <button class="btn-primary" id="btnAddCustomItem" style="padding:6px 14px; font-size:0.85rem;">➕ 新增項目</button>
-          </div>
-
-          <!-- Eco Alert -->
-          <div class="eco-alert-card">
-            <span style="font-size:24px;">🌱</span>
-            <div>
-              <b>因應減塑及環保政策，特別提醒：</b><br>
-              1. 飯店<b>不提供一次性盥洗用品</b>（如牙刷、牙膏、梳子、浴帽等），請務必自行攜帶個人牙膏牙刷！<br>
-              2. 本次旅程中<b>皆不提供免洗餐具</b>，請自備環保筷/餐具。<br>
-              3. 旅途中<b>不主動提供瓶裝水</b>，請隨身攜帶個人環保水壺。
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 4. 景點深度圖文導覽 ==================== -->
-      <section class="section-container" id="attractionsSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">🗺️</div>
-            <span>精選景點深度圖文導覽</span>
-          </div>
-        </div>
-
-        <div class="attractions-grid">
-          <!-- 921 -->
-          <div class="attraction-card">
-            <div class="attraction-img-wrap">
-              <img src="assets/images/p_9.jpg" alt="921地震教育園區" loading="lazy">
-            </div>
-            <div class="attraction-content">
-              <h3>921 地震教育園區</h3>
-              <div class="attraction-tags">
-                <span class="tag-pill">防災科學</span>
-                <span class="tag-pill">地質活教材</span>
-                <span class="tag-pill">霧峰光復國中原址</span>
-              </div>
-              <p class="attraction-desc">
-                1999年9月21日凌晨1時47分，芮氏規模7.3強烈地震重創臺灣。為保存地震原址與紀錄史實，於臺中霧峰光復國中斷層隆起災區原址改建為園區，提供全體國民最深刻的地震教育活教材。
-              </p>
-              <div class="attraction-highlights">
-                🏛️ <b>五大特色展館：</b><br>
-                • <b>車籠埔斷層保存館：</b>紀錄斷層地表破裂真實地貌與科學知識。<br>
-                • <b>影像館：</b>集結珍貴震災影像與各界送溫暖歷史紀錄。<br>
-                • <b>地震工程教育館：</b>毀壞校舍原址展示與耐震科學實驗。<br>
-                • <b>防災教育館：</b>推廣事前的預防避難宣導觀念。<br>
-                • <b>重建記錄館：</b>呈現社區凝聚、住宅重建與產業重生歷程。
-              </div>
-            </div>
-          </div>
-
-          <!-- 林班道 -->
-          <div class="attraction-card">
-            <div class="attraction-img-wrap">
-              <img src="assets/images/p_11.jpg" alt="林班道體驗工廠" loading="lazy">
-            </div>
-            <div class="attraction-content">
-              <h3>林班道體驗工廠（水里車埕）</h3>
-              <div class="attraction-tags">
-                <span class="tag-pill">木業文化</span>
-                <span class="tag-pill">最後的火車站</span>
-                <span class="tag-pill">文創手作</span>
-              </div>
-              <p class="attraction-desc">
-                車埕被譽為臺灣「最後的火車站」，是充滿歷史底蘊的小山城。林班道是一棟綠意盎然的環保綠建築體驗園區，結合文化、教育與休閒，讓遊客透過親手體驗發現木材之美與鐵道歷史。
-              </p>
-              <div class="attraction-highlights">
-                🪵 <b>園區亮點巡禮：</b><br>
-                • <b>體驗工廠木工教室：</b>動手DIY手作木藝作品，感受木質溫潤手感。<br>
-                • <b>創意商店區與樂活倉庫：</b>匯聚生活雜貨、文創伴手禮。<br>
-                • <b>木茶房湖畔景觀：</b>依傍儲木池畔，飽覽水里山城水岸寧靜風光。
-              </div>
-            </div>
-          </div>
-
-          <!-- 鹿港老街 -->
-          <div class="attraction-card">
-            <div class="attraction-img-wrap">
-              <img src="assets/images/p_12.jpg" alt="鹿港老街" loading="lazy">
-            </div>
-            <div class="attraction-content">
-              <h3>鹿港老街歷史巡禮</h3>
-              <div class="attraction-tags">
-                <span class="tag-pill">一府二鹿三艋舺</span>
-                <span class="tag-pill">不見天街</span>
-                <span class="tag-pill">國定古蹟</span>
-              </div>
-              <p class="attraction-desc">
-                鹿港為臺灣三大歷史門戶之一。昔日由於靠海風沙強烈，居民在街道上方加蓋屋頂，形成行人看不見天空的鼎鼎大名「不見天街」。漫步紅磚街道，曲折的九曲巷與古樸老宅宛如穿越時空隧道。
-              </p>
-              <div class="attraction-highlights">
-                🏮 <b>鹿港必看五大文化景點：</b><br>
-                • <b>天后宮：</b>國定古蹟，供奉湄洲開基媽祖神尊。<br>
-                • <b>新祖宮：</b>乾隆皇帝敕建官廟，立有「文武官員至此下馬」石碑。<br>
-                • <b>半邊井：</b>牆內自己用、牆外給鄰居，體現純樸溫厚人情味。<br>
-                • <b>隘門：</b>街角防禦性門樓，昔日防範宵小盜匪與分類械鬥。<br>
-                • <b>餓鬼埕：</b>昔日碼頭工人下船後狼吞虎嚥補充熱量的小吃市集。
-              </div>
-            </div>
-          </div>
-
-          <!-- 麗寶樂園 -->
-          <div class="attraction-card">
-            <div class="attraction-img-wrap">
-              <img src="assets/images/p_14.jpg" alt="麗寶樂園" loading="lazy">
-            </div>
-            <div class="attraction-content">
-              <h3>麗寶樂園渡假區（探索世界）</h3>
-              <div class="attraction-tags">
-                <span class="tag-pill">200公頃主題渡假區</span>
-                <span class="tag-pill">搶救地心斷軌</span>
-                <span class="tag-pill">POPA家族</span>
-              </div>
-              <p class="attraction-desc">
-                前身為「月眉育樂世界」，緊鄰后里交流道，佔地200公頃。探索世界擁有豐富多樣的超人氣設施，從挑戰心臟極限的高空斷軌到童趣盎然的歡樂王國，讓大朋友小朋友玩到欲罷不能！
-              </p>
-              <div class="attraction-highlights">
-                🎢 <b>三大超人氣主題園區：</b><br>
-                • <b>冒險天堂：</b>「搶救地心」全球首座斷軌雲霄飛車（13層樓高空垂直俯衝）、時空飛俠、碰碰車、火山冒險。<br>
-                • <b>魔法森林：</b>摩天輪、叢林泛舟、魔法咖啡杯、花園小舟。<br>
-                • <b>POPA歡樂王國：</b>採礦飛車、海盜船、旋轉木馬、青蛙跳、人魚木舟。<br>
-                🍕 <b>特約午餐：</b>享用必勝客個人獨享披薩套餐！
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 5. 線上互動學習單 ==================== -->
-      <section class="section-container" id="quizSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">✍️</div>
-            <span>戶外教育線上互動學習單</span>
-          </div>
-          <span style="font-size:0.8rem; color:var(--text-muted);">即時作答 ➔ 一鍵批改 ➔ 詳解解析</span>
-        </div>
-
-        <div class="quiz-section-tabs">
-          <button class="quiz-tab-btn active" data-quiz="eq">📍 921地震教育園區學習單</button>
-          <button class="quiz-tab-btn" data-quiz="lk">🏮 鹿港老街古蹟學習單</button>
-          <button class="quiz-tab-btn" data-quiz="lp">🎢 麗寶探索樂園學習單</button>
-        </div>
-
-        <!-- 921 Quiz -->
-        <div class="quiz-panel quiz-card" data-quiz="eq" id="quizEarthquakeContent"></div>
-
-        <!-- Lukang Quiz -->
-        <div class="quiz-panel quiz-card" data-quiz="lk" id="quizLukangContent" style="display:none;"></div>
-
-        <!-- Lihpao Quiz -->
-        <div class="quiz-panel quiz-card" data-quiz="lp" id="quizLihpaoContent" style="display:none;"></div>
-      </section>
-
-      <!-- ==================== 6. 生活安全與護理小百科 ==================== -->
-      <section class="section-container" id="safetySection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">🛡️</div>
-            <span>行前叮嚀、安全規範與護理須知</span>
-          </div>
-        </div>
-
-        <div class="rules-grid">
-          <!-- 行動與車上安全 -->
-          <div class="rule-card">
-            <h4>🚶 行動與車上的安全</h4>
-            <ol class="rule-list">
-              <li><b>以小組為單位行動：</b>絕不可單獨脫隊，任何時間離隊務必告知老師及領隊，獲准後才可離開，歸隊時也需回報。</li>
-              <li><b>車上安全：</b>車子行進中全程繫妥安全帶，不可任意站立走動；嚴禁倚靠車門站立。</li>
-              <li><b>車內禁止飲食：</b>車上禁止飲食，個人垃圾妥善包好帶下車丟棄。</li>
-              <li><b>上車注意鄰座：</b>每次上車隨時確認同組同學是否到齊並向領隊回報。</li>
-              <li><b>遵守身體界線：</b>不做推人、追逐等危險動作，遵守遊樂設施的身高安全限制。</li>
-              <li><b>若不慎迷路脫隊：</b>請保持冷靜留在原地或直接尋求園區服務台廣播求助。</li>
-            </ol>
-          </div>
-
-          <!-- 住宿安全與禮儀 -->
-          <div class="rule-card">
-            <h4>🏨 住宿安全與生活禮儀</h4>
-            <ol class="rule-list">
-              <li><b>記住自己房號桌號：</b>不隨意進入他人房間，嚴禁男生進女生房或女生進男生房。</li>
-              <li><b>敲門安全：</b>有人敲門時，務必透過防盜眼或詢問確認身分後再開門。</li>
-              <li><b>外出必帶房卡：</b>離開房間隨手關門並攜帶房卡（鑰匙）；睡前確實鎖好門窗防盜扣。</li>
-              <li><b>冷氣溫度設定：</b>建議<b>不低於 25 度</b>，以免夜間著涼影響隔日行程。</li>
-              <li><b>晚點名嚴禁離房：</b>晚點名後禁止擅自離開房間，有事請以分機撥打飯店櫃檯或聯絡隨隊老師。</li>
-              <li><b>公德心與賠償：</b>愛惜飯店設施，浴室請使用腳踏墊防滑，<b>如有破壞或帶走公物將依名單追究賠償</b>。</li>
-            </ol>
-          </div>
-
-          <!-- 護理篇與急救 -->
-          <div class="rule-card">
-            <h4>🩺 護理篇與簡易急救常識</h4>
-            <ul class="rule-list" style="list-style-type: none; padding-left: 0;">
-              <li style="margin-bottom:10px;">💊 <b>暈車藥：</b>易暈車同學請於<b>開車前半小時服用</b>。</li>
-              <li style="margin-bottom:10px;">❄️ <b>早晚保暖：</b>早晚溫差大，隨身預備禦寒薄外套，避免感冒。</li>
-              <li style="margin-bottom:10px;">🔥 <b>灼燙傷處置：</b>立即以流動冷水沖泡傷處 <b>5～15 分鐘</b>至不痛為止，切忌搓揉皮膚。</li>
-              <li style="margin-bottom:10px;">🩸 <b>外傷流血：</b>直接加壓止血，並抬高患肢 5～10 分鐘。</li>
-              <li style="margin-bottom:10px;">🩹 <b>扭傷瘀腫：</b>急性期（24-36小時內）局部間歇冰敷並抬高休息，切勿揉捏以免傷勢加劇。</li>
-            </ul>
-
-            <div class="medical-alert">
-              ⚠️ <b>法律重要宣導（護理人員法第24條）：</b><br>
-              校外教學醫療輔助行為須在醫師指示下進行，隨隊護理師僅能提供<b>外傷急救處置</b>，<b>依法校方與旅行社無法提供口服藥品</b>，個人特殊疾病藥品請務必隨身備妥！
-            </div>
-          </div>
-
-          <!-- 定型化契約退費規範 -->
-          <div class="rule-card">
-            <h4>📋 觀光署國內旅遊退費規定</h4>
-            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:10px;">
-              依交通部觀光署國內旅遊定型化契約第十二條規範：
-            </p>
-            <ul class="rule-list">
-              <li>旅遊活動開始前<b>第 2 日至第 20 日以內</b>取消：收取全額 <b>30%</b> 手續費。</li>
-              <li>旅遊活動開始前<b>第 1 日</b>取消：收取全額 <b>50%</b> 手續費。</li>
-              <li>旅遊活動開始日或開始後取消、未通知不參加者：<b>僅退門票</b>。</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 7. 緊急聯絡電話與住宿導航 ==================== -->
-      <section class="section-container" id="contactsSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">📞</div>
-            <span>重要聯絡資訊與住宿飯店導航</span>
-          </div>
-          <span style="font-size:0.8rem; color:var(--text-muted);">手機直接點擊即可通話</span>
-        </div>
-
-        <div class="contacts-grid">
-          <!-- 麗園國小 -->
-          <div class="contact-card">
-            <div>
-              <div class="name">🏫 新北市麗園國民小學</div>
-              <div class="addr">新北市林口區忠孝路591號</div>
-            </div>
-            <a href="tel:0226091061" class="phone-btn">📞 撥打學校：(02) 2609-1061</a>
-          </div>
-
-          <!-- 原民旅行社 -->
-          <div class="contact-card">
-            <div>
-              <div class="name">🚩 原民旅行社（承辦單位）</div>
-              <div class="addr">專責六年級戶外教育行程服務</div>
-            </div>
-            <a href="tel:0229509096" class="phone-btn">📞 撥打旅行社：(02) 2950-9096</a>
-          </div>
-
-          <!-- 今埔里渡假大酒店 -->
-          <div class="contact-card">
-            <div>
-              <div class="name">🏨 今埔里渡假大酒店 (第一晚)</div>
-              <div class="addr">南投縣埔里鎮南興街 79 號</div>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <a href="tel:0492422088" class="phone-btn" style="flex:1;">📞 (049) 242-2088</a>
-              <a href="https://maps.google.com/?q=南投縣埔里鎮南興街79號" target="_blank" class="btn-secondary" style="font-size:0.82rem; display:inline-flex; align-items:center;">🗺️ 地圖導航</a>
-            </div>
-          </div>
-
-          <!-- 麗寶福容大飯店 -->
-          <div class="contact-card">
-            <div>
-              <div class="name">🏨 麗寶福容大飯店 (第二晚)</div>
-              <div class="addr">台中市后里區福容路 88 號</div>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <a href="tel:0425592888" class="phone-btn" style="flex:1;">📞 (04) 2559-2888</a>
-              <a href="https://maps.google.com/?q=台中市后里區福容路88號" target="_blank" class="btn-secondary" style="font-size:0.82rem; display:inline-flex; align-items:center;">🗺️ 地圖導航</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 景點電話列表 -->
-        <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:16px; margin-top:16px;">
-          <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:10px;">🏛️ 各景點服務專線：</h4>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; font-size:0.85rem;">
-            <div>• <b>921地震教育園區：</b><a href="tel:0423390906">(04) 2339-0906</a></div>
-            <div>• <b>林班道體驗工廠：</b><a href="tel:0492777462">(049) 277-7462</a></div>
-            <div>• <b>薰衣草森林九九峰：</b><a href="tel:0496004999">(049) 600-4999</a></div>
-            <div>• <b>麗寶樂園渡假區：</b><a href="tel:0425582459">(04) 2558-2459</a></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== 8. 留言板與回憶塗鴉板 ==================== -->
-      <section class="section-container" id="doodleSection">
-        <div class="section-header">
-          <div class="section-title">
-            <div class="icon-box">🎨</div>
-            <span>旅途心情留言板與手繪塗鴉牆</span>
-          </div>
-        </div>
-
-        <!-- Canvas Card -->
-        <div class="canvas-wrapper-card">
-          <div style="margin-bottom:12px; font-size:0.9rem; font-weight:700; color:var(--text-main);">
-            🦒 長頸鹿與小豬童趣留言塗鴉板（原書 19～21 頁）：
-          </div>
-
-          <div class="canvas-toolbar">
-            <span style="font-size:0.85rem; font-weight:600;">筆觸顏色：</span>
-            <div class="color-swatch active" data-color="#f97316" style="background:#f97316;"></div>
-            <div class="color-swatch" data-color="#0284c7" style="background:#0284c7;"></div>
-            <div class="color-swatch" data-color="#10b981" style="background:#10b981;"></div>
-            <div class="color-swatch" data-color="#ec4899" style="background:#ec4899;"></div>
-            <div class="color-swatch" data-color="#0f172a" style="background:#0f172a;"></div>
-            <div class="color-swatch" data-color="eraser" style="background:#f1f5f9; display:flex; align-items:center; justify-content:center; font-size:12px;" title="橡皮擦">🧹</div>
-
-            <div style="margin-left:auto; display:flex; gap:8px;">
-              <button class="btn-secondary" id="btnClearCanvas" style="font-size:0.8rem; padding:4px 10px;">清空畫布</button>
-              <button class="btn-primary" id="btnDownloadCanvas" style="font-size:0.8rem; padding:4px 12px;">📥 下載塗鴉留念</button>
-            </div>
-          </div>
-
-          <div class="canvas-frame">
-            <canvas id="doodleCanvas"></canvas>
-          </div>
-        </div>
-
-        <!-- Sticky Notes Wall -->
-        <div class="canvas-wrapper-card">
-          <div style="margin-bottom:12px; font-size:0.9rem; font-weight:700; color:var(--text-main);">
-            💬 同學祝福與心情便利貼牆：
-          </div>
-
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-            <input type="text" id="noteAuthor" placeholder="你的暱稱 / 班級" style="width:140px; padding:8px 12px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm); font-size:0.85rem;">
-            <input type="text" id="noteText" placeholder="寫下一句話分享給全體同學（如：祝大家畢旅玩得超開心！）" style="flex:1; min-width:200px; padding:8px 12px; border:1px solid var(--border-subtle); border-radius:var(--radius-sm); font-size:0.85rem;">
-            <button class="btn-primary" id="btnAddNote" style="padding:6px 16px; font-size:0.85rem;">貼上便利貼</button>
-          </div>
-
-          <div class="guestbook-notes-grid" id="guestbookNotesGrid"></div>
-        </div>
-      </section>
-
-    </div><!-- /interactiveView -->
-
-    <!-- ==================== 2. 高畫質原版手冊翻頁模式 ==================== -->
-    <div id="flipbookView" class="flipbook-container">
-      <div class="flipbook-toolbar">
-        <div>
-          <h2 style="font-size:1.15rem; font-weight:800; color:white; display:flex; align-items:center; gap:8px;">
-            <span>📖</span> 原民旅行社原版手冊翻閱器
-          </h2>
-          <div style="font-size:0.75rem; color:#94a3b8;">高解析度 1~24 頁全本電子閱覽</div>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-          <select id="flipbookPageSelect" style="background:#0f172a; color:white; border:1px solid #475569; padding:6px 12px; border-radius:var(--radius-sm); font-size:0.85rem; max-width:260px; outline:none;"></select>
-          <button class="btn-secondary" id="btnToggleSpread" style="background:#334155; color:white; border-color:#475569; font-size:0.82rem; padding:6px 12px;">📑 切換為雙頁開本</button>
-        </div>
+  <!-- Book Stage -->
+  <main class="book-stage">
+    
+    <!-- 倒數與提示小條 -->
+    <div style="width:100%; max-width:1260px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; color:#cbd5e1; font-size:0.85rem; flex-wrap:wrap; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="color:#fdba74;">⏳ 集合倒數：</span>
+        <span id="headerCountdown" style="font-weight:700; color:#38bdf8;">計算中...</span>
+        <span style="font-size:0.75rem; color:#94a3b8;">(115/11/25 06:30 集合 07:00 出發)</span>
       </div>
-
-      <div class="flipbook-viewer">
-        <div class="flipbook-image-wrap">
-          <img id="flipbookImage" src="assets/images/p_1.jpg" alt="手冊頁面">
-        </div>
-      </div>
-
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px;">
-        <button class="btn-primary" id="btnPrevPage">⬅️ 上一頁</button>
-        <span class="page-indicator" id="flipbookIndicator">第 1 頁 / 共 24 頁</span>
-        <button class="btn-primary" id="btnNextPage">下一頁 ➡️</button>
+      <div style="font-size:0.8rem; color:#94a3b8;">
+        💡 提示：使用下方箭頭或鍵盤 <b>←</b> <b>→</b> 左右翻頁，手機可直接左右滑動！
       </div>
     </div>
 
+    <!-- Book Spine & Pages Container -->
+    <div class="book-spine-wrapper" id="bookWrapper">
+      <div class="book-spread" id="bookSpread">
+        <!-- Left Page Container -->
+        <article class="book-page page-left" id="pageLeft"></article>
+        <!-- Right Page Container -->
+        <article class="book-page page-right" id="pageRight"></article>
+      </div>
+    </div>
+
+    <!-- Bottom Page Navigation Bar -->
+    <nav class="book-nav-bar">
+      <button class="nav-arrow-btn" id="btnPrevSpread">
+        <span>⬅️ 上一頁</span>
+      </button>
+
+      <select class="page-jump-select" id="pageJumpSelect"></select>
+
+      <button class="nav-arrow-btn" id="btnNextSpread">
+        <span>下一頁 ➡️</span>
+      </button>
+    </nav>
   </main>
 
-  <!-- Mobile Bottom Navigation Bar -->
-  <nav class="mobile-nav">
-    <button class="mobile-nav-item active" onclick="document.querySelector('#interactiveView').style.display='block'; document.querySelector('#flipbookView').style.display='none'; document.querySelector('#scheduleSection').scrollIntoView({behavior:'smooth'})">
-      <span class="icon">📅</span>
-      <span>行程</span>
-    </button>
-    <button class="mobile-nav-item" onclick="document.querySelector('#interactiveView').style.display='block'; document.querySelector('#flipbookView').style.display='none'; document.querySelector('#checklistSection').scrollIntoView({behavior:'smooth'})">
-      <span class="icon">🎒</span>
-      <span>打包</span>
-    </button>
-    <button class="mobile-nav-item" onclick="document.querySelector('#interactiveView').style.display='block'; document.querySelector('#flipbookView').style.display='none'; document.querySelector('#quizSection').scrollIntoView({behavior:'smooth'})">
-      <span class="icon">📝</span>
-      <span>學習單</span>
-    </button>
-    <button class="mobile-nav-item" onclick="document.querySelector('#interactiveView').style.display='block'; document.querySelector('#flipbookView').style.display='none'; document.querySelector('#contactsSection').scrollIntoView({behavior:'smooth'})">
-      <span class="icon">📞</span>
-      <span>緊急電話</span>
-    </button>
-    <button class="mobile-nav-item" onclick="document.getElementById('btnModeFlipbook').click();">
-      <span class="icon">📖</span>
-      <span>原書</span>
-    </button>
-  </nav>
-
-  <!-- Global Search Modal -->
-  <div class="search-modal-backdrop" id="searchModalBackdrop">
-    <div class="search-modal">
-      <div class="search-input-box">
-        <span>🔍</span>
-        <input type="text" id="globalSearchInput" placeholder="搜尋手冊關鍵字（如：便服、集合、斷軌、暈車、電話）...">
-        <button class="btn-icon" id="btnCloseSearch" style="width:30px; height:30px; font-size:14px;">✕</button>
-      </div>
-      <div class="search-results-list" id="searchResultsList"></div>
+  <!-- Table of Contents Drawer (目錄側邊欄) -->
+  <div class="toc-backdrop" id="tocBackdrop"></div>
+  <aside class="toc-drawer" id="tocDrawer">
+    <div class="toc-header">
+      <h3><span>📖</span> 手冊章節目錄</h3>
+      <button class="header-btn" id="btnCloseToc" style="padding:4px 8px;">✕</button>
     </div>
-  </div>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
 
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <p><b>新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動</b></p>
-    <p>活動日期：民國 115 年 11 月 25 日 ～ 11 月 27 日 ｜ 承辦單位：原民旅行社</p>
-    <p style="font-size:0.75rem; color:#94a3b8; margin-top:8px;">預祝全體六年級師生旅途平安、收穫豐碩、留下最美好的青春回憶！🎒✨</p>
-  </footer>
-
+  <!-- Scripts -->
   <script src="js/quiz-data.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/pages-content.js"></script>
+  <script src="js/book-reader.js"></script>
 </body>
 </html>
