@@ -20,6 +20,34 @@ const hotelInfo = {
   }
 };
 
+// ==========================================================================
+// 【個資保護規範】：學生姓名去中字，以全形「Ｏ」代替
+// ==========================================================================
+function maskStudentName(name) {
+  if (!name || typeof name !== "string") return "";
+  const trimmed = name.trim();
+  if (trimmed.length <= 1) return trimmed;
+  // 若已經包含全形「Ｏ」或「○」「〇」「O」，則直接返回避免重複替換
+  if (trimmed.includes("Ｏ") || trimmed.includes("○") || trimmed.includes("〇") || trimmed.includes("O")) {
+    return trimmed;
+  }
+  // 兩個字：王明 -> 王Ｏ
+  if (trimmed.length === 2) {
+    return trimmed[0] + "Ｏ";
+  }
+  // 三個字：林小明 -> 林Ｏ明
+  if (trimmed.length === 3) {
+    return trimmed[0] + "Ｏ" + trimmed[2];
+  }
+  // 四個字（如複姓）：歐陽建豪 -> 歐陽Ｏ豪
+  if (trimmed.length === 4) {
+    return trimmed.slice(0, 2) + "Ｏ" + trimmed[3];
+  }
+  // 五個字以上：替換正中間字
+  const mid = Math.floor(trimmed.length / 2);
+  return trimmed.slice(0, mid) + "Ｏ" + trimmed.slice(mid + 1);
+}
+
 // 7 個班級初始資料結構 (各班男女生 1~25 號)
 const initialClasses = ["601", "602", "603", "604", "605", "606", "607"];
 
@@ -31,11 +59,29 @@ function generateEmptySlots() {
   return arr;
 }
 
+function sanitizeSheetData(data) {
+  if (!data) return data;
+  Object.keys(data).forEach(c => {
+    if (data[c] && data[c].boys) {
+      data[c].boys.forEach(b => {
+        if (b.name) b.name = maskStudentName(b.name);
+      });
+    }
+    if (data[c] && data[c].girls) {
+      data[c].girls.forEach(g => {
+        if (g.name) g.name = maskStudentName(g.name);
+      });
+    }
+  });
+  return data;
+}
+
 function getInitialSheetData() {
   const saved = localStorage.getItem("ly_room_table_sheets");
   if (saved) {
     try {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      return sanitizeSheetData(parsed);
     } catch (e) {
       console.error(e);
     }
@@ -52,16 +98,16 @@ function getInitialSheetData() {
     };
   });
 
-  // 601 班置入範例資料方便預覽
-  data["601"].boys[0] = { no: 1, name: "林小明", room1: "301", room2: "501", table: "1" };
-  data["601"].boys[1] = { no: 2, name: "陳大偉", room1: "301", room2: "501", table: "1" };
-  data["601"].boys[2] = { no: 3, name: "張建豪", room1: "301", room2: "501", table: "1" };
-  data["601"].boys[3] = { no: 4, name: "黃俊傑", room1: "301", room2: "501", table: "1" };
+  // 601 班置入範例資料方便預覽（中字以全形「Ｏ」代替）
+  data["601"].boys[0] = { no: 1, name: "林Ｏ明", room1: "301", room2: "501", table: "1" };
+  data["601"].boys[1] = { no: 2, name: "陳Ｏ偉", room1: "301", room2: "501", table: "1" };
+  data["601"].boys[2] = { no: 3, name: "張Ｏ豪", room1: "301", room2: "501", table: "1" };
+  data["601"].boys[3] = { no: 4, name: "黃Ｏ傑", room1: "301", room2: "501", table: "1" };
 
-  data["601"].girls[0] = { no: 1, name: "李雅婷", room1: "302", room2: "502", table: "2" };
-  data["601"].girls[1] = { no: 2, name: "王美琪", room1: "302", room2: "502", table: "2" };
-  data["601"].girls[2] = { no: 3, name: "周思雨", room1: "302", room2: "502", table: "2" };
-  data["601"].girls[3] = { no: 4, name: "蔡宜君", room1: "302", room2: "502", table: "2" };
+  data["601"].girls[0] = { no: 1, name: "李Ｏ婷", room1: "302", room2: "502", table: "2" };
+  data["601"].girls[1] = { no: 2, name: "王Ｏ琪", room1: "302", room2: "502", table: "2" };
+  data["601"].girls[2] = { no: 3, name: "周Ｏ雨", room1: "302", room2: "502", table: "2" };
+  data["601"].girls[3] = { no: 4, name: "蔡Ｏ君", room1: "302", room2: "502", table: "2" };
 
   return data;
 }
@@ -90,8 +136,14 @@ function renderSheetPageHtml() {
   return `
     <div class="sheet-page-container">
       <div class="page-title" style="margin-bottom:6px;">📋 麗園國小學生校外教學活動房桌號表</div>
-      <div style="font-size:0.82rem; color:#64748b; margin-bottom:14px; font-weight:700;">
+      <div style="font-size:0.82rem; color:#64748b; margin-bottom:10px; font-weight:700;">
         🍎 教師專用頁面 · 第一晚：今埔里渡假大酒店 ｜ 第二晚：麗寶福容大飯店
+      </div>
+
+      <!-- 個資保護提示 -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:6px 10px; margin-bottom:10px; font-size:0.78rem; color:#1e40af; display:flex; align-items:center; gap:6px;">
+        <span>🔒</span>
+        <span><b>個資保護規範：</b>學生姓名已依規定去中字並以全形「Ｏ」代替（如：林Ｏ明）。</span>
       </div>
 
       <!-- 切換班級工具列 -->
@@ -269,13 +321,13 @@ function renderRoomSheetTablePage() {
   if (totalInput) totalInput.value = cData.totalCount || "";
   if (teacherInput) teacherInput.value = cData.teacher || "";
 
-  // 渲染男生 (1~25)
+  // 渲染男生 (1~25)，學生姓名去中字以全形「Ｏ」代替
   const boysTbody = document.getElementById("sheetBoysTbodyPage");
   if (boysTbody) {
     boysTbody.innerHTML = cData.boys.map((b, idx) => `
       <tr>
         <td class="col-no">${b.no}</td>
-        <td class="col-name"><input type="text" value="${b.name || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', 'boys', ${idx}, 'name', this.value)"></td>
+        <td class="col-name"><input type="text" value="${maskStudentName(b.name) || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', 'boys', ${idx}, 'name', this.value)"></td>
         <td class="col-room"><input type="text" value="${b.room1 || ""}" placeholder="房號" onchange="updateStudentFieldPage('${currentSheetClass}', 'boys', ${idx}, 'room1', this.value)"></td>
         <td class="col-room"><input type="text" value="${b.room2 || ""}" placeholder="房號" onchange="updateStudentFieldPage('${currentSheetClass}', 'boys', ${idx}, 'room2', this.value)"></td>
         <td class="col-table"><input type="text" value="${b.table || ""}" placeholder="桌" onchange="updateStudentFieldPage('${currentSheetClass}', 'boys', ${idx}, 'table', this.value)"></td>
@@ -283,13 +335,13 @@ function renderRoomSheetTablePage() {
     `).join("");
   }
 
-  // 渲染女生 (1~25)
+  // 渲染女生 (1~25)，學生姓名去中字以全形「Ｏ」代替
   const girlsTbody = document.getElementById("sheetGirlsTbodyPage");
   if (girlsTbody) {
     girlsTbody.innerHTML = cData.girls.map((g, idx) => `
       <tr>
         <td class="col-no">${g.no}</td>
-        <td class="col-name"><input type="text" value="${g.name || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', 'girls', ${idx}, 'name', this.value)"></td>
+        <td class="col-name"><input type="text" value="${maskStudentName(g.name) || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', 'girls', ${idx}, 'name', this.value)"></td>
         <td class="col-room"><input type="text" value="${g.room1 || ""}" placeholder="房號" onchange="updateStudentFieldPage('${currentSheetClass}', 'girls', ${idx}, 'room1', this.value)"></td>
         <td class="col-room"><input type="text" value="${g.room2 || ""}" placeholder="房號" onchange="updateStudentFieldPage('${currentSheetClass}', 'girls', ${idx}, 'room2', this.value)"></td>
         <td class="col-table"><input type="text" value="${g.table || ""}" placeholder="桌" onchange="updateStudentFieldPage('${currentSheetClass}', 'girls', ${idx}, 'table', this.value)"></td>
@@ -300,8 +352,14 @@ function renderRoomSheetTablePage() {
 
 window.updateStudentFieldPage = function(className, gender, idx, field, value) {
   if (!sheetData[className]) return;
-  sheetData[className][gender][idx][field] = value.trim();
+  let finalVal = value.trim();
+  // 姓名欄位自動去中字替換為「Ｏ」
+  if (field === "name" && finalVal) {
+    finalVal = maskStudentName(finalVal);
+  }
+  sheetData[className][gender][idx][field] = finalVal;
   saveSheetDataPage();
+  renderRoomSheetTablePage();
 };
 
 window.updateSheetMeta = function(field, value) {
@@ -342,7 +400,7 @@ function getPatrolRoomsForPage(hotelNum) {
             note: ""
           };
         }
-        roomMap[rm].students.push(st.name);
+        roomMap[rm].students.push(maskStudentName(st.name));
       }
     });
   });
@@ -350,8 +408,8 @@ function getPatrolRoomsForPage(hotelNum) {
   const list = Object.values(roomMap);
   if (list.length === 0) {
     return [
-      { id: `h${hotelNum}_301`, room: "301", class: "601", type: "四人房", students: ["林小明", "陳大偉", "張建豪", "黃俊傑"], note: "" },
-      { id: `h${hotelNum}_302`, room: "302", class: "601", type: "四人房", students: ["李雅婷", "王美琪", "周思雨", "蔡宜君"], note: "" }
+      { id: `h${hotelNum}_301`, room: "301", class: "601", type: "四人房", students: ["林Ｏ明", "陳Ｏ偉", "張Ｏ豪", "黃Ｏ傑"], note: "" },
+      { id: `h${hotelNum}_302`, room: "302", class: "601", type: "四人房", students: ["李Ｏ婷", "王Ｏ琪", "周Ｏ雨", "蔡Ｏ君"], note: "" }
     ];
   }
   return list.sort((a, b) => a.room.localeCompare(b.room, undefined, { numeric: true }));
@@ -403,7 +461,7 @@ function renderPatrolGridPage() {
         </div>
 
         <div class="room-students-list">
-          ${r.students.map(s => `<span class="student-pill">${s}</span>`).join("")}
+          ${r.students.map(s => `<span class="student-pill">${maskStudentName(s)}</span>`).join("")}
         </div>
 
         <input type="text" class="room-note-field" placeholder="點此輸入查房備註（如：已吃藥）" value="${itemState.note || ""}" onchange="saveRoomNotePage('${r.id}', this.value)">
