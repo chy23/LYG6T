@@ -434,11 +434,32 @@ const pagesContent = [
   // ==================== 第 12 頁 ====================
   {
     num: 12,
-    title: "鹿港老街：古鎮巡禮與不見天街",
+    title: "九九峰自然生態 ＆ 鹿港老街巡禮",
     category: "景點導覽",
     render: () => `
-      <div class="page-title">鹿港老街：歷史古鎮巡禮</div>
+      <div class="page-title">第二天行程景點導覽</div>
 
+      <!-- 第二天上午行程精選景點：九九峰自然生態 -->
+      <div style="background:#ecfdf5; border-left:4px solid #10b981; border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:1.1rem;">🌿</span>
+          <b style="color:#065f46; font-size:1.02rem;">第二天上午：薰衣草森林九九峰生態園區</b>
+        </div>
+        <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
+          告別南投埔里後，上午造訪草屯九九峰自然保留區旁之薰衣草森林。此區為臺灣著名的火炎山地貌，九十九座奇峰相連疊翠、宛如大自然屏風。園區滿布香草與綠意，讓師生漫步在芬多精與微風清香中，感受台灣特有的森林地質生態之美。
+        </div>
+      </div>
+
+      <!-- 網路精選真實照片：九九峰自然保留區與雙十吊橋全景 -->
+      <div class="book-photo-card" style="margin-bottom:18px;">
+        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然保留區風光" loading="lazy">
+        <div class="book-photo-caption">
+          <span>⛰️ 九九峰自然風貌：九九尖峰火炎山群巒與雙十吊橋壯麗全景</span>
+          <span class="photo-source-badge">南投自然生態實景</span>
+        </div>
+      </div>
+
+      <div class="page-section-subtitle">🏛️ 第二天下午：鹿港老街歷史古鎮巡禮</div>
       <div class="book-text">
         <p>鹿港為臺灣重要的歷史古鎮之一，當地保留古蹟相當完善，也是著名的文化發祥地；其中最聞名的包含三大古蹟文祠、龍山寺、天后宮、八景與十二勝，還有民俗文物陳列館保存鹿港文物，供遊客觀覽先民歷史遺蹟。</p>
         <p>鹿港與臺南、萬華為臺灣三大門戶，早期稱為<b>「一府、二鹿、三艋舺」</b>，古時鹿港最熱鬧的一條街在中山路上，就是鼎鼎大名的<b>「不見天街」</b>，它是十分特殊的建築；主要因鹿港靠海，風沙頗大，為防止風沙的直接入侵，鹿港居民在街上蓋上屋頂，於是行人仰頭是看不見天的，這就稱為「不見天街」。</p>
@@ -467,7 +488,7 @@ const pagesContent = [
   // ==================== 第 13 頁 ====================
   {
     num: 13,
-    title: "鹿港老街：舊街風貌與九曲巷",
+    title: "鹿港老街：老街風貌與建築",
     category: "景點導覽",
     render: () => `
       <div class="page-title">鹿港老街：老街風貌與建築</div>
@@ -479,18 +500,24 @@ const pagesContent = [
         <p>街道特別彎曲，有時甚至成直角連串轉彎，所以會如此是先民智慧的展現與適應生活的艱辛，走在街上請仔細體會每一曲折所蘊含的歷史故事。經過長期歲月的沉澱，這裡氣氛由從前的熱鬧繁華轉為今日的淡泊悠閒。</p>
       </div>
 
-      <!-- 網路精選真實照片：九曲巷紅磚巷弄與隘門、半邊井 -->
-      <div class="photo-grid-2">
-        <div class="book-photo-card">
+      <!-- 網路精選真實照片：九曲巷、半邊井、鹿港隘門三大經典古蹟 -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin:16px 0;">
+        <div class="book-photo-card" style="margin:0;">
           <img src="assets/images/real/lukang_nine_turns.jpg" alt="鹿港九曲巷曲折紅磚道" loading="lazy">
           <div class="book-photo-caption">
-            <span>曲折防強風與盜匪的「九曲巷」</span>
+            <span>🌀 曲折防強風與盜匪的「九曲巷」</span>
           </div>
         </div>
-        <div class="book-photo-card">
+        <div class="book-photo-card" style="margin:0;">
           <img src="assets/images/real/lukang_half_well.jpg" alt="鹿港半邊井" loading="lazy">
           <div class="book-photo-caption">
-            <span>人情味敦親睦鄰的「半邊井」</span>
+            <span>🤝 人情味敦親睦鄰的「半邊井」</span>
+          </div>
+        </div>
+        <div class="book-photo-card" style="margin:0;">
+          <img src="assets/images/real/lukang_aimen.jpg" alt="國定古蹟鹿港隘門「門後隘門」" loading="lazy">
+          <div class="book-photo-caption">
+            <span>🛡️ 防械鬥保衛家園的國定古蹟「鹿港隘門」</span>
           </div>
         </div>
       </div>
@@ -554,26 +581,50 @@ const pagesContent = [
       </div>
 
       <div style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
+        <!-- 冒險天堂 -->
         <div style="background:#fef2f2; border-left:4px solid #ef4444; padding:12px 14px; border-radius:0 8px 8px 0;">
           <b style="color:#991b1b; font-size:1.02rem;">⚡ 冒險天堂（刺激設施區，挑戰「強心臟」的你）：</b>
           <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             此區設施有：<b>搶救地心（斷軌雲霄飛車）、時空飛俠、銀河炫風、異次元風暴、音速迴旋、火山冒險、碰碰車</b>。<br>
             ★ <b>搶救地心</b>：為全球首座斷軌式雲霄飛車，高度約有 <b>13 層樓高</b>，挑戰心跳極限！
           </div>
+          <!-- 手冊原版冒險天堂設施照片群 -->
+          <div class="book-photo-card" style="margin:10px 0 4px 0;">
+            <img src="assets/images/lihpao_thrill.jpg" alt="冒險天堂代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <div class="book-photo-caption">
+              <span>🎢 冒險天堂人氣設施群（手冊原圖）</span>
+            </div>
+          </div>
         </div>
 
+        <!-- 魔法森林 -->
         <div style="background:#f0fdf4; border-left:4px solid #10b981; padding:12px 14px; border-radius:0 8px 8px 0;">
           <b style="color:#166534; font-size:1.02rem;">🌲 魔法森林（較慢速之設施，同學增進感情的好去處）：</b>
           <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             設施包括：<b>摩天輪、陽光探戈、魔法風琴師（咖啡杯）、叢林泛舟、花園小舟</b>。<br>
             除了可以暢玩，還可以一起拍下值得一同回憶的歡樂合照唷！
           </div>
+          <!-- 手冊原版魔法森林設施照片群 -->
+          <div class="book-photo-card" style="margin:10px 0 4px 0;">
+            <img src="assets/images/lihpao_magic.jpg" alt="魔法森林代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <div class="book-photo-caption">
+              <span>🎡 魔法森林溫馨歡樂設施群（手冊原圖）</span>
+            </div>
+          </div>
         </div>
 
+        <!-- POPA 歡樂王國 -->
         <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:12px 14px; border-radius:0 8px 8px 0;">
           <b style="color:#1e40af; font-size:1.02rem;">👑 POPA 歡樂王國（適合兒童遊玩的童趣樂園）：</b>
           <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             設施包括：<b>採礦飛車（小型雲霄飛車）、探險虎克（海盜船）、人魚木舟（迷你泛舟）、露娜與海盜、皇冠鞦韆（輻射椅）、轉轉笛諾、小蝸牛（手動車）、旋轉木馬、時光旅行（老爺車）、飛象藍天（小飛象）、青蛙跳、娃娃城堡、POPA 歡樂島</b>。
+          </div>
+          <!-- 手冊原版 POPA 歡樂王國設施照片群 -->
+          <div class="book-photo-card" style="margin:10px 0 4px 0;">
+            <img src="assets/images/lihpao_popa.jpg" alt="POPA歡樂王國代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <div class="book-photo-caption">
+              <span>🎠 POPA 歡樂王國童趣設施群（手冊原圖）</span>
+            </div>
           </div>
         </div>
       </div>
