@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load last read page
   const savedPage = parseInt(localStorage.getItem("ly_handbook_page") || "1");
-  goToPage(savedPage >= 1 && savedPage <= 24 ? savedPage : 1);
+  goToPage(savedPage >= 1 && savedPage <= pagesContent.length ? savedPage : 1);
 
   window.addEventListener("resize", () => {
     const newIsMobile = window.innerWidth < 1024;
@@ -94,7 +94,7 @@ function renderBook() {
     leftContainer.innerHTML = continuousHtml;
 
     // 掛載所有互動元件
-    [1, 5, 16, 17, 18, 19, 21].forEach(pn => initDynamicComponentsOnPage(pn));
+    [1, 5, 16, 17, 18, 19, 21, 25].forEach(pn => initDynamicComponentsOnPage(pn));
     setupScrollSpy();
     updateNavControlsContinuous();
   } else if (isMobile) {
@@ -153,7 +153,7 @@ function buildPageHtml(pageData, side) {
   }
 
   // 在單頁模式下，頁尾增加醒目的「繼續閱讀下一篇」大按鈕
-  const nextPageData = (!isContinuousMode && pageData.num < 24) ? pagesContent.find(p => p.num === pageData.num + 1) : null;
+  const nextPageData = (!isContinuousMode && pageData.num < pagesContent.length) ? pagesContent.find(p => p.num === pageData.num + 1) : null;
   const nextCtaHtml = nextPageData ? `
     <div class="next-page-cta" onclick="goToPage(${nextPageData.num})">
       <div class="next-cta-left">
@@ -175,7 +175,7 @@ function buildPageHtml(pageData, side) {
     </div>
     <div class="page-footer-row">
       <span>原民旅行社承辦</span>
-      <span class="page-num-badge">第 ${pageData.num} 頁 / 共 24 頁</span>
+      <span class="page-num-badge">第 ${pageData.num} 頁 / 共 ${pagesContent.length} 頁</span>
     </div>
   `;
 }
@@ -193,7 +193,7 @@ function updateNavControls(activePage, rightPage) {
   if (nextBtn) {
     nextBtn.innerHTML = "<span>下一頁 ▶</span>";
     nextBtn.onclick = null;
-    nextBtn.disabled = isMobile ? (activePage >= 24) : (rightPage >= 24);
+    nextBtn.disabled = isMobile ? (activePage >= pagesContent.length) : (rightPage >= pagesContent.length);
   }
 
   if (jumpSelect) {
@@ -256,14 +256,14 @@ function initBookNavigation() {
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       if (isMobile) {
-        if (currentPage < 24) {
+        if (currentPage < pagesContent.length) {
           currentPage++;
           renderBook();
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       } else {
-        if (currentPage < 23) {
-          currentPage = Math.min(23, currentPage + 2);
+        if (currentPage < pagesContent.length) {
+          currentPage = Math.min(pagesContent.length, currentPage + 2);
           renderBook();
         }
       }
@@ -414,7 +414,7 @@ function initScreenEdgeTap() {
     }
     // 點擊螢幕右側 18% 邊緣 ➔ 下一頁
     else if (touchEndX > screenWidth * 0.82) {
-      if (currentPage < 24) {
+      if (currentPage < pagesContent.length) {
         goToPage(currentPage + 1);
       }
     }
@@ -524,6 +524,7 @@ function initDynamicComponentsOnPage(pageNum) {
   if (pageNum === 18) renderBookQuiz3();
   if (pageNum === 19) initBookDoodleCanvas();
   if (pageNum === 21) renderBookNotesWall();
+  if (pageNum === 25 && typeof initSheetPageComponents === "function") initSheetPageComponents();
 }
 
 window.saveStudentPass = function() {
