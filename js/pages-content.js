@@ -7,62 +7,62 @@ const pagesContent = [
     category: "封面與證件",
     render: () => `
       <div class="page-title">🏷️ 個人資料卡</div>
-      <div class="book-callout callout-orange" style="margin-bottom:16px;">
-        <b>原民旅行社製 ｜ 新北市麗園國小</b><br>
-        填寫並確認個人與房號資料，旅途中妥善保管，遇緊急狀況可隨時對照！
+      <div class="book-callout callout-orange" style="margin-bottom:14px;">
+        <b>新北市麗園國小 ｜ 原民旅行社製</b><br>
+        填寫個人與房號資料，旅途中妥善保管，遇緊急狀況可隨時對照！
       </div>
 
-      <div style="background:#fff7ed; border:2px dashed #f97316; border-radius:12px; padding:18px; margin-bottom:16px;">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <div style="background:#fff7ed; border:2px dashed #f97316; border-radius:12px; padding:16px; margin-bottom:16px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px;">
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">學校名稱</label>
-            <input type="text" value="新北市麗園國小" readonly style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fed7aa; background:#ffedd5; font-weight:700; color:#9a3412;">
+            <input type="text" value="新北市麗園國小" readonly style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fed7aa; background:#ffedd5; font-weight:700; color:#9a3412; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">學生姓名</label>
-            <input type="text" id="pass_name" placeholder="請輸入姓名" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700;">
+            <input type="text" id="pass_name" placeholder="請輸入姓名" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">班級</label>
-            <input type="text" id="pass_class" placeholder="如：六年3班" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <input type="text" id="pass_class" placeholder="如：六年3班" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">血型</label>
-            <input type="text" id="pass_blood" placeholder="如：O型" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <input type="text" id="pass_blood" placeholder="如：O型" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div style="grid-column:1 / -1;">
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">通訊地址</label>
-            <input type="text" id="pass_addr" placeholder="住家通訊地址" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <input type="text" id="pass_addr" placeholder="住家通訊地址" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div>
-            <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">緊急聯絡人 (家長/電話)</label>
-            <input type="text" id="pass_parent" placeholder="稱謂與家長手機" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">緊急聯絡人家長電話</label>
+            <input type="tel" id="pass_parent" placeholder="家長手機號碼" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">導師/電話</label>
-            <input type="text" id="pass_teacher" placeholder="級任導師姓名與電話" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <input type="tel" id="pass_teacher" placeholder="級任導師電話" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">遊覽車車號</label>
-            <input type="text" id="pass_bus" placeholder="請記下車牌號碼" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#ea580c;">
+            <input type="text" id="pass_bus" placeholder="記下車牌號碼" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#ea580c; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">用餐桌號</label>
-            <input type="text" id="pass_table" placeholder="如：第5桌" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white;">
+            <input type="text" id="pass_table" placeholder="如：第5桌" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">第一晚房號 (今埔里)</label>
-            <input type="text" id="pass_room1" placeholder="填入房號" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#0284c7;">
+            <input type="text" id="pass_room1" placeholder="填入房號" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#0284c7; font-size:0.9rem;">
           </div>
           <div>
             <label style="font-size:0.75rem; font-weight:700; color:#9a3412;">第二晚房號 (麗寶福容)</label>
-            <input type="text" id="pass_room2" placeholder="填入房號" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#0284c7;">
+            <input type="text" id="pass_room2" placeholder="填入房號" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #fdba74; background:white; font-weight:700; color:#0284c7; font-size:0.9rem;">
           </div>
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:14px;">
-          <button class="nav-arrow-btn" onclick="saveStudentPass()" style="padding:6px 14px; font-size:0.82rem;">💾 儲存名牌卡</button>
-          <button class="header-btn" onclick="window.print()" style="padding:6px 14px; font-size:0.82rem; background:#64748b; color:white;">🖨️ 列印</button>
+          <button class="nav-arrow-btn" onclick="saveStudentPass()" style="padding:8px 16px; font-size:0.85rem; height:auto; max-width:none;">💾 儲存名牌卡</button>
+          <button class="header-btn" onclick="window.print()" style="padding:8px 16px; font-size:0.85rem; background:#64748b; color:white;">🖨️ 列印</button>
         </div>
       </div>
     `
@@ -75,7 +75,7 @@ const pagesContent = [
     category: "活動計畫",
     render: () => `
       <div class="page-title">新北市林口區麗園國民小學</div>
-      <div style="font-weight:700; color:#64748b; margin-bottom:12px;">115 學年度 6 年級戶外教育參觀活動實施計劃</div>
+      <div style="font-weight:700; color:#64748b; margin-bottom:12px;">(115 學年度 6 年級戶外教育參觀活動實施計劃)</div>
 
       <div class="book-text">
         <p><b>一、目的：</b>為擴大學生學習領域及生活經驗，指導學生實踐生活規範並充實生活內容，以提高教學效果，特訂定本計畫。</p>
@@ -98,7 +98,7 @@ const pagesContent = [
         <li>請自行攜帶隨身藥品﹝如：暈車藥﹞，以備不時之需。</li>
         <li>請務必攜帶健保 IC 卡。</li>
         <li><b>環保宣達事項：</b>
-          <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:6px; padding:8px 12px; margin-top:6px; font-size:0.85rem; color:#065f46;">
+          <div style="background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:10px 12px; margin-top:8px; font-size:0.9rem; color:#065f46; line-height:1.7;">
             A. 本次旅程中皆不使用/提供免洗餐具，請自備環保餐具。<br>
             B. 本次旅程中不主動提供包裝飲用水/瓶裝水，請自備環保杯。<br>
             C. 本次旅程中請落實垃圾分類及資源回收，共同愛護環境。<br>
@@ -119,29 +119,29 @@ const pagesContent = [
       <div class="page-title">三天活動行程表</div>
       <div style="font-weight:700; color:#64748b; margin-bottom:12px;">新北市林口區麗園國民小學 115學年度6年級戶外教育參觀活動</div>
 
-      <div style="margin-bottom:14px; background:#fff7ed; border-left:4px solid #f97316; padding:10px 14px; border-radius:0 8px 8px 0;">
-        <b style="color:#9a3412;">第一天（11 月 25 日星期三） ｜ 【著便服】</b>
-        <div style="font-size:0.88rem; color:#334155; margin-top:4px; line-height:1.6;">
+      <div style="margin-bottom:14px; background:#fff7ed; border-left:4px solid #f97316; padding:12px 14px; border-radius:0 8px 8px 0;">
+        <b style="color:#9a3412; font-size:1.02rem;">第一天（11 月 25 日星期三） ｜ 【著便服】</b>
+        <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
           06:30 學校集合完畢 ➔ 07:00 前出發 ➔ 921 地震教育園區 ➔ 享用午餐 ➔ 林班道體驗工廠 ➔ 今埔里渡假大酒店 Check in ➔ 享用晚餐 ➔ 團康活動 ➔ 21:00 晚點名
         </div>
       </div>
 
-      <div style="margin-bottom:14px; background:#f0f9ff; border-left:4px solid #0284c7; padding:10px 14px; border-radius:0 8px 8px 0;">
-        <b style="color:#0369a1;">第二天（11 月 26 日星期四） ｜ 【著班服】</b>
-        <div style="font-size:0.88rem; color:#334155; margin-top:4px; line-height:1.6;">
+      <div style="margin-bottom:14px; background:#f0f9ff; border-left:4px solid #0284c7; padding:12px 14px; border-radius:0 8px 8px 0;">
+        <b style="color:#0369a1; font-size:1.02rem;">第二天（11 月 26 日星期四） ｜ 【著班服】</b>
+        <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
           07:00 晨喚 ➔ 享用早餐 ➔ 薰衣草森林九九峰園區 ➔ 享用午餐 ➔ 芬園小憩 ➔ 鹿港老街 ➔ 享用晚餐 ➔ 青春晚會 ➔ 麗寶福容大飯店 Check in ➔ 21:30 晚點名
         </div>
       </div>
 
-      <div style="margin-bottom:14px; background:#f0fdf4; border-left:4px solid #10b981; padding:10px 14px; border-radius:0 8px 8px 0;">
-        <b style="color:#166534;">第三天（11 月 27 日星期五） ｜ 【著運動服】</b>
-        <div style="font-size:0.88rem; color:#334155; margin-top:4px; line-height:1.6;">
-          07:00 晨喚 ➔ 享用早餐 ➔ 麗寶樂園（午餐：必勝客個人套餐） ➔ 16:00 返抵學校
+      <div style="margin-bottom:14px; background:#f0fdf4; border-left:4px solid #10b981; padding:12px 14px; border-radius:0 8px 8px 0;">
+        <b style="color:#166534; font-size:1.02rem;">第三天（11 月 27 日星期五） ｜ 【著運動服】</b>
+        <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
+          07:00 晨喚 ➔ 享用早餐 ➔ 麗寶樂園（午餐：必勝客個人套餐） ➔ 16:00 返抵學校放學
         </div>
       </div>
 
       <div class="book-callout callout-orange">
-        ★ 以上時間僅供參考，實際以當天路況與現場調度為準。請大家務必緊跟各班領隊與導師指引！
+        ★ 以上時間僅供參考，實際以當天路況為準。
       </div>
     `
   },
@@ -149,7 +149,7 @@ const pagesContent = [
   // ==================== 第 4 頁 ====================
   {
     num: 4,
-    title: "出門前的叮嚀與退費方式",
+    title: "出門前的叮嚀與退費規定",
     category: "生活規範",
     render: () => `
       <div class="page-title">出門前的叮嚀</div>
@@ -167,7 +167,7 @@ const pagesContent = [
       </ol>
 
       <div class="page-section-subtitle">10. 退費方式（交通部觀光署國內旅遊定型化契約第十二條）</div>
-      <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:10px 14px; font-size:0.85rem; line-height:1.6;">
+      <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px 14px; font-size:0.9rem; line-height:1.7;">
         根據交通部觀光署發布國內旅遊定型化契約第十二條（出發前旅客任意解除契約）甲方於旅遊活動開始前得通知乙方解除本契約，但應繳交行政規費，並應依下列基準賠償：<br>
         • <b>A.</b> 旅遊活動開始前<b>第 2 日至第 20 日以內</b>取消，需收取全額 <b>30%</b> 手續費。<br>
         • <b>B.</b> 旅遊活動開始前<b>第 1 日</b>取消，需收取全額 <b>50%</b> 手續費。<br>
@@ -184,26 +184,26 @@ const pagesContent = [
     render: () => `
       <div class="page-title">外出旅遊攜帶物品選取表</div>
       
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <span style="font-size:0.85rem; font-weight:700; color:#0284c7;" id="bookCheckProgress">打包進度：計算中...</span>
-        <button class="header-btn" onclick="resetBookChecklist()" style="font-size:0.75rem; padding:2px 8px; color:#475569;">重設</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+        <span style="font-size:0.92rem; font-weight:800; color:#0284c7;" id="bookCheckProgress">打包進度：計算中...</span>
+        <button class="header-btn" onclick="resetBookChecklist()" style="font-size:0.8rem; padding:4px 10px; color:#475569;">重設清單</button>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-          <h4 style="font-size:0.92rem; color:#ea580c; margin-bottom:8px;">🎒 隨身背包（裝貴重物品）</h4>
-          <div id="bookBackpackList" style="display:flex; flex-direction:column; gap:6px;"></div>
+      <div style="display:grid; grid-template-columns:1fr; gap:14px; margin-bottom:16px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+          <h4 style="font-size:1rem; font-weight:800; color:#ea580c; margin-bottom:10px;">🎒 隨身背包（裝貴重物品）</h4>
+          <div id="bookBackpackList" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-          <h4 style="font-size:0.92rem; color:#0284c7; margin-bottom:8px;">🧳 行李袋 / 行李箱（裝換洗）</h4>
-          <div id="bookLuggageList" style="display:flex; flex-direction:column; gap:6px;"></div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:14px;">
+          <h4 style="font-size:1rem; font-weight:800; color:#0284c7; margin-bottom:10px;">🧳 行李袋 / 行李箱（裝換洗衣物）</h4>
+          <div id="bookLuggageList" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
       </div>
 
       <div class="book-callout callout-green">
         🌱 <b>因應減塑及環保，特別提醒：</b><br>
-        飯店不提供一次性用品（如：梳子、牙刷、牙膏、浴帽…等），請務必自行準備盥洗清潔用品！
+        飯店不提供一次性用品（如：梳子、牙刷、牙膏、浴帽…等），請務必自行準備個人盥洗用品！
       </div>
     `
   },
@@ -284,7 +284,7 @@ const pagesContent = [
     title: "護理篇與緊急救護常識",
     category: "護理急救",
     render: () => `
-      <div class="page-title">護理篇與簡易急救小常識</div>
+      <div class="page-title">護理篇與簡易急救常識</div>
 
       <ol class="book-ol">
         <li>會暈車者，請自備暈車藥，並於開車前半小時服用。</li>
@@ -294,7 +294,7 @@ const pagesContent = [
         <li>出門在外應注意飲食衛生，不吃路邊未包裝食品。</li>
         <li>旅行期間請攜帶健保卡、緊急連絡人姓名、電話（住宅及辦公室）於身上，以備不時之需。</li>
         <li><b>簡易急救小常識：</b>
-          <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px 12px; margin-top:6px; font-size:0.88rem; line-height:1.65;">
+          <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px; margin-top:8px; font-size:0.92rem; line-height:1.75;">
             ☆ <b>灼燙傷時：</b>以冷水沖泡傷處至不痛為止（至少 5-15 分鐘），不可搓揉皮膚，以免表皮受損，容易受到感染。<br>
             ☆ <b>外傷流血時：</b>除了直接加壓傷口使其密合外，尚須抬高患肢 5-10 分鐘。<br>
             ☆ <b>瘀腫傷：</b>應即刻讓患肢休息，避免不必要之走動，不可搓揉，以免傷勢加重。<br>
@@ -351,6 +351,7 @@ const pagesContent = [
     render: () => `
       <div class="page-title">921 園區五大展館介紹</div>
 
+      <!-- 網路精選真實照片：車籠埔斷層保存館特色薄膜天棚外觀 -->
       <div class="book-photo-card">
         <img src="assets/images/real/921_hall.jpg" alt="車籠埔斷層保存館特色建築外觀" loading="lazy">
         <div class="book-photo-caption">
@@ -360,37 +361,37 @@ const pagesContent = [
       </div>
 
       <div style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
-        <div style="background:#f8fafc; border-left:4px solid #0284c7; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#0369a1; font-size:1rem;">☞ 車籠埔斷層保存館：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f8fafc; border-left:4px solid #0284c7; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#0369a1; font-size:1.02rem;">☞ 車籠埔斷層保存館：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             「車籠埔斷層保存館」紀錄及保存 921 地震斷層遺址的景觀，連結現址與過去的共同記憶，透過真實地貌及認識地震科學的知識，讓民眾體現人與大自然之間和諧共處的關係。
           </div>
         </div>
 
-        <div style="background:#f8fafc; border-left:4px solid #f97316; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#ea580c; font-size:1rem;">☞ 影像館：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f8fafc; border-left:4px solid #f97316; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#ea580c; font-size:1.02rem;">☞ 影像館：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             集結了昔日 921 地震的種種圖像以及影音資料，以人文社會與歷史紀錄的角度，真實地呈現 921 地震在人們心中所留下的記憶。透過有系統的展示，觀眾可以瀏覽 921 地震後到處斷垣殘壁、救難人員救災、各界送溫暖、重建施工、以及重建重生後等等情景。
           </div>
         </div>
 
-        <div style="background:#f8fafc; border-left:4px solid #8b5cf6; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#7c3aed; font-size:1rem;">☞ 地震工程教育館：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f8fafc; border-left:4px solid #8b5cf6; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#7c3aed; font-size:1.02rem;">☞ 地震工程教育館：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             地震工程教育館，分為「展示館」與「毀壞教室保存區」兩部份；「展示館」主要以實驗室為規劃概念，利用互動式展示結合科學演示，讓參觀民眾從動手操作中，獲得地震工程相關知識。「毀壞教室保存區」則保留霧峰區光復國中震損校舍的原址，參觀民眾可見證強烈地震的破壞力，並可觀察臺灣地區中小學校舍建築典型的震損模式。
           </div>
         </div>
 
-        <div style="background:#f8fafc; border-left:4px solid #10b981; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#059669; font-size:1rem;">☞ 防災教育館：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f8fafc; border-left:4px solid #10b981; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#059669; font-size:1.02rem;">☞ 防災教育館：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             防災教育館的設立，是基於「事前的預防工作做得好，遠勝過事後的補救」的理念，將相關的救災及避難知識傳達出去，期待國人能建立正確的防災觀念。
           </div>
         </div>
 
-        <div style="background:#f8fafc; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#d97706; font-size:1rem;">☞ 重建記錄館：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f8fafc; border-left:4px solid #f59e0b; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#d97706; font-size:1.02rem;">☞ 重建記錄館：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             本館以數字呈現出 921 地震救災、安置到重建的總體樣貌，提供重建過程的總覽，說明重建工程的費用來源與金額。瞭解集合式住宅重建、山地部落遷村，以及自然復育與居民生計之間的衝突，讓民眾進一步明白重建工作所遭遇的困難與挑戰。隨著館內展示，帶領觀眾一起關懷突然失去親人與家園的災民，看他們如何自立自強、凝聚社區意識，創造出社區產業與文化特色。
           </div>
         </div>
@@ -521,7 +522,7 @@ const pagesContent = [
       <div class="book-photo-card">
         <img src="assets/images/real/lihpao_overview.jpg" alt="麗寶樂園全景照片" loading="lazy">
         <div class="book-photo-caption">
-          <span>🎡 麗寶樂園渡假區空拍全景：探索世界、馬拉灣與天空之夢摩天輪</span>
+          <span>🎡 麗寶樂園渡假區全景：探索世界、馬拉灣與天空之夢摩天輪</span>
           <span class="photo-source-badge">園區實拍全貌</span>
         </div>
       </div>
@@ -543,6 +544,7 @@ const pagesContent = [
     render: () => `
       <div class="page-title">探索世界三大分區設施</div>
 
+      <!-- 網路精選真實照片：搶救地心斷軌雲霄飛車 -->
       <div class="book-photo-card">
         <img src="assets/images/real/lihpao_gravity_max.jpg" alt="搶救地心斷軌式雲霄飛車" loading="lazy">
         <div class="book-photo-caption">
@@ -551,26 +553,26 @@ const pagesContent = [
         </div>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:12px; margin-top:14px;">
-        <div style="background:#fef2f2; border-left:4px solid #ef4444; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#991b1b; font-size:1rem;">⚡ 冒險天堂（刺激設施區，挑戰「強心臟」的你）：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+      <div style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
+        <div style="background:#fef2f2; border-left:4px solid #ef4444; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#991b1b; font-size:1.02rem;">⚡ 冒險天堂（刺激設施區，挑戰「強心臟」的你）：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             此區設施有：<b>搶救地心（斷軌雲霄飛車）、時空飛俠、銀河炫風、異次元風暴、音速迴旋、火山冒險、碰碰車</b>。<br>
             ★ <b>搶救地心</b>：為全球首座斷軌式雲霄飛車，高度約有 <b>13 層樓高</b>，挑戰心跳極限！
           </div>
         </div>
 
-        <div style="background:#f0fdf4; border-left:4px solid #10b981; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#166534; font-size:1rem;">🌲 魔法森林（較慢速之設施，同學增進感情的好去處）：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#f0fdf4; border-left:4px solid #10b981; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#166534; font-size:1.02rem;">🌲 魔法森林（較慢速之設施，同學增進感情的好去處）：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             設施包括：<b>摩天輪、陽光探戈、魔法風琴師（咖啡杯）、叢林泛舟、花園小舟</b>。<br>
             除了可以暢玩，還可以一起拍下值得一同回憶的歡樂合照唷！
           </div>
         </div>
 
-        <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:10px 14px; border-radius:0 8px 8px 0;">
-          <b style="color:#1e40af; font-size:1rem;">👑 POPA 歡樂王國（適合兒童遊玩的童趣樂園）：</b>
-          <div style="font-size:0.9rem; color:#334155; margin-top:4px; line-height:1.65;">
+        <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:12px 14px; border-radius:0 8px 8px 0;">
+          <b style="color:#1e40af; font-size:1.02rem;">👑 POPA 歡樂王國（適合兒童遊玩的童趣樂園）：</b>
+          <div style="font-size:0.92rem; color:#334155; margin-top:4px; line-height:1.7;">
             設施包括：<b>採礦飛車（小型雲霄飛車）、探險虎克（海盜船）、人魚木舟（迷你泛舟）、露娜與海盜、皇冠鞦韆（輻射椅）、轉轉笛諾、小蝸牛（手動車）、旋轉木馬、時光旅行（老爺車）、飛象藍天（小飛象）、青蛙跳、娃娃城堡、POPA 歡樂島</b>。
           </div>
         </div>
@@ -589,7 +591,7 @@ const pagesContent = [
     category: "互動學習單",
     render: () => `
       <div class="page-title">921 地震教育園區學習單</div>
-      <div style="font-size:0.85rem; color:#64748b; margin-bottom:12px;">聰明的你，在體驗過地震後，一起來動動腦回答下列問題！</div>
+      <div style="font-size:0.9rem; color:#64748b; margin-bottom:12px;">聰明的你，在體驗過地震後，一起來動動腦回答下列問題！</div>
 
       <div id="quiz1_container"></div>
     `
@@ -636,26 +638,26 @@ const pagesContent = [
     category: "旅途留念",
     render: () => `
       <div class="page-title">🦒 留言板 (一)</div>
-      <div style="font-size:0.85rem; color:#64748b; margin-bottom:10px;">手寫塗鴉、簽名與插畫紀念（原書長頸鹿與小豬插畫畫框）</div>
+      <div style="font-size:0.9rem; color:#64748b; margin-bottom:10px;">手寫塗鴉、簽名與插畫紀念（原書長頸鹿與小豬插畫畫框）</div>
 
       <div style="background:#ffffff; border:2px solid #cbd5e1; border-radius:12px; padding:14px; position:relative;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
-          <span style="font-size:0.8rem; font-weight:700;">畫筆顏色：</span>
-          <button onclick="setPenColor('#f97316')" style="width:22px; height:22px; border-radius:50%; background:#f97316; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#0284c7')" style="width:22px; height:22px; border-radius:50%; background:#0284c7; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#10b981')" style="width:22px; height:22px; border-radius:50%; background:#10b981; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#ec4899')" style="width:22px; height:22px; border-radius:50%; background:#ec4899; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenColor('#0f172a')" style="width:22px; height:22px; border-radius:50%; background:#0f172a; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
-          <button onclick="setPenEraser()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer;">🧹 橡皮擦</button>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
+          <span style="font-size:0.85rem; font-weight:700;">畫筆顏色：</span>
+          <button onclick="setPenColor('#f97316')" style="width:26px; height:26px; border-radius:50%; background:#f97316; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
+          <button onclick="setPenColor('#0284c7')" style="width:26px; height:26px; border-radius:50%; background:#0284c7; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
+          <button onclick="setPenColor('#10b981')" style="width:26px; height:26px; border-radius:50%; background:#10b981; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
+          <button onclick="setPenColor('#ec4899')" style="width:26px; height:26px; border-radius:50%; background:#ec4899; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
+          <button onclick="setPenColor('#0f172a')" style="width:26px; height:26px; border-radius:50%; background:#0f172a; border:2px solid white; box-shadow:0 0 0 1px #cbd5e1; cursor:pointer;"></button>
+          <button onclick="setPenEraser()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:0.82rem; cursor:pointer;">🧹 橡皮擦</button>
           
           <div style="margin-left:auto; display:flex; gap:6px;">
-            <button onclick="clearBookCanvas()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:2px 8px; font-size:0.75rem; cursor:pointer;">清空</button>
-            <button onclick="downloadBookCanvas()" style="background:var(--primary); color:white; border:none; border-radius:4px; padding:2px 10px; font-size:0.75rem; font-weight:700; cursor:pointer;">📥 保存</button>
+            <button onclick="clearBookCanvas()" style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:4px; padding:4px 10px; font-size:0.82rem; cursor:pointer;">清空</button>
+            <button onclick="downloadBookCanvas()" style="background:var(--primary); color:white; border:none; border-radius:4px; padding:4px 12px; font-size:0.82rem; font-weight:700; cursor:pointer;">📥 下載塗鴉</button>
           </div>
         </div>
 
         <div style="width:100%; height:380px; position:relative; background:#ffffff; border:1px dashed #fdba74; border-radius:8px;">
-          <canvas id="pageDoodleCanvas" style="width:100%; height:100%; border-radius:8px;"></canvas>
+          <canvas id="pageDoodleCanvas" style="width:100%; height:100%; border-radius:8px; touch-action:none;"></canvas>
         </div>
       </div>
     `
@@ -692,12 +694,12 @@ const pagesContent = [
       <div class="page-title">留 言 板 (三) ＆ 心情便條牆</div>
 
       <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
-        <input type="text" id="bm_author" placeholder="你的暱稱 / 班級" style="width:120px; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem;">
-        <input type="text" id="bm_msg" placeholder="寫下一句祝福或旅行心得..." style="flex:1; min-width:180px; padding:6px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.85rem;">
-        <button class="nav-arrow-btn" onclick="addBookNote()" style="padding:6px 14px; font-size:0.82rem;">貼上便條</button>
+        <input type="text" id="bm_author" placeholder="你的暱稱 / 班級" style="width:140px; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.88rem;">
+        <input type="text" id="bm_msg" placeholder="寫下一句祝福或旅行心得..." style="flex:1; min-width:180px; padding:8px 10px; border:1px solid #cbd5e1; border-radius:6px; font-size:0.88rem;">
+        <button class="nav-arrow-btn" onclick="addBookNote()" style="padding:8px 16px; font-size:0.85rem; height:auto; max-width:none;">貼上便條</button>
       </div>
 
-      <div id="bookNotesWall" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div>
+      <div id="bookNotesWall" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px;"></div>
     `
   },
 
@@ -709,52 +711,53 @@ const pagesContent = [
     render: () => `
       <div class="page-title">晚點名貼心小叮嚀</div>
 
-      <!-- 原版手冊第22頁完整表格呈現 -->
-      <table class="table-evening-call">
-        <thead>
-          <tr>
-            <th rowspan="2" style="width:20%;">時間規劃</th>
-            <th colspan="2" style="color:#0284c7;">第一晚（今埔里）</th>
-            <th colspan="2" style="color:#f97316;">第二晚（麗寶福容）</th>
-          </tr>
-          <tr>
-            <th style="width:20%;">時間</th>
-            <th style="width:20%;">地點</th>
-            <th style="width:20%;">時間</th>
-            <th style="width:20%;">地點</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>起床</b></td>
-            <td>07:00</td>
-            <td>各客房</td>
-            <td>07:00</td>
-            <td>各客房</td>
-          </tr>
-          <tr>
-            <td><b>退房</b></td>
-            <td>早餐後</td>
-            <td>飯店大廳</td>
-            <td>早餐後</td>
-            <td>飯店大廳</td>
-          </tr>
-          <tr>
-            <td><b>早餐</b></td>
-            <td>07:20</td>
-            <td>飯店餐廳</td>
-            <td>07:20</td>
-            <td>飯店餐廳</td>
-          </tr>
-          <tr>
-            <td><b>注意事項</b></td>
-            <td colspan="2" style="font-size:0.8rem; text-align:left;">21:00 準時晚點名；整理好明日行李</td>
-            <td colspan="2" style="font-size:0.8rem; text-align:left;">21:30 準時晚點名；裝箱上車不遺漏</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x:auto; margin:14px 0;">
+        <table class="table-evening-call">
+          <thead>
+            <tr>
+              <th rowspan="2" style="width:20%;">時間規劃</th>
+              <th colspan="2" style="color:#0284c7;">第一晚（今埔里）</th>
+              <th colspan="2" style="color:#f97316;">第二晚（麗寶福容）</th>
+            </tr>
+            <tr>
+              <th style="width:20%;">時間</th>
+              <th style="width:20%;">地點</th>
+              <th style="width:20%;">時間</th>
+              <th style="width:20%;">地點</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>起床</b></td>
+              <td>07:00</td>
+              <td>各客房</td>
+              <td>07:00</td>
+              <td>各客房</td>
+            </tr>
+            <tr>
+              <td><b>退房</b></td>
+              <td>早餐後</td>
+              <td>飯店大廳</td>
+              <td>早餐後</td>
+              <td>飯店大廳</td>
+            </tr>
+            <tr>
+              <td><b>早餐</b></td>
+              <td>07:20</td>
+              <td>飯店餐廳</td>
+              <td>07:20</td>
+              <td>飯店餐廳</td>
+            </tr>
+            <tr>
+              <td><b>注意事項</b></td>
+              <td colspan="2" style="font-size:0.82rem; text-align:left;">21:00 準時晚點名；整理好明日行李</td>
+              <td colspan="2" style="font-size:0.82rem; text-align:left;">21:30 準時晚點名；裝箱上車不遺漏</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <div style="margin-top:18px; font-size:0.92rem; color:#334155; line-height:1.75;">
+      <div style="margin-top:16px; font-size:0.95rem; color:#334155; line-height:1.8;">
         <p>● <b>晚上冷氣溫度建議不要低於 25 度</b>，避免感冒著涼。</p>
         <p>● <b>睡前再確認行李是否整理好</b>，證件貴重物品隨身保管。</p>
         <p>● <b>晚點名後因安全考量，請勿擅自離開房間</b>；若有任何問題可撥打至飯店櫃台，會有人員協助處理。</p>
@@ -775,13 +778,13 @@ const pagesContent = [
       <div class="page-title">新北市林口區麗園國民小學</div>
       <div style="font-weight:700; color:#64748b; margin-bottom:12px;">(115 學年度 6 年級戶外教育參觀活動家長聯絡單)</div>
 
-      <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px 14px; margin-bottom:14px; font-size:0.9rem;">
+      <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:12px 14px; margin-bottom:14px; font-size:0.92rem;">
         <b>日 期：</b>民國 115 年 11 月 25 日至 11 月 27 日
       </div>
 
       <div style="margin-bottom:14px;">
-        <h4 style="font-size:0.95rem; font-weight:800; color:#0369a1; margin-bottom:6px;">🏛️ 活動地點專線：</h4>
-        <div style="font-size:0.88rem; line-height:1.7; color:#334155;">
+        <h4 style="font-size:0.98rem; font-weight:800; color:#0369a1; margin-bottom:6px;">🏛️ 活動地點專線：</h4>
+        <div style="font-size:0.92rem; line-height:1.75; color:#334155;">
           • 921 地震教育園區：<a href="tel:0423390906" style="font-weight:700;">(04) 2339-0906</a><br>
           • 林班道體驗工廠：<a href="tel:0492777462" style="font-weight:700;">(049) 277-7462</a><br>
           • 薰衣草森林九九峰園區：<a href="tel:0496004999" style="font-weight:700;">(049) 600-4999</a><br>
@@ -790,14 +793,14 @@ const pagesContent = [
       </div>
 
       <div style="margin-bottom:14px;">
-        <h4 style="font-size:0.95rem; font-weight:800; color:#ea580c; margin-bottom:6px;">🏨 住宿飯店資訊：</h4>
-        <div style="background:#fff7ed; border-radius:6px; padding:10px 12px; margin-bottom:8px; font-size:0.88rem;">
+        <h4 style="font-size:0.98rem; font-weight:800; color:#ea580c; margin-bottom:6px;">🏨 住宿飯店資訊：</h4>
+        <div style="background:#fff7ed; border-radius:8px; padding:12px; margin-bottom:10px; font-size:0.92rem;">
           <b>今埔里渡假大酒店（第一晚）</b><br>
           電話：<a href="tel:0492422088" style="font-weight:700;">(049) 242-2088</a><br>
           地址：南投縣埔里鎮南興街 79 號 ｜ <a href="https://maps.google.com/?q=南投縣埔里鎮南興街79號" target="_blank">🗺️ 地圖導航</a>
         </div>
 
-        <div style="background:#f0f9ff; border-radius:6px; padding:10px 12px; font-size:0.88rem;">
+        <div style="background:#f0f9ff; border-radius:8px; padding:12px; font-size:0.92rem;">
           <b>麗寶福容大飯店（第二晚）</b><br>
           電話：<a href="tel:0425592888" style="font-weight:700;">(04) 2559-2888</a><br>
           地址：台中市后里區福容路 88 號 ｜ <a href="https://maps.google.com/?q=台中市后里區福容路88號" target="_blank">🗺️ 地圖導航</a>
@@ -805,14 +808,14 @@ const pagesContent = [
       </div>
 
       <div>
-        <h4 style="font-size:0.95rem; font-weight:800; color:#166534; margin-bottom:6px;">📞 緊急聯絡電話：</h4>
-        <div style="font-size:0.88rem; line-height:1.7;">
+        <h4 style="font-size:0.98rem; font-weight:800; color:#166534; margin-bottom:6px;">📞 緊急聯絡電話：</h4>
+        <div style="font-size:0.92rem; line-height:1.75;">
           • 麗園國小聯絡電話：<a href="tel:0226091061" style="font-weight:700;">(02) 2609-1061</a><br>
           • 原民旅行社聯絡電話：<a href="tel:0229509096" style="font-weight:700;">(02) 2950-9096</a>
         </div>
       </div>
 
-      <div style="margin-top:14px; text-align:center; font-size:0.82rem; color:#64748b; border-top:1px dashed #cbd5e1; padding-top:10px;">
+      <div style="margin-top:16px; text-align:center; font-size:0.85rem; color:#64748b; border-top:1px dashed #cbd5e1; padding-top:10px;">
         預祝您旅途平安快樂，並把此頁撕下交給家長存查。
       </div>
     `
@@ -827,7 +830,7 @@ const pagesContent = [
       <div class="page-title">戶外教育參觀活動行程表 (存查聯)</div>
       <div style="font-weight:700; color:#64748b; margin-bottom:12px;">新北市林口區麗園國民小學 115 學年度 6 年級</div>
 
-      <div style="font-size:0.88rem; line-height:1.75; color:#334155;">
+      <div style="font-size:0.92rem; line-height:1.8; color:#334155;">
         <p><b>第一天（11 月 25 日星期三） ｜ （著便服）</b><br>
         06:30 學校集合完畢 ➔ 07:00 前出發 ➔ 921 地震教育園區 ➔ 享用午餐 ➔ 林班道體驗工廠 ➔ 今埔里渡假大酒店 Check in ➔ 享用晚餐 ➔ 團康活動 ➔ 21:00 晚點名</p>
 
@@ -844,7 +847,7 @@ const pagesContent = [
       </div>
 
       <div style="margin-top:14px; text-align:right;">
-        <button class="nav-arrow-btn" onclick="window.print()" style="font-size:0.85rem; padding:6px 14px;">🖨️ 列印存查聯</button>
+        <button class="nav-arrow-btn" onclick="window.print()" style="font-size:0.88rem; padding:8px 18px; height:auto; max-width:none;">🖨️ 列印存查聯</button>
       </div>
     `
   }

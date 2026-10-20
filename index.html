@@ -3,76 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>新北市林口區麗園國小 115學年度六年級戶外教育參觀活動 電子手冊書</title>
-  <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊書，以立體數位書籍形式閱覽，收錄三天兩夜完整行程、真實景點照片輔助、行李打包清單、線上學習單與緊急聯絡資訊。">
+  <title>新北市林口區麗園國小 115學年度六年級戶外教育參觀活動 電子手冊</title>
+  <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊書，手機最佳化閱讀體驗，完整收錄三天兩夜行程、真實景點照片輔助、行李打包清單、線上學習單與緊急聯絡資訊。">
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Top Sticky Navigation Bar -->
   <header class="book-header">
     <div class="header-inner">
       <div class="book-title-group">
-        <span class="school-tag">新北市麗園國小</span>
+        <span class="school-tag">麗園國小</span>
         <div class="book-main-title">
-          <span>115學年度六年級戶外教育電子手冊</span>
-          <span class="sub-txt" style="font-size:0.8rem; color:#94a3b8; font-weight:normal;">(民國115年11月25日～27日)</span>
+          <span>六年級戶外教育手冊</span>
         </div>
       </div>
 
       <div class="header-controls">
+        <!-- 字體放大縮小 -->
+        <button class="header-btn font-size-btn" onclick="adjustFontSize(-0.1)" title="縮小字體">A-</button>
+        <button class="header-btn font-size-btn" onclick="adjustFontSize(0.1)" title="放大字體">A+</button>
+
         <button class="header-btn" id="btnOpenToc" title="開啟章節目錄">
-          <span>📑 章節目錄</span>
+          <span>📑 目錄</span>
         </button>
-        <button class="header-btn" id="btnToggleScan" title="切換原書掃描頁 / 數位增強版">
-          <span id="scanModeText">📷 顯示原版掃描</span>
+        <button class="header-btn" id="btnToggleScan" title="切換原版掃描 / 數位排版">
+          <span id="scanModeText">📷 原版</span>
         </button>
-        <button class="header-btn" onclick="window.print()" title="列印手冊">
-          <span>🖨️ 列印</span>
-        </button>
-        <a href="assets/handbook.pdf" download="麗園國小戶外教育手冊.pdf" class="header-btn" title="下載原版手冊 PDF">
-          <span>📥 下載原檔</span>
-        </a>
       </div>
     </div>
   </header>
 
-  <!-- Book Stage -->
+  <!-- Book Main Stage -->
   <main class="book-stage">
     
-    <!-- 倒數與提示小條 -->
-    <div style="width:100%; max-width:1260px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; color:#cbd5e1; font-size:0.85rem; flex-wrap:wrap; gap:8px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="color:#fdba74;">⏳ 集合倒數：</span>
-        <span id="headerCountdown" style="font-weight:700; color:#38bdf8;">計算中...</span>
-        <span style="font-size:0.75rem; color:#94a3b8;">(115/11/25 06:30 集合 07:00 出發)</span>
+    <!-- 頂部倒數與提示小條 -->
+    <div class="book-info-bar">
+      <div>
+        <span style="color:#fdba74; font-weight:700;">⏳ 啟程倒數：</span>
+        <span id="headerCountdown" style="font-weight:800; color:#38bdf8;">計算中...</span>
       </div>
-      <div style="font-size:0.8rem; color:#94a3b8;">
-        💡 提示：使用下方箭頭或鍵盤 <b>←</b> <b>→</b> 左右翻頁，手機可直接左右滑動！
+      <div style="font-size:0.78rem; color:#94a3b8;">
+        115/11/25 (三) 06:30 集合 07:00 準時出發！
       </div>
     </div>
 
     <!-- Book Spine & Pages Container -->
     <div class="book-spine-wrapper" id="bookWrapper">
       <div class="book-spread" id="bookSpread">
-        <!-- Left Page Container -->
+        <!-- Left Page (Mobile shows active page here) -->
         <article class="book-page page-left" id="pageLeft"></article>
-        <!-- Right Page Container -->
+        <!-- Right Page (Desktop only) -->
         <article class="book-page page-right" id="pageRight"></article>
       </div>
     </div>
 
-    <!-- Bottom Page Navigation Bar -->
+    <!-- Bottom Page Navigation Bar (Fixed on Mobile) -->
     <nav class="book-nav-bar">
-      <button class="nav-arrow-btn" id="btnPrevSpread">
-        <span>⬅️ 上一頁</span>
+      <button class="nav-arrow-btn" id="btnPrevPage">
+        <span>◀ 上一頁</span>
       </button>
 
       <select class="page-jump-select" id="pageJumpSelect"></select>
 
-      <button class="nav-arrow-btn" id="btnNextSpread">
-        <span>下一頁 ➡️</span>
+      <button class="nav-arrow-btn" id="btnNextPage">
+        <span>下一頁 ▶</span>
       </button>
     </nav>
   </main>
@@ -81,8 +77,8 @@
   <div class="toc-backdrop" id="tocBackdrop"></div>
   <aside class="toc-drawer" id="tocDrawer">
     <div class="toc-header">
-      <h3><span>📖</span> 手冊章節目錄</h3>
-      <button class="header-btn" id="btnCloseToc" style="padding:4px 8px;">✕</button>
+      <h3><span>📖</span> 手冊章節目錄 (共24頁)</h3>
+      <button class="header-btn" id="btnCloseToc" style="padding:4px 10px;">✕</button>
     </div>
     <div class="toc-list" id="tocList"></div>
   </aside>
