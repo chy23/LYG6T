@@ -689,3 +689,151 @@ body {
     break-after: page;
   }
 }
+
+/* --------------------------------------------------------------------------
+   連續長條滑動模式 (Continuous Scroll Mode)
+   -------------------------------------------------------------------------- */
+.continuous-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.continuous-page-block {
+  background-color: var(--paper-bg);
+  background-image: linear-gradient(to bottom, #ffffff 0%, var(--paper-cream) 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 20px 14px 28px;
+  position: relative;
+  scroll-margin-top: 70px;
+}
+
+@media (min-width: 768px) {
+  .continuous-page-block {
+    padding: 30px 24px 34px;
+    border-radius: var(--radius-lg);
+  }
+}
+
+.continuous-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 0 8px;
+  width: 100%;
+}
+
+.continuous-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+}
+
+.continuous-divider .divider-tag {
+  background: #3b82f6;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   單頁模式：頁尾接續卡片 (Next Page CTA Banner)
+   -------------------------------------------------------------------------- */
+.next-page-cta {
+  margin-top: 26px;
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 2px solid #93c5fd;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.08);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.next-page-cta:hover, .next-page-cta:active {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #2563eb;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.18);
+}
+
+.next-cta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+}
+
+.next-cta-sub {
+  font-size: 0.72rem;
+  color: #2563eb;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.next-cta-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  line-height: 1.3;
+}
+
+.next-cta-action {
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  margin-left: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   窄螢幕 Header 與按鈕優化 (< 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .book-header {
+    padding: 8px 10px;
+  }
+  .header-inner {
+    gap: 4px;
+  }
+  .school-tag {
+    display: none;
+  }
+  .book-main-title {
+    font-size: 0.85rem;
+    max-width: 105px;
+  }
+  .header-controls {
+    gap: 4px;
+  }
+  .header-btn {
+    padding: 5px 8px;
+    font-size: 0.74rem;
+    gap: 2px;
+  }
+  .font-size-btn {
+    padding: 5px 6px;
+  }
+}
+

@@ -2,14 +2,18 @@
 let currentPage = 1; // 1 to 24
 let isScanMode = false;
 let isMobile = window.innerWidth < 1024;
+let isContinuousMode = localStorage.getItem("ly_reading_mode") === "continuous";
 let fontScale = 1.0;
+let scrollSpyObserver = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   initBookCountdown();
   initTocDrawer();
   initBookNavigation();
+  initModeToggle();
   initKeyboardNav();
   initTouchSwipe();
+  initScreenEdgeTap();
 
   // Load last read page
   const savedPage = parseInt(localStorage.getItem("ly_handbook_page") || "1");
@@ -57,15 +61,44 @@ function initBookCountdown() {
 }
 
 /* --------------------------------------------------------------------------
-   3. 書本頁面渲染核心 (手機單頁自然滾動 vs 電腦雙頁對開)
+   3. 書本頁面渲染核心 (連續長卷軸 vs 單頁自然滾動 vs 電腦雙頁對開)
    -------------------------------------------------------------------------- */
 function renderBook() {
   const leftContainer = document.getElementById("pageLeft");
   const rightContainer = document.getElementById("pageRight");
   if (!leftContainer || !rightContainer) return;
 
-  if (isMobile) {
-    // 【手機端模式】：單頁順暢閱讀，包含全部 1~24 頁，無任何跳頁或隱藏！
+  // 斷開滾動監聽
+  if (scrollSpyObserver) {
+    scrollSpyObserver.disconnect();
+    scrollSpyObserver = null;
+  }
+
+  if (isContinuousMode) {
+    // 【連續向下長條滾動模式】：所有 1~24 頁一氣呵成連續向下排列
+    rightContainer.style.display = "none";
+    let continuousHtml = '<div class="continuous-container">';
+    pagesContent.forEach(p => {
+      continuousHtml += `
+        <section class="continuous-page-block" id="section-page-${p.num}" data-page="${p.num}">
+          <div class="continuous-divider">
+            <div class="divider-line"></div>
+            <div class="divider-tag">第 ${p.num} 頁 · ${p.title}</div>
+            <div class="divider-line"></div>
+          </div>
+          ${buildPageHtml(p, "continuous")}
+        </section>
+      `;
+    });
+    continuousHtml += '</div>';
+    leftContainer.innerHTML = continuousHtml;
+
+    // 掛載所有互動元件
+    [1, 5, 16, 17, 18, 19, 21].forEach(pn => initDynamicComponentsOnPage(pn));
+    setupScrollSpy();
+    updateNavControlsContinuous();
+  } else if (isMobile) {
+    // 【手機端單頁模式】：單頁順暢閱讀，包含全部 1~24 頁，無任何跳頁或隱藏！
     rightContainer.style.display = "none";
     const currentData = pagesContent.find(p => p.num === currentPage);
     if (currentData) {
@@ -119,6 +152,18 @@ function buildPageHtml(pageData, side) {
     `;
   }
 
+  // 在單頁模式下，頁尾增加醒目的「繼續閱讀下一篇」大按鈕
+  const nextPageData = (!isContinuousMode && pageData.num < 24) ? pagesContent.find(p => p.num === pageData.num + 1) : null;
+  const nextCtaHtml = nextPageData ? `
+    <div class="next-page-cta" onclick="goToPage(${nextPageData.num})">
+      <div class="next-cta-left">
+        <span class="next-cta-sub">下一篇章節</span>
+        <span class="next-cta-title">第 ${nextPageData.num} 頁 · ${nextPageData.title}</span>
+      </div>
+      <button class="next-cta-action" type="button">繼續閱讀 ➔</button>
+    </div>
+  ` : '';
+
   return `
     <div class="page-header-row">
       <span>${pageData.category}</span>
@@ -126,6 +171,7 @@ function buildPageHtml(pageData, side) {
     </div>
     <div class="book-page-body">
       ${pageData.render()}
+      ${nextCtaHtml}
     </div>
     <div class="page-footer-row">
       <span>原民旅行社承辦</span>
@@ -139,16 +185,44 @@ function updateNavControls(activePage, rightPage) {
   const nextBtn = document.getElementById("btnNextPage");
   const jumpSelect = document.getElementById("pageJumpSelect");
 
-  if (isMobile) {
-    if (prevBtn) prevBtn.disabled = activePage <= 1;
-    if (nextBtn) nextBtn.disabled = activePage >= 24;
-  } else {
-    if (prevBtn) prevBtn.disabled = activePage <= 1;
-    if (nextBtn) nextBtn.disabled = rightPage >= 24;
+  if (prevBtn) {
+    prevBtn.innerHTML = "<span>◀ 上一頁</span>";
+    prevBtn.onclick = null;
+    prevBtn.disabled = activePage <= 1;
+  }
+  if (nextBtn) {
+    nextBtn.innerHTML = "<span>下一頁 ▶</span>";
+    nextBtn.onclick = null;
+    nextBtn.disabled = isMobile ? (activePage >= 24) : (rightPage >= 24);
   }
 
   if (jumpSelect) {
     jumpSelect.value = activePage;
+  }
+}
+
+function updateNavControlsContinuous() {
+  const prevBtn = document.getElementById("btnPrevPage");
+  const nextBtn = document.getElementById("btnNextPage");
+  const jumpSelect = document.getElementById("pageJumpSelect");
+
+  if (prevBtn) {
+    prevBtn.disabled = false;
+    prevBtn.innerHTML = "<span>📑 目錄</span>";
+    prevBtn.onclick = () => {
+      const openBtn = document.getElementById("btnOpenToc");
+      if (openBtn) openBtn.click();
+    };
+  }
+  if (nextBtn) {
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = "<span>⬆ 回頂端</span>";
+    nextBtn.onclick = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  }
+  if (jumpSelect) {
+    jumpSelect.value = currentPage;
   }
 }
 
@@ -227,8 +301,124 @@ function initBookNavigation() {
 
 function goToPage(pageNum) {
   currentPage = pageNum;
-  renderBook();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  localStorage.setItem("ly_handbook_page", currentPage);
+  if (isContinuousMode) {
+    const el = document.getElementById(`section-page-${pageNum}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  } else {
+    renderBook();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function initModeToggle() {
+  const toggleBtn = document.getElementById("btnToggleLayout");
+  if (!toggleBtn) return;
+
+  function updateButtonLabel() {
+    const textEl = document.getElementById("layoutModeText");
+    if (textEl) {
+      textEl.textContent = isContinuousMode ? "📖 單頁" : "📜 連續";
+    }
+    toggleBtn.classList.toggle("active", isContinuousMode);
+    toggleBtn.title = isContinuousMode ? "目前為連續模式，點擊切換為單頁翻閱" : "目前為單頁模式，點擊切換為連續向下滾動";
+  }
+
+  updateButtonLabel();
+
+  toggleBtn.addEventListener("click", () => {
+    isContinuousMode = !isContinuousMode;
+    localStorage.setItem("ly_reading_mode", isContinuousMode ? "continuous" : "single");
+    updateButtonLabel();
+    renderBook();
+    if (isContinuousMode) {
+      setTimeout(() => {
+        const el = document.getElementById(`section-page-${currentPage}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+}
+
+function setupScrollSpy() {
+  const sections = document.querySelectorAll(".continuous-page-block");
+  if (!sections || sections.length === 0) return;
+
+  scrollSpyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const pageNum = parseInt(entry.target.dataset.page);
+        if (pageNum) {
+          currentPage = pageNum;
+          localStorage.setItem("ly_handbook_page", currentPage);
+          const jumpSelect = document.getElementById("pageJumpSelect");
+          if (jumpSelect && document.activeElement !== jumpSelect) {
+            jumpSelect.value = pageNum;
+          }
+        }
+      }
+    });
+  }, {
+    rootMargin: "-10% 0px -70% 0px",
+    threshold: 0
+  });
+
+  sections.forEach(s => scrollSpyObserver.observe(s));
+}
+
+function initScreenEdgeTap() {
+  const stage = document.getElementById("bookWrapper");
+  if (!stage) return;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  stage.addEventListener("touchstart", (e) => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  stage.addEventListener("touchend", (e) => {
+    if (isContinuousMode) return;
+    if (!isMobile) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const duration = Date.now() - touchStartTime;
+    const deltaX = Math.abs(touchEndX - touchStartX);
+    const deltaY = Math.abs(touchEndY - touchStartY);
+
+    // 排除長按、滑動
+    if (duration > 400 || deltaX > 15 || deltaY > 15) return;
+
+    // 排除可互動元件
+    const target = e.target;
+    if (target.closest("button, a, input, select, textarea, label, canvas, .check-item, .quiz-opt, .header-btn, .next-page-cta")) {
+      return;
+    }
+
+    const screenWidth = window.innerWidth;
+    // 點擊螢幕左側 18% 邊緣 ➔ 上一頁
+    if (touchEndX < screenWidth * 0.18) {
+      if (currentPage > 1) {
+        goToPage(currentPage - 1);
+      }
+    }
+    // 點擊螢幕右側 18% 邊緣 ➔ 下一頁
+    else if (touchEndX > screenWidth * 0.82) {
+      if (currentPage < 24) {
+        goToPage(currentPage + 1);
+      }
+    }
+  }, { passive: true });
 }
 
 function initKeyboardNav() {
