@@ -371,6 +371,9 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  min-height: 140px;
+  background-color: #f1f5f9;
+  object-fit: cover;
 }
 
 .book-photo-caption {

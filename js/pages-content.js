@@ -1,3 +1,16 @@
+// 全域圖片容錯與自動重試載入器 (防 Google Translate 竄改與網路偶發中斷)
+window.handleImgError = function(img) {
+  if (!img) return;
+  const retryCount = parseInt(img.dataset.retries || '0');
+  if (retryCount < 3) {
+    img.dataset.retries = (retryCount + 1).toString();
+    const cleanSrc = img.src.split('?')[0];
+    setTimeout(() => {
+      img.src = cleanSrc + '?t=' + Date.now();
+    }, 300 * (retryCount + 1));
+  }
+};
+
 // 新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動 完整 24 頁手冊內容與網路輔助真實高畫質照片
 const pagesContent = [
   // ==================== 第 1 頁 ====================
@@ -326,7 +339,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：光復國中操場車籠埔斷層錯動真實照片 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/921_track.jpg" alt="光復國中操場車籠埔斷層隆起地貌" loading="lazy">
+        <img src="assets/images/real/921_track.jpg" alt="光復國中操場車籠埔斷層隆起地貌" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>📸 現場紀實：光復國中操場跑道受車籠埔斷層強烈錯動隆起（高達2.5公尺落差遺址）</span>
           <span class="photo-source-badge">維基共享資源典藏真實照片</span>
@@ -335,7 +348,7 @@ const pagesContent = [
 
       <div class="page-section-subtitle">園區設施平面圖：</div>
       <div class="book-photo-card">
-        <img src="assets/images/921_map.jpg" alt="921地震教育園區彩色設施導覽圖" loading="lazy">
+        <img src="assets/images/921_map.jpg" alt="921地震教育園區彩色設施導覽圖" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🗺️ 921 地震教育園區完整設施平面配置圖（原書手冊原圖）</span>
         </div>
@@ -353,7 +366,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：車籠埔斷層保存館特色薄膜天棚外觀 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/921_hall.jpg" alt="車籠埔斷層保存館特色建築外觀" loading="lazy">
+        <img src="assets/images/real/921_hall.jpg" alt="車籠埔斷層保存館特色建築外觀" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🏛️ 車籠埔斷層保存館：特殊圓弧薄膜天棚，完整覆蓋保護原光復國中操場地表破裂斷層</span>
           <span class="photo-source-badge">現場實景照片</span>
@@ -414,7 +427,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：車埕火車站日式木造站體 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/checheng_station.jpg" alt="水里車埕火車站日式木造建築" loading="lazy">
+        <img src="assets/images/real/checheng_station.jpg" alt="水里車埕火車站日式木造建築" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🚉 「最後的火車站」車埕車站：集集線終點站，群山環抱之美</span>
           <span class="photo-source-badge">台灣鐵道實景</span>
@@ -423,7 +436,7 @@ const pagesContent = [
 
       <!-- 手冊原版林班道4張照片 -->
       <div class="book-photo-card">
-        <img src="assets/images/linbando_photos.jpg" alt="林班道園區實景照片群" loading="lazy">
+        <img src="assets/images/linbando_photos.jpg" alt="林班道園區實景照片群" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🪵 林班道體驗工廠、最後車站、樂活倉庫（手冊原圖）</span>
         </div>
@@ -452,7 +465,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：南投草屯九九峰山巒與雙十吊橋全景 -->
       <div class="book-photo-card" style="margin-bottom:18px;">
-        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然山巒風光" loading="lazy">
+        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然山巒風光" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>⛰️ 南投草屯九九峰秀麗山巒與雙十吊橋壯麗全景</span>
           <span class="photo-source-badge">南投自然生態實景</span>
@@ -469,7 +482,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：鹿港天后宮國定古蹟 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/lukang_tianhou.jpg" alt="國定古蹟鹿港天后宮三川殿" loading="lazy">
+        <img src="assets/images/real/lukang_tianhou.jpg" alt="國定古蹟鹿港天后宮三川殿" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🏮 國定古蹟【鹿港天后宮】：湄洲開基媽祖名聞遐邇，雕樑畫棟的建築瑰寶</span>
           <span class="photo-source-badge">文化部文化資產實景</span>
@@ -477,7 +490,7 @@ const pagesContent = [
       </div>
 
       <div class="book-photo-card">
-        <img src="assets/images/lukang_gate.jpg" alt="鹿港牌樓古蹟照片" loading="lazy">
+        <img src="assets/images/lukang_gate.jpg" alt="鹿港牌樓古蹟照片" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🏛️ 鹿港古鎮牌樓風采（手冊原圖）</span>
         </div>
@@ -503,19 +516,19 @@ const pagesContent = [
       <!-- 網路精選真實照片：九曲巷、半邊井、鹿港隘門三大經典古蹟 -->
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin:16px 0;">
         <div class="book-photo-card" style="margin:0;">
-          <img src="assets/images/real/lukang_nine_turns.jpg" alt="鹿港九曲巷曲折紅磚道" loading="lazy">
+          <img src="assets/images/real/lukang_nine_turns.jpg" alt="鹿港九曲巷曲折紅磚道" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
           <div class="book-photo-caption">
             <span>🌀 曲折防強風與盜匪的「九曲巷」</span>
           </div>
         </div>
         <div class="book-photo-card" style="margin:0;">
-          <img src="assets/images/real/lukang_half_well.jpg" alt="鹿港半邊井" loading="lazy">
+          <img src="assets/images/real/lukang_half_well.jpg" alt="鹿港半邊井" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
           <div class="book-photo-caption">
             <span>🤝 人情味敦親睦鄰的「半邊井」</span>
           </div>
         </div>
         <div class="book-photo-card" style="margin:0;">
-          <img src="assets/images/real/lukang_aimen.jpg" alt="國定古蹟鹿港隘門「門後隘門」" loading="lazy">
+          <img src="assets/images/real/lukang_aimen.jpg" alt="國定古蹟鹿港隘門「門後隘門」" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
           <div class="book-photo-caption">
             <span>🛡️ 防械鬥保衛家園的國定古蹟「鹿港隘門」</span>
           </div>
@@ -523,7 +536,7 @@ const pagesContent = [
       </div>
 
       <div class="book-photo-card">
-        <img src="assets/images/lukang_street.jpg" alt="鹿港老街紅磚巷街景照片組" loading="lazy">
+        <img src="assets/images/lukang_street.jpg" alt="鹿港老街紅磚巷街景照片組" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🏮 瑤林街、埔頭街紅磚古厝與民俗藝品古街（手冊原圖）</span>
         </div>
@@ -547,7 +560,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：麗寶樂園渡假區壯麗全景 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/lihpao_overview.jpg" alt="麗寶樂園全景照片" loading="lazy">
+        <img src="assets/images/real/lihpao_overview.jpg" alt="麗寶樂園全景照片" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🎡 麗寶樂園渡假區全景：探索世界、馬拉灣與天空之夢摩天輪</span>
           <span class="photo-source-badge">園區實拍全貌</span>
@@ -555,7 +568,7 @@ const pagesContent = [
       </div>
 
       <div class="book-photo-card">
-        <img src="assets/images/lihpao_overview.jpg" alt="麗寶樂園手冊照片" loading="lazy">
+        <img src="assets/images/lihpao_handbook_overview.jpg" alt="麗寶樂園手冊照片" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>🎢 探索世界歡樂迎賓（手冊原圖）</span>
         </div>
@@ -573,7 +586,7 @@ const pagesContent = [
 
       <!-- 網路精選真實照片：搶救地心斷軌雲霄飛車 -->
       <div class="book-photo-card">
-        <img src="assets/images/real/lihpao_gravity_max.jpg" alt="搶救地心斷軌式雲霄飛車" loading="lazy">
+        <img src="assets/images/real/lihpao_gravity_max.jpg" alt="搶救地心斷軌式雲霄飛車" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>⚡ 全球首座斷軌雲霄飛車「搶救地心」：13層樓高空水平斷軌90度垂直俯衝！</span>
           <span class="photo-source-badge">挑戰強心臟</span>
@@ -590,7 +603,7 @@ const pagesContent = [
           </div>
           <!-- 手冊原版冒險天堂設施照片群 -->
           <div class="book-photo-card" style="margin:10px 0 4px 0;">
-            <img src="assets/images/lihpao_thrill.jpg" alt="冒險天堂代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <img src="assets/images/lihpao_thrill.jpg" alt="冒險天堂代表設施手冊原圖" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)" style="max-height:220px; object-fit:contain; background:#ffffff;">
             <div class="book-photo-caption">
               <span>🎢 冒險天堂人氣設施群（手冊原圖）</span>
             </div>
@@ -606,7 +619,7 @@ const pagesContent = [
           </div>
           <!-- 手冊原版魔法森林設施照片群 -->
           <div class="book-photo-card" style="margin:10px 0 4px 0;">
-            <img src="assets/images/lihpao_magic.jpg" alt="魔法森林代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <img src="assets/images/lihpao_magic.jpg" alt="魔法森林代表設施手冊原圖" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)" style="max-height:220px; object-fit:contain; background:#ffffff;">
             <div class="book-photo-caption">
               <span>🎡 魔法森林溫馨歡樂設施群（手冊原圖）</span>
             </div>
@@ -621,7 +634,7 @@ const pagesContent = [
           </div>
           <!-- 手冊原版 POPA 歡樂王國設施照片群 -->
           <div class="book-photo-card" style="margin:10px 0 4px 0;">
-            <img src="assets/images/lihpao_popa.jpg" alt="POPA歡樂王國代表設施手冊原圖" loading="lazy" style="max-height:220px; object-fit:contain; background:#ffffff;">
+            <img src="assets/images/lihpao_popa.jpg" alt="POPA歡樂王國代表設施手冊原圖" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)" style="max-height:220px; object-fit:contain; background:#ffffff;">
             <div class="book-photo-caption">
               <span>🎠 POPA 歡樂王國童趣設施群（手冊原圖）</span>
             </div>
@@ -657,7 +670,7 @@ const pagesContent = [
       <div class="page-title">鹿港老街學習單</div>
 
       <div class="book-photo-card" style="margin-bottom:14px;">
-        <img src="assets/images/lukang_heritages.jpg" alt="鹿港五大古蹟圖照" loading="lazy">
+        <img src="assets/images/lukang_heritages.jpg" alt="鹿港五大古蹟圖照" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
           <span>考考你對這些古蹟還記得多少！【A 天后宮】｜【B 隘門】｜【C 餓鬼埕】｜【D 新祖宮】｜【E 半邊井】</span>
         </div>

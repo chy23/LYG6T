@@ -145,7 +145,7 @@ function buildPageHtml(pageData, side) {
         <span>第 ${pageData.num} 頁</span>
       </div>
       <div style="flex:1; display:flex; justify-content:center; align-items:center; background:#ffffff; border-radius:8px; overflow:hidden; padding:4px;">
-        <img class="scan-view-frame" src="assets/images/p_${scanNum}.jpg" alt="第 ${pageData.num} 頁原版手冊掃描" loading="lazy">
+        <img class="scan-view-frame notranslate" src="assets/images/p_${scanNum}.jpg" alt="第 ${pageData.num} 頁原版手冊掃描" loading="eager" decoding="async" translate="no" onerror="handleImgError(this)">
       </div>
       <div class="page-footer-row">
         <span>新北市林口區麗園國小</span>
