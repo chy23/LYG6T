@@ -439,22 +439,22 @@ const pagesContent = [
     render: () => `
       <div class="page-title">第二天行程景點導覽</div>
 
-      <!-- 第二天上午行程精選景點：九九峰自然生態 -->
+      <!-- 第二天上午行程精選景點：薰衣草森林九九峰園區 -->
       <div style="background:#ecfdf5; border-left:4px solid #10b981; border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:14px;">
         <div style="display:flex; align-items:center; gap:8px;">
           <span style="font-size:1.1rem;">🌿</span>
-          <b style="color:#065f46; font-size:1.02rem;">第二天上午：薰衣草森林九九峰生態園區</b>
+          <b style="color:#065f46; font-size:1.02rem;">第二天上午：薰衣草森林九九峰園區</b>
         </div>
         <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
-          告別南投埔里後，上午造訪草屯九九峰自然保留區旁之薰衣草森林。此區為臺灣著名的火炎山地貌，九十九座奇峰相連疊翠、宛如大自然屏風。園區滿布香草與綠意，讓師生漫步在芬多精與微風清香中，感受台灣特有的森林地質生態之美。
+          告別南投埔里後，上午造訪坐落於南投草屯九九峰山腳下的<b>「薰衣草森林南投九九峰園區」</b>。園區依傍九九峰秀麗群山，規劃有豐富的香草花園、森林散步步道、香氛美學選物與自然綠意空間。讓師生們漫步在清新的山林芬多精與微風花香中，盡情享受大自然的放鬆與療癒之美。
         </div>
       </div>
 
-      <!-- 網路精選真實照片：九九峰自然保留區與雙十吊橋全景 -->
+      <!-- 網路精選真實照片：南投草屯九九峰山巒與雙十吊橋全景 -->
       <div class="book-photo-card" style="margin-bottom:18px;">
-        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然保留區風光" loading="lazy">
+        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然山巒風光" loading="lazy">
         <div class="book-photo-caption">
-          <span>⛰️ 九九峰自然風貌：九九尖峰火炎山群巒與雙十吊橋壯麗全景</span>
+          <span>⛰️ 南投草屯九九峰秀麗山巒與雙十吊橋壯麗全景</span>
           <span class="photo-source-badge">南投自然生態實景</span>
         </div>
       </div>
