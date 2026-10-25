@@ -48,9 +48,19 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 html {
   font-size: var(--base-font-size);
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -62,6 +72,10 @@ body {
   color: var(--text-main);
   line-height: 1.7;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
@@ -76,17 +90,24 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 10px 14px;
+  padding: 8px 12px;
   color: white;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .header-inner {
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .book-title-group {
@@ -162,10 +183,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 10px 90px; /* 留出底部導航列空間 */
+  padding: 10px 8px 85px; /* 留出底部導航列空間 */
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -187,6 +210,7 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   padding: 0 4px;
+  box-sizing: border-box;
 }
 
 /* 書本容器 */
@@ -199,7 +223,8 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 @media (min-width: 1024px) {
@@ -216,8 +241,11 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
+  max-width: 100%;
   background: #ffffff;
   border-radius: inherit;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -231,7 +259,7 @@ body {
 .book-page {
   background-color: var(--paper-bg);
   background-image: linear-gradient(to bottom, #ffffff 0%, var(--paper-cream) 100%);
-  padding: 22px 16px 30px;
+  padding: 16px 10px 24px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -240,6 +268,10 @@ body {
   height: auto;
   max-height: none;
   overflow-y: visible;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @media (min-width: 768px) {
@@ -501,11 +533,13 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 10px 14px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+  max-width: 100vw;
+  box-sizing: border-box;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
 }
 
@@ -811,32 +845,51 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   窄螢幕 Header 與按鈕優化 (< 480px)
+   窄螢幕 Header 與按鈕優化 (< 640px)
    -------------------------------------------------------------------------- */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .book-header {
-    padding: 8px 10px;
+    padding: 6px 8px;
+    width: 100%;
+    max-width: 100vw;
   }
   .header-inner {
     gap: 4px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
   .school-tag {
     display: none;
   }
   .book-main-title {
-    font-size: 0.85rem;
-    max-width: 105px;
+    font-size: 0.8rem;
+    max-width: 85px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .header-controls {
-    gap: 4px;
+    gap: 3px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: calc(100% - 90px);
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .header-controls::-webkit-scrollbar {
+    display: none;
   }
   .header-btn {
-    padding: 5px 8px;
-    font-size: 0.74rem;
+    padding: 4px 6px;
+    font-size: 0.72rem;
     gap: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .font-size-btn {
-    padding: 5px 6px;
+    display: none;
   }
 }
 
@@ -1212,6 +1265,9 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @media (min-width: 900px) {
@@ -1223,8 +1279,12 @@ body {
 .table-box {
   border: 2px solid #0f172a;
   border-radius: 4px;
-  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   background: white;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .table-box-header {
@@ -1233,6 +1293,7 @@ body {
   font-size: 0.95rem;
   text-align: center;
   border-bottom: 2px solid #0f172a;
+  white-space: nowrap;
 }
 
 .table-box-header.boys {
@@ -1247,6 +1308,7 @@ body {
 
 .room-sheet-table {
   width: 100%;
+  min-width: 290px;
   border-collapse: collapse;
   text-align: center;
   font-size: 0.82rem;
@@ -1415,9 +1477,19 @@ body {
 /* 分組卡片網格 (用餐桌號 / 住宿房間) */
 .group-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
   margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .group-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 .group-card {
@@ -1427,6 +1499,9 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   transition: transform 0.2s ease;
   background: white;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .group-card:hover {
@@ -1435,26 +1510,34 @@ body {
 }
 
 .group-card-header {
-  padding: 10px 14px;
+  padding: 8px 10px;
   font-weight: 800;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .group-card-body {
-  padding: 12px 14px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .group-student-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .group-student-tag {
@@ -1463,12 +1546,14 @@ body {
   gap: 4px;
   background: white;
   border: 1px solid rgba(0,0,0,0.12);
-  padding: 4px 8px;
+  padding: 3px 6px;
   border-radius: 6px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #1e293b;
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .gender-dot,
@@ -1550,12 +1635,16 @@ body {
   border-radius: 8px;
   padding: 8px 10px;
   margin-bottom: 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .toolbar-select-wrap {
   display: flex;
   align-items: center;
   gap: 4px;
+  min-width: 0;
 }
 
 .toolbar-select-label {
@@ -1563,6 +1652,7 @@ body {
   font-weight: 800;
   color: #334155;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .toolbar-select {
@@ -1576,6 +1666,7 @@ body {
   outline: none;
   cursor: pointer;
   max-width: 100%;
+  min-width: 0;
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
 
@@ -2154,16 +2245,24 @@ body {
   border: 1px solid #cbd5e1;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.sheet-view-pill-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .view-pill-btn {
   flex: 1;
-  min-width: 78px;
-  padding: 7px 8px;
+  min-width: 68px;
+  padding: 6px 6px;
   border: none;
   background: transparent;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #475569;
   cursor: pointer;
@@ -2192,11 +2291,15 @@ body {
   padding: 4px;
   border-radius: 8px;
   margin-bottom: 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .unified-hotel-bar .hotel-tab-btn {
   flex: 1;
-  padding: 8px 12px;
+  min-width: 0;
+  padding: 8px 6px;
   border: none;
   background: transparent;
   border-radius: 6px;
@@ -2206,6 +2309,7 @@ body {
   cursor: pointer;
   text-align: center;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 
 .unified-hotel-bar .hotel-tab-btn.active {
@@ -2237,9 +2341,12 @@ body {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
-  padding: 12px 10px;
-  margin-bottom: 16px;
+  padding: 10px 8px;
+  margin-bottom: 14px;
   transition: background-color 0.4s ease, border-color 0.4s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .class-patrol-section.flash-highlight {
@@ -2252,12 +2359,115 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   padding-bottom: 6px;
   border-bottom: 1px dashed #cbd5e1;
   flex-wrap: wrap;
   gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+/* ==========================================================================
+   全站手機解析度自適應防破版防超出版面 (Universal Responsive Auto-Fit)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .book-stage {
+    padding: 6px 4px 85px;
+  }
+  .book-page {
+    padding: 14px 8px 20px;
+  }
+  .sheet-container {
+    padding: 8px 6px;
+  }
+  .class-patrol-section {
+    padding: 8px 6px;
+  }
+  .sheet-unified-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 6px 8px;
+  }
+  .toolbar-select-wrap {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .toolbar-select {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 60px);
+  }
+  .toolbar-btn-wrap {
+    margin-left: 0;
+    width: 100%;
+  }
+  .sheet-drawer-toggle-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .room-patrol-summary-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .room-patrol-summary-bar .summary-left {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .room-patrol-summary-bar .summary-actions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .book-nav-bar {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  .nav-arrow-btn {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+  .page-jump-select {
+    font-size: 0.76rem;
+    padding: 5px 6px;
+  }
+  .teacher-notice-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 8px 10px !important;
+  }
+  .teacher-notice-banner button {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .unified-hotel-bar {
+    gap: 4px;
+    padding: 3px;
+  }
+  .unified-hotel-bar .hotel-tab-btn {
+    font-size: 0.76rem;
+    padding: 6px 2px;
+  }
+  .hotel-tab-suffix {
+    display: none;
+  }
+}
+
+/* iOS Safari 輸入框防自動放大縮小 */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 
 
 

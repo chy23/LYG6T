@@ -3344,7 +3344,7 @@ function sanitizeSheetData(data) {
 }
 
 // 資料版本控管：確保更新官方資料、導師去識別化與下拉漢堡選單時，使用者端自動升級至最新版本
-const OFFICIAL_DATA_VERSION = "20261026_v4_teacher_masked_compact_ui";
+const OFFICIAL_DATA_VERSION = "20261026_v6_responsive_fit";
 
 function getInitialSheetData() {
   const savedVersion = localStorage.getItem("ly_room_table_version");
@@ -3566,7 +3566,7 @@ function renderSheetPageHtml() {
       </div>
 
       <!-- 表格主體 (合併統一呈現，下方不再有重複區塊) -->
-      <div class="sheet-container" style="border:1px solid #cbd5e1; padding:12px 10px; margin-bottom:18px;">
+      <div class="sheet-container" style="border:1px solid #cbd5e1; margin-bottom:18px; width:100%; max-width:100%; box-sizing:border-box;">
         
         <!-- 表格主標題 (僅在實體座位表模式顯示) -->
         <div class="sheet-title-header" style="margin-bottom:8px; ${sheetActiveView === 'sheet' ? '' : 'display:none;'}">
@@ -4386,10 +4386,10 @@ function renderGroupCardsView(container, cData) {
       <!-- 頂部飯店一鍵切換標籤列 (手機單手直覺點選，免開下拉選單) -->
       <div class="unified-hotel-bar">
         <button class="hotel-tab-btn ${hotelNum === 1 ? 'active' : ''}" onclick="setSheetViewMode('rooms1')">
-          🏨 第一晚：今埔里渡假大酒店
+          🏨 第 1 晚：今埔里<span class="hotel-tab-suffix">渡假大酒店</span>
         </button>
         <button class="hotel-tab-btn ${hotelNum === 2 ? 'active' : ''}" onclick="setSheetViewMode('rooms2')">
-          🏰 第二晚：麗寶福容大飯店
+          🏰 第 2 晚：麗寶福容<span class="hotel-tab-suffix">大飯店</span>
         </button>
       </div>
 
@@ -4431,13 +4431,13 @@ function renderSingleRoomCardHtml(r, hotelNum, hotelChecks, defaultColor, icon) 
   return `
     <div class="group-card ${statusClass}" style="border-top: 6px solid ${col.border}; background: #ffffff;">
       <div class="group-card-header" style="background: ${col.bg};">
-        <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap; min-width:0;">
           <span style="font-size:1.05rem;">${icon}</span>
           <span style="font-size:1.05rem; font-weight:800; color:${col.text};">${r.room} 房</span>
           <span class="room-gender-badge ${r.genderClass}">${r.genderBadge}</span>
           <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">🏷️ ${col.name}</span>
         </div>
-        <div style="display:flex; align-items:center; gap:5px;">
+        <div style="display:flex; align-items:center; gap:5px; flex-shrink:0;">
           <span style="font-size:0.75rem; color:#64748b; font-weight:700;">${r.class}班</span>
           <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
             ${r.students.length} 人
