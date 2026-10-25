@@ -201,6 +201,12 @@ function updateNavControls(activePage, rightPage) {
   if (jumpSelect) {
     jumpSelect.value = activePage;
   }
+
+  // 當使用者在手冊最後一頁（房桌號表）時自動隱藏跳轉提示橫幅，釋放手機垂直空間
+  const teacherBanner = document.getElementById("teacherPageNoticeBanner");
+  if (teacherBanner && typeof pagesContent !== "undefined") {
+    teacherBanner.style.display = (activePage >= pagesContent.length) ? "none" : "flex";
+  }
 }
 
 function updateNavControlsContinuous() {
@@ -304,6 +310,10 @@ function initBookNavigation() {
 function goToPage(pageNum) {
   currentPage = pageNum;
   localStorage.setItem("ly_handbook_page", currentPage);
+  const teacherBanner = document.getElementById("teacherPageNoticeBanner");
+  if (teacherBanner && typeof pagesContent !== "undefined") {
+    teacherBanner.style.display = (currentPage >= pagesContent.length) ? "none" : "flex";
+  }
   if (isContinuousMode) {
     const el = document.getElementById(`section-page-${pageNum}`);
     if (el) {
