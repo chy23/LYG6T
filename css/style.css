@@ -1098,6 +1098,9 @@ body {
   font-size: 0.84rem;
   font-weight: 600;
   color: #1e293b;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .room-action-row {
@@ -1468,13 +1471,17 @@ body {
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
+.gender-dot,
 .group-student-tag .gender-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   display: inline-block;
+  flex-shrink: 0;
 }
+.gender-dot.boy,
 .group-student-tag .gender-dot.boy { background: #3b82f6; }
+.gender-dot.girl,
 .group-student-tag .gender-dot.girl { background: #ec4899; }
 
 /* 表格單元格與高亮效果 */
@@ -1826,9 +1833,311 @@ body {
   .sheet-drawer-backdrop,
   .sheet-active-highlight-bar,
   .toggle-empty-rows-tr,
-  .empty-rows-toggle-btn {
+  .empty-rows-toggle-btn,
+  .patrol-modal,
+  .patrol-modal-backdrop,
+  .patrol-toast-notice,
+  .patrol-quick-clear-btn,
+  .patrol-quick-jump-btn {
     display: none !important;
   }
+}
+
+/* ==========================================================================
+   房間男女標記、查房整合進度列、清除點名彈窗樣式
+   ========================================================================== */
+.room-gender-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+.room-gender-badge.boy {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.room-gender-badge.girl {
+  background: #fdf2f8;
+  color: #be185d;
+  border: 1px solid #fbcfe8;
+}
+
+/* 上方房間分組卡片檢視之頂部查房進度整合列 */
+.room-patrol-summary-bar {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.room-patrol-summary-bar .summary-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.room-patrol-summary-bar .summary-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #92400e;
+}
+
+.room-patrol-summary-bar .summary-stat {
+  font-size: 0.8rem;
+  color: #78350f;
+  font-weight: 700;
+}
+
+.room-patrol-summary-bar .summary-progress-bg {
+  width: 80px;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.room-patrol-summary-bar .summary-progress-fill {
+  height: 100%;
+  background: #10b981;
+  transition: width 0.3s ease;
+}
+
+.room-patrol-summary-bar .summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.patrol-quick-clear-btn {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.patrol-quick-clear-btn:hover {
+  background: #fecaca;
+  border-color: #f87171;
+}
+
+.patrol-quick-jump-btn {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.patrol-quick-jump-btn:hover {
+  background: #fde68a;
+}
+
+/* 清除確認彈窗 (Modal Action Sheet) */
+.patrol-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1050;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.patrol-modal-backdrop.active {
+  display: block;
+  opacity: 1;
+}
+
+.patrol-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  z-index: 1060;
+  width: 90%;
+  max-width: 440px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.patrol-modal.active {
+  display: flex;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.patrol-modal-header {
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patrol-modal-close {
+  background: #e2e8f0;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patrol-modal-body {
+  padding: 16px;
+}
+
+.clear-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clear-opt-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.clear-opt-btn .opt-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.clear-opt-btn .opt-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.clear-opt-btn .opt-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.clear-opt-btn .opt-desc {
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.btn-class-clear {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  color: #166534;
+}
+
+.btn-class-clear:hover {
+  background: #dcfce7;
+  border-color: #4ade80;
+}
+
+.btn-class-clear .opt-desc {
+  color: #15803d;
+}
+
+.btn-all-clear {
+  background: #fef2f2;
+  border: 1.5px solid #fca5a5;
+  color: #991b1b;
+}
+
+.btn-all-clear:hover {
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
+.btn-all-clear .opt-desc {
+  color: #b91c1c;
+}
+
+.patrol-modal-footer {
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.patrol-modal-cancel-btn {
+  background: #e2e8f0;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+}
+
+.patrol-toast-notice {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.patrol-toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
 
 
