@@ -1303,5 +1303,201 @@ body {
   width: 45px;
 }
 
+/* --------------------------------------------------------------------------
+   米色色塊與房桌號表強化樣式 (Beige Color Blocks & Grouping Views)
+   -------------------------------------------------------------------------- */
+.sheet-color-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #fdfcf7;
+  border: 1px solid #e7e5e4;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.color-mode-group, .sheet-view-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.color-mode-btn, .sheet-view-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-mode-btn:hover, .sheet-view-btn:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.color-mode-btn.active, .sheet-view-btn.active {
+  background: #d97706;
+  border-color: #b45309;
+  color: white;
+  box-shadow: 0 2px 4px rgba(217,119,6,0.25);
+}
+
+.sheet-color-legend {
+  background: #fffdf9;
+  border: 1px solid #f2ede4;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.legend-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #57534e;
+  min-width: 120px;
+  margin-top: 3px;
+}
+
+.legend-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+
+.color-legend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.color-legend-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.color-legend-pill.active {
+  outline: 2px solid #0f172a;
+  outline-offset: 1px;
+  font-weight: 900;
+  transform: scale(1.05);
+}
+
+/* 分組卡片網格 (用餐桌號 / 住宿房間) */
+.group-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.group-card {
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease;
+  background: white;
+}
+
+.group-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.group-card-header {
+  padding: 10px 14px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.group-card-body {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-student-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.group-student-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.group-student-tag .gender-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.group-student-tag .gender-dot.boy { background: #3b82f6; }
+.group-student-tag .gender-dot.girl { background: #ec4899; }
+
+/* 表格單元格與高亮效果 */
+.room-sheet-table tr.highlight-matched {
+  box-shadow: inset 0 0 0 2px #d97706;
+}
+.room-sheet-table tr.highlight-dimmed {
+  opacity: 0.35;
+}
+
+.room-sheet-table td.col-room,
+.room-sheet-table td.col-table {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* 列印顏色保全 */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+
 
 
