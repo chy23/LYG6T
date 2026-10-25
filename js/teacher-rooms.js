@@ -3645,7 +3645,7 @@ function renderSheetPageHtml() {
             <div class="drawer-section-title">🏫 快速切換班級：</div>
             <div class="drawer-class-grid" id="drawerClassGrid">
               ${initialClasses.map(c => `
-                <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" onclick="selectSheetClassPage('${c}')">
+                <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" onclick="selectSheetClassPage('${c}', true)">
                   ${c} 班
                 </button>
               `).join("")}
@@ -3709,7 +3709,7 @@ function renderSheetPageHtml() {
           <!-- 專屬米色色塊圖例與連動高亮器 -->
           <div class="drawer-section">
             <div class="drawer-section-title" style="display:flex; justify-content:space-between; align-items:center;">
-              <span>🎨 【${currentSheetClass}班】米色色塊圖例：</span>
+              <span id="drawerLegendClassTitle">🎨 【${currentSheetClass}班】米色色塊圖例：</span>
               ${activeHighlight ? '<button onclick="clearHighlightTarget()" style="background:#e2e8f0; border:none; padding:2px 8px; border-radius:4px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:700;">✕ 清除高亮</button>' : ''}
             </div>
             <p style="font-size:0.75rem; color:#64748b; margin:2px 0 8px;">點選任一色塊膠囊，下方名冊自動連動高亮聚焦對應學生：</p>
@@ -3784,74 +3784,84 @@ window.toggleEmptyRowsMode = function() {
 
 // 渲染抽屜內色塊圖例與高亮點名器
 function renderSheetDrawerContent() {
-  const container = document.getElementById("drawerLegendContent");
-  if (!container) return;
+  try {
+    const titleEl = document.getElementById("drawerLegendClassTitle");
+    if (titleEl) {
+      titleEl.textContent = `🎨 【${currentSheetClass}班】米色色塊圖例：`;
+    }
 
-  const { room1Map, room2Map, tableMap, r1List, r2List, tbList, allSt } = getClassColorMaps(currentSheetClass);
+    const container = document.getElementById("drawerLegendContent");
+    if (!container) return;
 
-  container.innerHTML = `
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <!-- 第一晚今埔里 -->
-      <div>
-        <span style="font-size:0.75rem; font-weight:800; color:#475569;">🏨 第一晚 (今埔里)：</span>
-        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
-          ${r1List.map(r => {
-            const col = room1Map[r];
-            const cnt = allSt.filter(s => s.room1 === r && s.name).length;
-            const isMatch = activeHighlight && activeHighlight.type === "room1" && activeHighlight.val === r;
-            return `
-              <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('room1', '${r}')">
-                ${r} 房 (${cnt}人) · ${col.name}
-              </span>
-            `;
-          }).join("")}
+    const { room1Map, room2Map, tableMap, r1List, r2List, tbList, allSt } = getClassColorMaps(currentSheetClass);
+    const defaultColor = (BEIGE_PALETTE && BEIGE_PALETTE[0]) || { key: "yellow", name: "米黃", bg: "#fef9c3", border: "#fde047", badgeBg: "#fef08a", text: "#854d0e", tagBg: "#fefce8" };
+
+    container.innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <!-- 第一晚今埔里 -->
+        <div>
+          <span style="font-size:0.75rem; font-weight:800; color:#475569;">🏨 第一晚 (今埔里)：</span>
+          <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
+            ${r1List.map(r => {
+              const col = room1Map[r] || defaultColor;
+              const cnt = allSt.filter(s => s.room1 === r && s.name).length;
+              const isMatch = activeHighlight && activeHighlight.type === "room1" && activeHighlight.val === r;
+              return `
+                <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('room1', '${r}')">
+                  ${r} 房 (${cnt}人) · ${col.name}
+                </span>
+              `;
+            }).join("")}
+          </div>
+        </div>
+
+        <!-- 第二晚福容 -->
+        <div>
+          <span style="font-size:0.75rem; font-weight:800; color:#475569;">🏰 第二晚 (麗寶福容)：</span>
+          <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
+            ${r2List.map(r => {
+              const col = room2Map[r] || defaultColor;
+              const cnt = allSt.filter(s => s.room2 === r && s.name).length;
+              const isMatch = activeHighlight && activeHighlight.type === "room2" && activeHighlight.val === r;
+              return `
+                <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('room2', '${r}')">
+                  ${r} 房 (${cnt}人) · ${col.name}
+                </span>
+              `;
+            }).join("")}
+          </div>
+        </div>
+
+        <!-- 用餐桌號 -->
+        <div>
+          <span style="font-size:0.75rem; font-weight:800; color:#475569;">🍽️ 用餐桌號：</span>
+          <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
+            ${tbList.map(t => {
+              const col = tableMap[t] || defaultColor;
+              const cnt = allSt.filter(s => s.table === t && s.name).length;
+              const isMatch = activeHighlight && activeHighlight.type === "table" && activeHighlight.val === t;
+              return `
+                <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('table', '${t}')">
+                  第 ${t} 桌 (${cnt}人) · ${col.name}
+                </span>
+              `;
+            }).join("")}
+          </div>
         </div>
       </div>
+    `;
 
-      <!-- 第二晚福容 -->
-      <div>
-        <span style="font-size:0.75rem; font-weight:800; color:#475569;">🏰 第二晚 (麗寶福容)：</span>
-        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
-          ${r2List.map(r => {
-            const col = room2Map[r];
-            const cnt = allSt.filter(s => s.room2 === r && s.name).length;
-            const isMatch = activeHighlight && activeHighlight.type === "room2" && activeHighlight.val === r;
-            return `
-              <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('room2', '${r}')">
-                ${r} 房 (${cnt}人) · ${col.name}
-              </span>
-            `;
-          }).join("")}
-        </div>
-      </div>
-
-      <!-- 用餐桌號 -->
-      <div>
-        <span style="font-size:0.75rem; font-weight:800; color:#475569;">🍽️ 用餐桌號：</span>
-        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:4px;">
-          ${tbList.map(t => {
-            const col = tableMap[t];
-            const cnt = allSt.filter(s => s.table === t && s.name).length;
-            const isMatch = activeHighlight && activeHighlight.type === "table" && activeHighlight.val === t;
-            return `
-              <span class="color-legend-pill ${isMatch ? "active" : ""}" style="background:${col.bg}; border:1px solid ${col.border}; color:${col.text};" onclick="toggleHighlightTarget('table', '${t}')">
-                第 ${t} 桌 (${cnt}人) · ${col.name}
-              </span>
-            `;
-          }).join("")}
-        </div>
-      </div>
-    </div>
-  `;
-
-  // 更新抽屜內班級切片狀態
-  const grid = document.getElementById("drawerClassGrid");
-  if (grid) {
-    grid.innerHTML = initialClasses.map(c => `
-      <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" onclick="selectSheetClassPage('${c}')">
-        ${c} 班
-      </button>
-    `).join("");
+    // 更新抽屜內班級切片狀態，點選後自動關閉抽屜平滑切換
+    const grid = document.getElementById("drawerClassGrid");
+    if (grid) {
+      grid.innerHTML = initialClasses.map(c => `
+        <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" onclick="selectSheetClassPage('${c}', true)">
+          ${c} 班
+        </button>
+      `).join("");
+    }
+  } catch (err) {
+    console.error("renderSheetDrawerContent error:", err);
   }
 }
 
@@ -3881,13 +3891,29 @@ document.addEventListener("DOMContentLoaded", () => {
 /* --------------------------------------------------------------------------
    第 22 頁房桌號表互動與色塊控制 (下拉選單同步更新)
    -------------------------------------------------------------------------- */
-window.selectSheetClassPage = function(c) {
+window.selectSheetClassPage = function(c, closeDrawer = false) {
+  if (!c || !sheetData[c]) {
+    c = "601";
+  }
   currentSheetClass = c;
   activeHighlight = null; // 切換班級時清除高亮
 
   // 同步更新班級下拉選單
   const select = document.getElementById("sheetClassSelect");
   if (select) select.value = c;
+
+  // 同步更新檢視模式下拉選單
+  const viewSelect = document.getElementById("sheetViewSelect");
+  if (viewSelect) viewSelect.value = sheetActiveView;
+
+  // 同步更新色塊模式下拉選單
+  const colorSelect = document.getElementById("sheetColorSelect");
+  if (colorSelect) colorSelect.value = sheetColorMode;
+
+  // 若從抽屜快速選單點選，自動收合抽屜提升操作順暢度
+  if (closeDrawer && typeof window.closeSheetDrawer === "function") {
+    window.closeSheetDrawer();
+  }
 
   renderRoomSheetTablePage();
   renderPatrolGridPage();
@@ -3933,251 +3959,269 @@ window.clearHighlightTarget = function() {
 };
 
 function renderRoomSheetTablePage() {
-  const cData = sheetData[currentSheetClass] || {
-    className: currentSheetClass,
-    teacher: "",
-    totalCount: 0,
-    boys: generateEmptySlots(),
-    girls: generateEmptySlots()
-  };
+  try {
+    const cData = sheetData[currentSheetClass] || {
+      className: currentSheetClass,
+      teacher: "",
+      totalCount: 0,
+      boys: generateEmptySlots(),
+      girls: generateEmptySlots()
+    };
 
-  const classDisplay = document.getElementById("sheetDisplayClassPage");
-  const totalInput = document.getElementById("sheetInputTotalPage");
-  const teacherInput = document.getElementById("sheetInputTeacherPage");
+    const classDisplay = document.getElementById("sheetDisplayClassPage");
+    const totalInput = document.getElementById("sheetInputTotalPage");
+    const teacherInput = document.getElementById("sheetInputTeacherPage");
 
-  const classNum = parseInt(currentSheetClass.replace(/^60?/, ""), 10) || currentSheetClass;
-  if (classDisplay) classDisplay.textContent = `6年${classNum}班 (${currentSheetClass}班)`;
-  if (totalInput) totalInput.value = cData.totalCount || "";
-  // 導師姓名自動去識別化
-  if (teacherInput) teacherInput.value = maskPersonName(cData.teacher) || "";
+    const classNum = parseInt(currentSheetClass.replace(/^60?/, ""), 10) || currentSheetClass;
+    if (classDisplay) classDisplay.textContent = `6年${classNum}班 (${currentSheetClass}班)`;
+    if (totalInput) totalInput.value = cData.totalCount || "";
+    // 導師姓名自動去識別化
+    if (teacherInput) teacherInput.value = maskPersonName(cData.teacher) || "";
 
-  // 更新連動高亮提示列
-  const highlightBar = document.getElementById("sheetActiveHighlightBar");
-  const highlightText = document.getElementById("sheetActiveHighlightText");
-  const indicatorDot = document.getElementById("drawerHighlightIndicator");
+    // 更新連動高亮提示列
+    const highlightBar = document.getElementById("sheetActiveHighlightBar");
+    const highlightText = document.getElementById("sheetActiveHighlightText");
+    const indicatorDot = document.getElementById("drawerHighlightIndicator");
 
-  if (activeHighlight) {
-    if (highlightBar) highlightBar.style.display = "flex";
-    if (indicatorDot) indicatorDot.style.display = "inline-block";
-    let typeName = activeHighlight.type === "room1" ? "第一晚房號" : (activeHighlight.type === "room2" ? "第二晚房號" : "用餐桌號");
-    if (highlightText) highlightText.innerHTML = `✨ 已高亮聚焦：<b>${typeName} ${activeHighlight.val}</b> 同學名冊`;
-  } else {
-    if (highlightBar) highlightBar.style.display = "none";
-    if (indicatorDot) indicatorDot.style.display = "none";
-  }
+    if (activeHighlight) {
+      if (highlightBar) highlightBar.style.display = "flex";
+      if (indicatorDot) indicatorDot.style.display = "inline-block";
+      let typeName = activeHighlight.type === "room1" ? "第一晚房號" : (activeHighlight.type === "room2" ? "第二晚房號" : "用餐桌號");
+      if (highlightText) highlightText.innerHTML = `✨ 已高亮聚焦：<b>${typeName} ${activeHighlight.val}</b> 同學名冊`;
+    } else {
+      if (highlightBar) highlightBar.style.display = "none";
+      if (indicatorDot) indicatorDot.style.display = "none";
+    }
 
-  const dualWrap = document.getElementById("sheetDualTablesWrap");
-  const groupWrap = document.getElementById("sheetGroupCardsWrap");
+    const dualWrap = document.getElementById("sheetDualTablesWrap");
+    const groupWrap = document.getElementById("sheetGroupCardsWrap");
+    const colorWrap = document.getElementById("toolbarColorSelectWrap");
 
-  // 判斷是否呈現分組卡片檢視
-  if (sheetActiveView !== "sheet") {
-    if (dualWrap) dualWrap.style.display = "none";
+    // 【關鍵修復】：始終同步渲染分組卡片檢視，確保在非實體雙欄座位表模式下切換班級絕不當掉
     if (groupWrap) {
-      groupWrap.style.display = "block";
       renderGroupCardsView(groupWrap, cData);
     }
-    return;
-  }
 
-  // 實體座位表 (男女雙欄) 檢視
-  if (dualWrap) dualWrap.style.display = "grid";
-  if (groupWrap) groupWrap.style.display = "none";
+    // 始終同步構建實體座位表 (男女雙欄)，保證資料與 DOM 100% 同步
+    const { room1Map, room2Map, tableMap } = getClassColorMaps(currentSheetClass);
 
-  const { room1Map, room2Map, tableMap } = getClassColorMaps(currentSheetClass);
+    function renderStudentRow(st, gender, idx) {
+      const r1 = (st.room1 || "").trim();
+      const r2 = (st.room2 || "").trim();
+      const tb = (st.table || "").trim();
 
-  function renderStudentRow(st, gender, idx) {
-    const r1 = (st.room1 || "").trim();
-    const r2 = (st.room2 || "").trim();
-    const tb = (st.table || "").trim();
+      const r1Col = r1 ? (room1Map[r1] || null) : null;
+      const r2Col = r2 ? (room2Map[r2] || null) : null;
+      const tbCol = tb ? (tableMap[tb] || null) : null;
 
-    const r1Col = r1 ? (room1Map[r1] || null) : null;
-    const r2Col = r2 ? (room2Map[r2] || null) : null;
-    const tbCol = tb ? (tableMap[tb] || null) : null;
+      // 檢查高亮狀態
+      let isMatched = false;
+      let isDimmed = false;
+      if (activeHighlight && st.name) {
+        if (activeHighlight.type === "room1" && r1 === activeHighlight.val) isMatched = true;
+        else if (activeHighlight.type === "room2" && r2 === activeHighlight.val) isMatched = true;
+        else if (activeHighlight.type === "table" && tb === activeHighlight.val) isMatched = true;
+        else isDimmed = true;
+      }
 
-    // 檢查高亮狀態
-    let isMatched = false;
-    let isDimmed = false;
-    if (activeHighlight && st.name) {
-      if (activeHighlight.type === "room1" && r1 === activeHighlight.val) isMatched = true;
-      else if (activeHighlight.type === "room2" && r2 === activeHighlight.val) isMatched = true;
-      else if (activeHighlight.type === "table" && tb === activeHighlight.val) isMatched = true;
-      else isDimmed = true;
-    }
+      // 計算整行底色（依模式）
+      let rowStyle = "";
+      if (sheetColorMode === "room1" && r1Col) {
+        rowStyle = `background-color: ${r1Col.bg};`;
+      } else if (sheetColorMode === "room2" && r2Col) {
+        rowStyle = `background-color: ${r2Col.bg};`;
+      } else if (sheetColorMode === "table" && tbCol) {
+        rowStyle = `background-color: ${tbCol.bg};`;
+      }
 
-    // 計算整行底色（依模式）
-    let rowStyle = "";
-    if (sheetColorMode === "room1" && r1Col) {
-      rowStyle = `background-color: ${r1Col.bg};`;
-    } else if (sheetColorMode === "room2" && r2Col) {
-      rowStyle = `background-color: ${r2Col.bg};`;
-    } else if (sheetColorMode === "table" && tbCol) {
-      rowStyle = `background-color: ${tbCol.bg};`;
-    }
+      // 各欄單元格底色
+      const r1TdStyle = (sheetColorMode === "column" && r1Col) ? `background-color:${r1Col.bg}; border-color:${r1Col.border};` : "";
+      const r1InputStyle = (r1Col) ? `color:${r1Col.text}; font-weight:800;` : "";
 
-    // 各欄單元格底色
-    const r1TdStyle = (sheetColorMode === "column" && r1Col) ? `background-color:${r1Col.bg}; border-color:${r1Col.border};` : "";
-    const r1InputStyle = (r1Col) ? `color:${r1Col.text}; font-weight:800;` : "";
+      const r2TdStyle = (sheetColorMode === "column" && r2Col) ? `background-color:${r2Col.bg}; border-color:${r2Col.border};` : "";
+      const r2InputStyle = (r2Col) ? `color:${r2Col.text}; font-weight:800;` : "";
 
-    const r2TdStyle = (sheetColorMode === "column" && r2Col) ? `background-color:${r2Col.bg}; border-color:${r2Col.border};` : "";
-    const r2InputStyle = (r2Col) ? `color:${r2Col.text}; font-weight:800;` : "";
+      const tbTdStyle = (sheetColorMode === "column" && tbCol) ? `background-color:${tbCol.bg}; border-color:${tbCol.border};` : "";
+      const tbInputStyle = (tbCol) ? `color:${tbCol.text}; font-weight:800;` : "";
 
-    const tbTdStyle = (sheetColorMode === "column" && tbCol) ? `background-color:${tbCol.bg}; border-color:${tbCol.border};` : "";
-    const tbInputStyle = (tbCol) ? `color:${tbCol.text}; font-weight:800;` : "";
+      const trClasses = [
+        isMatched ? "highlight-matched" : "",
+        isDimmed ? "highlight-dimmed" : ""
+      ].filter(Boolean).join(" ");
 
-    const trClasses = [
-      isMatched ? "highlight-matched" : "",
-      isDimmed ? "highlight-dimmed" : ""
-    ].filter(Boolean).join(" ");
-
-    return `
-      <tr class="${trClasses}" style="${rowStyle}">
-        <td class="col-no">${st.no}</td>
-        <td class="col-name"><input type="text" value="${maskPersonName(st.name) || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'name', this.value)"></td>
-        <td class="col-room" style="${r1TdStyle}" title="${r1Col ? `${r1Col.name}色塊：第一晚 ${r1} 房` : ''}">
-          <input type="text" value="${r1}" placeholder="房號" style="${r1InputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'room1', this.value)">
-        </td>
-        <td class="col-room" style="${r2TdStyle}" title="${r2Col ? `${r2Col.name}色塊：第二晚 ${r2} 房` : ''}">
-          <input type="text" value="${r2}" placeholder="房號" style="${r2InputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'room2', this.value)">
-        </td>
-        <td class="col-table" style="${tbTdStyle}" title="${tbCol ? `${tbCol.name}色塊：第 ${tb} 桌` : ''}">
-          <input type="text" value="${tb}" placeholder="桌" style="${tbInputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'table', this.value)">
-        </td>
-      </tr>
-    `;
-  }
-
-  // 緊湊模式過濾：若未勾選顯示空行，只顯示有名字或有房間資料的學生
-  const validBoys = cData.boys.filter(b => b.name && b.name.trim());
-  const boysList = sheetShowEmptyRows ? cData.boys : (validBoys.length > 0 ? validBoys : cData.boys.slice(0, 10));
-
-  const validGirls = cData.girls.filter(g => g.name && g.name.trim());
-  const girlsList = sheetShowEmptyRows ? cData.girls : (validGirls.length > 0 ? validGirls : cData.girls.slice(0, 10));
-
-  // 渲染男生
-  const boysTbody = document.getElementById("sheetBoysTbodyPage");
-  if (boysTbody) {
-    let boysHtml = boysList.map((b, idx) => {
-      // 保持原本索引以便更新
-      const realIdx = cData.boys.findIndex(orig => orig.no === b.no);
-      return renderStudentRow(b, "boys", realIdx >= 0 ? realIdx : idx);
-    }).join("");
-
-    if (!sheetShowEmptyRows && cData.boys.length > validBoys.length) {
-      boysHtml += `
-        <tr class="toggle-empty-rows-tr">
-          <td colspan="5" onclick="setEmptyRowsMode(true)" style="padding:6px; cursor:pointer; color:#0284c7; font-size:0.75rem; background:#f0f9ff; text-align:center; font-weight:700;">
-            + 展開男生其餘 ${cData.boys.length - validBoys.length} 格空白列 (至第 25 號)
+      return `
+        <tr class="${trClasses}" style="${rowStyle}">
+          <td class="col-no">${st.no}</td>
+          <td class="col-name"><input type="text" value="${maskPersonName(st.name) || ""}" placeholder="姓名" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'name', this.value)"></td>
+          <td class="col-room" style="${r1TdStyle}" title="${r1Col ? `${r1Col.name}色塊：第一晚 ${r1} 房` : ''}">
+            <input type="text" value="${r1}" placeholder="房號" style="${r1InputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'room1', this.value)">
+          </td>
+          <td class="col-room" style="${r2TdStyle}" title="${r2Col ? `${r2Col.name}色塊：第二晚 ${r2} 房` : ''}">
+            <input type="text" value="${r2}" placeholder="房號" style="${r2InputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'room2', this.value)">
+          </td>
+          <td class="col-table" style="${tbTdStyle}" title="${tbCol ? `${tbCol.name}色塊：第 ${tb} 桌` : ''}">
+            <input type="text" value="${tb}" placeholder="桌" style="${tbInputStyle}" onchange="updateStudentFieldPage('${currentSheetClass}', '${gender}', ${idx}, 'table', this.value)">
           </td>
         </tr>
       `;
     }
-    boysTbody.innerHTML = boysHtml;
-  }
 
-  // 渲染女生
-  const girlsTbody = document.getElementById("sheetGirlsTbodyPage");
-  if (girlsTbody) {
-    let girlsHtml = girlsList.map((g, idx) => {
-      const realIdx = cData.girls.findIndex(orig => orig.no === g.no);
-      return renderStudentRow(g, "girls", realIdx >= 0 ? realIdx : idx);
-    }).join("");
+    // 緊湊模式過濾：若未勾選顯示空行，只顯示有名字或有房間資料的學生
+    const validBoys = cData.boys.filter(b => b.name && b.name.trim());
+    const boysList = sheetShowEmptyRows ? cData.boys : (validBoys.length > 0 ? validBoys : cData.boys.slice(0, 10));
 
-    if (!sheetShowEmptyRows && cData.girls.length > validGirls.length) {
-      girlsHtml += `
-        <tr class="toggle-empty-rows-tr">
-          <td colspan="5" onclick="setEmptyRowsMode(true)" style="padding:6px; cursor:pointer; color:#0284c7; font-size:0.75rem; background:#f0f9ff; text-align:center; font-weight:700;">
-            + 展開女生其餘 ${cData.girls.length - validGirls.length} 格空白列 (至第 25 號)
-          </td>
-        </tr>
-      `;
+    const validGirls = cData.girls.filter(g => g.name && g.name.trim());
+    const girlsList = sheetShowEmptyRows ? cData.girls : (validGirls.length > 0 ? validGirls : cData.girls.slice(0, 10));
+
+    // 渲染男生
+    const boysTbody = document.getElementById("sheetBoysTbodyPage");
+    if (boysTbody) {
+      let boysHtml = boysList.map((b, idx) => {
+        const realIdx = cData.boys.findIndex(orig => orig.no === b.no);
+        return renderStudentRow(b, "boys", realIdx >= 0 ? realIdx : idx);
+      }).join("");
+
+      if (!sheetShowEmptyRows && cData.boys.length > validBoys.length) {
+        boysHtml += `
+          <tr class="toggle-empty-rows-tr">
+            <td colspan="5" onclick="setEmptyRowsMode(true)" style="padding:6px; cursor:pointer; color:#0284c7; font-size:0.75rem; background:#f0f9ff; text-align:center; font-weight:700;">
+              + 展開男生其餘 ${cData.boys.length - validBoys.length} 格空白列 (至第 25 號)
+            </td>
+          </tr>
+        `;
+      }
+      boysTbody.innerHTML = boysHtml;
     }
-    girlsTbody.innerHTML = girlsHtml;
+
+    // 渲染女生
+    const girlsTbody = document.getElementById("sheetGirlsTbodyPage");
+    if (girlsTbody) {
+      let girlsHtml = girlsList.map((g, idx) => {
+        const realIdx = cData.girls.findIndex(orig => orig.no === g.no);
+        return renderStudentRow(g, "girls", realIdx >= 0 ? realIdx : idx);
+      }).join("");
+
+      if (!sheetShowEmptyRows && cData.girls.length > validGirls.length) {
+        girlsHtml += `
+          <tr class="toggle-empty-rows-tr">
+            <td colspan="5" onclick="setEmptyRowsMode(true)" style="padding:6px; cursor:pointer; color:#0284c7; font-size:0.75rem; background:#f0f9ff; text-align:center; font-weight:700;">
+              + 展開女生其餘 ${cData.girls.length - validGirls.length} 格空白列 (至第 25 號)
+            </td>
+          </tr>
+        `;
+      }
+      girlsTbody.innerHTML = girlsHtml;
+    }
+
+    // 依檢視模式切換畫面容器
+    if (sheetActiveView === "sheet") {
+      if (dualWrap) dualWrap.style.display = "grid";
+      if (groupWrap) groupWrap.style.display = "none";
+      if (colorWrap) colorWrap.style.display = "flex";
+    } else {
+      if (dualWrap) dualWrap.style.display = "none";
+      if (groupWrap) groupWrap.style.display = "block";
+      if (colorWrap) colorWrap.style.display = "none";
+    }
+  } catch (err) {
+    console.error("renderRoomSheetTablePage error:", err);
   }
 }
 
 // 渲染「分組卡片檢視」（用餐桌號分組 / 第一晚房間分組 / 第二晚房間分組）
 function renderGroupCardsView(container, cData) {
-  const { room1Map, room2Map, tableMap, r1List, r2List, tbList, allSt } = getClassColorMaps(currentSheetClass);
+  try {
+    if (!container) return;
+    const { room1Map, room2Map, tableMap, r1List, r2List, tbList, allSt } = getClassColorMaps(currentSheetClass);
+    const defaultColor = (BEIGE_PALETTE && BEIGE_PALETTE[0]) || { key: "yellow", name: "米黃", bg: "#fef9c3", border: "#fde047", badgeBg: "#fef08a", text: "#854d0e", tagBg: "#fefce8" };
 
-  let title = "";
-  let icon = "";
-  let groups = [];
+    let title = "";
+    let icon = "";
+    let groups = [];
 
-  if (sheetActiveView === "tables") {
-    title = `🍽️ 【${currentSheetClass}班】用餐桌號分組一覽（同桌同米色色塊）`;
-    icon = "🍽️";
-    groups = tbList.map(t => {
-      const col = tableMap[t] || BEIGE_PALETTE[0];
-      const students = allSt.filter(s => s.table === t && s.name);
-      return {
-        key: `第 ${t} 桌`,
-        color: col,
-        badgeText: `${students.length} 人`,
-        students
-      };
-    });
-  } else if (sheetActiveView === "rooms1") {
-    title = `🏨 【${currentSheetClass}班】第一晚房間分組一覽（今埔里渡假大酒店）`;
-    icon = "🏨";
-    groups = r1List.map(r => {
-      const col = room1Map[r] || BEIGE_PALETTE[0];
-      const students = allSt.filter(s => s.room1 === r && s.name);
-      return {
-        key: `${r} 房`,
-        color: col,
-        badgeText: `${students.length} 人`,
-        students
-      };
-    });
-  } else if (sheetActiveView === "rooms2") {
-    title = `🏰 【${currentSheetClass}班】第二晚房間分組一覽（麗寶福容大飯店）`;
-    icon = "🏰";
-    groups = r2List.map(r => {
-      const col = room2Map[r] || BEIGE_PALETTE[0];
-      const students = allSt.filter(s => s.room2 === r && s.name);
-      return {
-        key: `${r} 房`,
-        color: col,
-        badgeText: `${students.length} 人`,
-        students
-      };
-    });
-  }
+    if (sheetActiveView === "tables") {
+      title = `🍽️ 【${currentSheetClass}班】用餐桌號分組一覽（同桌同米色色塊）`;
+      icon = "🍽️";
+      groups = tbList.map(t => {
+        const col = tableMap[t] || defaultColor;
+        const students = allSt.filter(s => s.table === t && s.name);
+        return {
+          key: `第 ${t} 桌`,
+          color: col,
+          badgeText: `${students.length} 人`,
+          students
+        };
+      });
+    } else if (sheetActiveView === "rooms1") {
+      title = `🏨 【${currentSheetClass}班】第一晚房間分組一覽（今埔里渡假大酒店）`;
+      icon = "🏨";
+      groups = r1List.map(r => {
+        const col = room1Map[r] || defaultColor;
+        const students = allSt.filter(s => s.room1 === r && s.name);
+        return {
+          key: `${r} 房`,
+          color: col,
+          badgeText: `${students.length} 人`,
+          students
+        };
+      });
+    } else if (sheetActiveView === "rooms2") {
+      title = `🏰 【${currentSheetClass}班】第二晚房間分組一覽（麗寶福容大飯店）`;
+      icon = "🏰";
+      groups = r2List.map(r => {
+        const col = room2Map[r] || defaultColor;
+        const students = allSt.filter(s => s.room2 === r && s.name);
+        return {
+          key: `${r} 房`,
+          color: col,
+          badgeText: `${students.length} 人`,
+          students
+        };
+      });
+    } else {
+      return;
+    }
 
-  container.innerHTML = `
-    <div style="margin-bottom:12px; font-weight:800; color:#334155; font-size:0.95rem; display:flex; align-items:center; justify-content:space-between;">
-      <span>${title}</span>
-      <span style="font-size:0.78rem; color:#64748b; font-weight:600;">共 ${groups.length} 組</span>
-    </div>
+    container.innerHTML = `
+      <div style="margin-bottom:12px; font-weight:800; color:#334155; font-size:0.95rem; display:flex; align-items:center; justify-content:space-between;">
+        <span>${title}</span>
+        <span style="font-size:0.78rem; color:#64748b; font-weight:600;">共 ${groups.length} 組</span>
+      </div>
 
-    <div class="group-cards-grid">
-      ${groups.map(g => `
-        <div class="group-card" style="border-top: 6px solid ${g.color.border}; background: #ffffff;">
-          <div class="group-card-header" style="background: ${g.color.bg};">
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="font-size:1.1rem;">${icon}</span>
-              <span style="font-size:1rem; font-weight:800; color:${g.color.text};">${g.key}</span>
-              <span style="font-size:0.75rem; background:${g.color.badgeBg}; color:${g.color.text}; border:1px solid ${g.color.border}; padding:1px 6px; border-radius:4px; font-weight:700;">${g.color.name}</span>
-            </div>
-            <span style="font-size:0.8rem; font-weight:700; color:${g.color.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${g.color.border};">
-              ${g.badgeText}
-            </span>
-          </div>
-          <div class="group-card-body">
-            <div class="group-student-tags">
-              ${g.students.map(s => `
-                <span class="group-student-tag" title="第 ${s.no} 號 ${s.genderText}生">
-                  <span class="gender-dot ${s.gender === 'boys' ? 'boy' : 'girl'}"></span>
-                  <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
-                  <span>${maskPersonName(s.name)}</span>
+      <div class="group-cards-grid">
+        ${groups.map(g => {
+          const col = g.color || defaultColor;
+          return `
+            <div class="group-card" style="border-top: 6px solid ${col.border}; background: #ffffff;">
+              <div class="group-card-header" style="background: ${col.bg};">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="font-size:1.1rem;">${icon}</span>
+                  <span style="font-size:1rem; font-weight:800; color:${col.text};">${g.key}</span>
+                  <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">${col.name}</span>
+                </div>
+                <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
+                  ${g.badgeText}
                 </span>
-              `).join("")}
+              </div>
+              <div class="group-card-body">
+                <div class="group-student-tags">
+                  ${g.students.map(s => `
+                    <span class="group-student-tag" title="第 ${s.no} 號 ${s.genderText || ''}生">
+                      <span class="gender-dot ${s.gender === 'boys' ? 'boy' : 'girl'}"></span>
+                      <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
+                      <span>${maskPersonName(s.name)}</span>
+                    </span>
+                  `).join("")}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      `).join("")}
-    </div>
-  `;
+          `;
+        }).join("")}
+      </div>
+    `;
+  } catch (err) {
+    console.error("renderGroupCardsView error:", err);
+  }
 }
 
 window.updateStudentFieldPage = function(className, gender, idx, field, value) {

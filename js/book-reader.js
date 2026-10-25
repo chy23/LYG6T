@@ -413,7 +413,7 @@ function initScreenEdgeTap() {
 
     // 排除可互動元件
     const target = e.target;
-    if (target.closest("button, a, input, select, textarea, label, canvas, .check-item, .quiz-opt, .header-btn, .next-page-cta")) {
+    if (target.closest("button, a, input, select, textarea, label, canvas, .check-item, .quiz-opt, .header-btn, .next-page-cta, .sheet-page-container, .group-card, .group-student-tag, .color-legend-pill, .sheet-drawer, .sheet-drawer-backdrop")) {
       return;
     }
 
