@@ -2140,6 +2140,125 @@ body {
   opacity: 1;
 }
 
+/* ==========================================================================
+   合併統一介面：頂部快速檢視膠囊列、飯店快速切換列、全校分班巡房樣式
+   ========================================================================== */
+.sheet-view-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.view-pill-btn {
+  flex: 1;
+  min-width: 78px;
+  padding: 7px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.view-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #1e293b;
+}
+
+.view-pill-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+}
+
+.unified-hotel-bar {
+  display: flex;
+  gap: 6px;
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.unified-hotel-bar .hotel-tab-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #92400e;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.unified-hotel-bar .hotel-tab-btn.active {
+  background: #f59e0b;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.35);
+}
+
+.switch-to-patrol-btn {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.switch-to-patrol-btn:hover {
+  background: #fde68a;
+}
+
+.class-patrol-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 10px;
+  margin-bottom: 16px;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.class-patrol-section.flash-highlight {
+  background: #fef9c3 !important;
+  border-color: #facc15 !important;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.35);
+}
+
+.class-patrol-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #cbd5e1;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 
 
 

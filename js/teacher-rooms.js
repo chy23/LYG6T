@@ -3496,10 +3496,11 @@ function renderSheetPageHtml() {
       <!-- 下拉選單與漢堡按鈕統一控制列 (極簡化版面，消除大量堆疊按鈕) -->
       <div class="sheet-unified-toolbar">
         
-        <!-- 班級下拉選單 -->
+        <!-- 班級下拉選單 (含全校總覽與各班) -->
         <div class="toolbar-select-wrap">
           <label for="sheetClassSelect" class="toolbar-select-label">🏫 班級：</label>
           <select id="sheetClassSelect" class="toolbar-select" onchange="selectSheetClassPage(this.value)">
+            <option value="all" ${currentSheetClass === "all" ? "selected" : ""}>🌐 全校六年級全部班級 (601 ~ 609)</option>
             ${initialClasses.map(c => {
               const info = sheetData[c] || {};
               const tName = maskPersonName(info.teacher || "");
@@ -3513,10 +3514,10 @@ function renderSheetPageHtml() {
         <div class="toolbar-select-wrap">
           <label for="sheetViewSelect" class="toolbar-select-label">👁️ 檢視：</label>
           <select id="sheetViewSelect" class="toolbar-select" onchange="setSheetViewMode(this.value)">
-            <option value="sheet" ${sheetActiveView === "sheet" ? "selected" : ""}>📋 實體雙欄座位表</option>
+            <option value="sheet" ${sheetActiveView === "sheet" ? "selected" : ""}>📋 實體雙欄名冊 (1~25號)</option>
             <option value="tables" ${sheetActiveView === "tables" ? "selected" : ""}>🍽️ 用餐桌號分組一覽</option>
-            <option value="rooms1" ${sheetActiveView === "rooms1" ? "selected" : ""}>🏨 第一晚房間分組 (今埔里)</option>
-            <option value="rooms2" ${sheetActiveView === "rooms2" ? "selected" : ""}>🏰 第二晚房間分組 (麗寶福容)</option>
+            <option value="rooms1" ${sheetActiveView === "rooms1" ? "selected" : ""}>🏨 第一晚查房點名 (今埔里)</option>
+            <option value="rooms2" ${sheetActiveView === "rooms2" ? "selected" : ""}>🏰 第二晚查房點名 (福容)</option>
           </select>
         </div>
 
@@ -3542,22 +3543,38 @@ function renderSheetPageHtml() {
         </div>
       </div>
 
+      <!-- 快速模式切換膠囊列 (手機極簡直覺點選，免開下拉選單) -->
+      <div class="sheet-view-pill-bar" id="sheetViewPillBar">
+        <button class="view-pill-btn ${sheetActiveView === 'sheet' ? 'active' : ''}" data-view="sheet" onclick="setSheetViewMode('sheet')">
+          📋 實體名冊
+        </button>
+        <button class="view-pill-btn ${sheetActiveView === 'tables' ? 'active' : ''}" data-view="tables" onclick="setSheetViewMode('tables')">
+          🍽️ 用餐分桌
+        </button>
+        <button class="view-pill-btn ${sheetActiveView === 'rooms1' ? 'active' : ''}" data-view="rooms1" onclick="setSheetViewMode('rooms1')">
+          🏨 今埔里查房
+        </button>
+        <button class="view-pill-btn ${sheetActiveView === 'rooms2' ? 'active' : ''}" data-view="rooms2" onclick="setSheetViewMode('rooms2')">
+          🏰 福容查房
+        </button>
+      </div>
+
       <!-- 當前連動高亮提示列 (若有點選高亮時才浮現，乾淨不佔位) -->
       <div id="sheetActiveHighlightBar" class="sheet-active-highlight-bar" style="${activeHighlight ? 'display:flex;' : 'display:none;'}">
         <span id="sheetActiveHighlightText">✨ 已高亮聚焦中</span>
         <button onclick="clearHighlightTarget()" class="clear-highlight-btn">✕ 清除高亮</button>
       </div>
 
-      <!-- 表格主體 -->
+      <!-- 表格主體 (合併統一呈現，下方不再有重複區塊) -->
       <div class="sheet-container" style="border:1px solid #cbd5e1; padding:12px 10px; margin-bottom:18px;">
         
-        <!-- 表格主標題 -->
-        <div class="sheet-title-header" style="margin-bottom:8px;">
+        <!-- 表格主標題 (僅在實體座位表模式顯示) -->
+        <div class="sheet-title-header" style="margin-bottom:8px; ${sheetActiveView === 'sheet' ? '' : 'display:none;'}">
           <div class="sheet-main-title" style="font-size:1.2rem;">麗園國小學生校外教學活動房桌號表</div>
         </div>
 
-        <!-- 班級、合計、導師 (導師姓名已去識別化) Meta 列 -->
-        <div class="sheet-meta-bar" style="margin-bottom:10px; padding:6px 12px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <!-- 班級、合計、導師 (導師姓名已去識別化) Meta 列 (僅在實體座位表模式顯示) -->
+        <div class="sheet-meta-bar" style="margin-bottom:10px; padding:6px 12px; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; ${sheetActiveView === 'sheet' ? 'display:flex;' : 'display:none;'}">
           <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
             <div>
               <span style="font-size:0.85rem; color:#64748b;">班級：</span>
@@ -3575,6 +3592,9 @@ function renderSheetPageHtml() {
           </div>
 
           <div style="display:flex; align-items:center; gap:6px;">
+            <button class="switch-to-patrol-btn" onclick="setSheetViewMode('rooms1')" title="前往第一晚查房點名">
+              🏨 查房點名
+            </button>
             <button id="btnToggleEmptyRows" class="empty-rows-toggle-btn" onclick="toggleEmptyRowsMode()" title="切換緊湊檢視或顯示完整25格空白列">
               ${sheetShowEmptyRows ? '📱 切換為緊湊模式' : '📄 展開完整 25 格'}
             </button>
@@ -3627,46 +3647,6 @@ function renderSheetPageHtml() {
 
       </div>
 
-      <!-- 夜間查房快速點名區塊 -->
-      <div id="nightPatrolSectionAnchor" style="padding:14px; background:#fffbeb; border:2px solid #fde68a; border-radius:12px; margin-top:16px;">
-        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-size:1.3rem;">🏨</span>
-            <div>
-              <b style="color:#92400e; font-size:0.95rem;">夜間查房點名系統（依房號即時勾選）</b>
-              <p style="margin:2px 0 0; font-size:0.75rem; color:#b45309;">由上方房桌號表自動彙整房號並標註班級米色色塊，老師晚間巡房時可單手輕按標記已就寢。</p>
-            </div>
-          </div>
-          <div class="hotel-tab-bar" style="background:#fef3c7; border:1px solid #fcd34d;">
-            <button class="hotel-tab-btn active" id="tabHotel1Page" onclick="switchHotelPage(1)">第一晚：今埔里</button>
-            <button class="hotel-tab-btn" id="tabHotel2Page" onclick="switchHotelPage(2)">第二晚：麗寶福容</button>
-          </div>
-        </div>
-
-        <!-- 查房班級快速篩選列 (下拉選單形式) -->
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:12px; background:#fff; padding:6px 12px; border-radius:8px; border:1px solid #fde68a;">
-          <span style="font-size:0.78rem; font-weight:800; color:#92400e;">班級篩選：</span>
-          <select id="patrolClassSelect" class="toolbar-select" style="padding:4px 8px; font-size:0.8rem;" onchange="setPatrolClassFilterPage(this.value)">
-            <option value="all">全校六年級全部班級 (601 ~ 609)</option>
-            ${initialClasses.map(c => `<option value="${c}">${c} 班</option>`).join("")}
-          </select>
-        </div>
-
-        <!-- 查房進度條 -->
-        <div class="room-stats-card" style="border:1px solid #fef08a; border-radius:8px; margin-bottom:12px;">
-          <div class="stats-text">
-            <span>查房進度：<b id="checkedCountPage" style="color:#059669;">0</b> / <span id="totalRoomsCountPage">0</span> 間 (<span id="progressPctPage">0%</span>)</span>
-            <button class="reset-stats-btn" onclick="openClearPatrolModal()" title="清除點名打勾與備註">🧹 清除點名</button>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progressBarFillPage" style="width: 0%;"></div>
-          </div>
-        </div>
-
-        <!-- 房間卡片網格 -->
-        <div class="rooms-grid-scroll" id="roomsGridPage" style="max-height:520px; padding:4px 0 10px;"></div>
-      </div>
-
       <!-- 漢堡選單抽屜 (側邊滑出面板) -->
       <div class="sheet-drawer-backdrop" id="sheetDrawerBackdrop" onclick="closeSheetDrawer()"></div>
       <aside class="sheet-drawer" id="sheetDrawer">
@@ -3684,8 +3664,11 @@ function renderSheetPageHtml() {
           <div class="drawer-section">
             <div class="drawer-section-title">🏫 快速切換班級：</div>
             <div class="drawer-class-grid" id="drawerClassGrid">
+              <button class="drawer-chip-btn ${currentSheetClass === 'all' ? 'active' : ''}" data-class="all" onclick="selectSheetClassPage('all', true)">
+                🌐 全校
+              </button>
               ${initialClasses.map(c => `
-                <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" onclick="selectSheetClassPage('${c}', true)">
+                <button class="drawer-chip-btn ${currentSheetClass === c ? 'active' : ''}" data-class="${c}" onclick="selectSheetClassPage('${c}', true)">
                   ${c} 班
                 </button>
               `).join("")}
@@ -3697,16 +3680,16 @@ function renderSheetPageHtml() {
             <div class="drawer-section-title">👁️ 檢視方式：</div>
             <div class="drawer-btn-list">
               <button class="drawer-list-btn ${sheetActiveView === 'sheet' ? 'active' : ''}" onclick="setSheetViewMode('sheet'); closeSheetDrawer();">
-                📋 實體雙欄座位表 (1~25號)
+                📋 實體雙欄名冊 (1~25號)
               </button>
               <button class="drawer-list-btn ${sheetActiveView === 'tables' ? 'active' : ''}" onclick="setSheetViewMode('tables'); closeSheetDrawer();">
                 🍽️ 用餐桌號分組一覽
               </button>
               <button class="drawer-list-btn ${sheetActiveView === 'rooms1' ? 'active' : ''}" onclick="setSheetViewMode('rooms1'); closeSheetDrawer();">
-                🏨 第一晚房間分組 (今埔里)
+                🏨 第一晚查房點名 (今埔里)
               </button>
               <button class="drawer-list-btn ${sheetActiveView === 'rooms2' ? 'active' : ''}" onclick="setSheetViewMode('rooms2'); closeSheetDrawer();">
-                🏰 第二晚房間分組 (福容)
+                🏰 第二晚查房點名 (福容)
               </button>
             </div>
           </div>
@@ -3845,9 +3828,25 @@ window.toggleSheetDrawer = function() {
 };
 
 window.scrollToPatrolSection = function() {
-  const el = document.getElementById("nightPatrolSectionAnchor");
+  if (sheetActiveView !== "rooms1" && sheetActiveView !== "rooms2") {
+    setSheetViewMode("rooms1");
+  }
+  const el = document.getElementById("sheetGroupCardsWrap") || document.getElementById("sheetMainContentArea");
   if (el) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
+window.scrollToClass = function(cKey) {
+  if (currentSheetClass !== "all") {
+    selectSheetClassPage(cKey);
+    return;
+  }
+  const el = document.getElementById(`patrol_class_${cKey}`);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.classList.add("flash-highlight");
+    setTimeout(() => el.classList.remove("flash-highlight"), 1600);
   }
 };
 
@@ -3975,22 +3974,22 @@ document.addEventListener("DOMContentLoaded", () => {
    第 22 頁房桌號表互動與色塊控制 (下拉選單同步更新)
    -------------------------------------------------------------------------- */
 window.selectSheetClassPage = function(c, closeDrawer = false) {
-  if (!c || !sheetData[c]) {
+  if (!c || (c !== "all" && !sheetData[c])) {
     c = "601";
   }
   currentSheetClass = c;
+  activePatrolClassFilter = c;
   activeHighlight = null; // 切換班級時清除高亮
 
   // 同步更新班級下拉選單
   const select = document.getElementById("sheetClassSelect");
   if (select) select.value = c;
 
-  // 若下方查房篩選非全校 (all)，同步連動下方班級篩選
-  if (activePatrolClassFilter !== "all") {
-    activePatrolClassFilter = c;
-    const patrolSel = document.getElementById("patrolClassSelect");
-    if (patrolSel) patrolSel.value = c;
-  }
+  // 同步更新抽屜班級按鈕高亮
+  const chips = document.querySelectorAll(".drawer-chip-btn");
+  chips.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.class === c);
+  });
 
   // 同步更新檢視模式下拉選單
   const viewSelect = document.getElementById("sheetViewSelect");
@@ -4006,8 +4005,27 @@ window.selectSheetClassPage = function(c, closeDrawer = false) {
   }
 
   renderRoomSheetTablePage();
-  renderPatrolGridPage();
   if (isDrawerOpen) renderSheetDrawerContent();
+
+  // 平滑跳轉定位：點哪個班級，自動平滑定位跳轉至該班級內容區塊
+  if (c !== "all") {
+    const targetEl = document.getElementById(`patrol_class_${c}`);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      targetEl.classList.add("flash-highlight");
+      setTimeout(() => targetEl.classList.remove("flash-highlight"), 1600);
+    } else {
+      const contentEl = document.getElementById("sheetMainContentArea");
+      if (contentEl) {
+        contentEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  } else {
+    const contentEl = document.getElementById("sheetMainContentArea");
+    if (contentEl) {
+      contentEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 };
 
 window.setSheetColorMode = function(mode) {
@@ -4023,16 +4041,22 @@ window.setSheetViewMode = function(vMode) {
   const select = document.getElementById("sheetViewSelect");
   if (select) select.value = vMode;
 
+  // 同步更新快速切換膠囊按鈕高亮
+  const pillBtns = document.querySelectorAll("#sheetViewPillBar .view-pill-btn");
+  pillBtns.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.view === vMode);
+  });
+
   const colorWrap = document.getElementById("toolbarColorSelectWrap");
   if (colorWrap) {
     colorWrap.style.display = (vMode === "sheet") ? "flex" : "none";
   }
 
-  // 雙向連動飯店分頁：切換至第一晚/第二晚房間分組時自動同步切換飯店
-  if (vMode === "rooms1" && currentHotelId !== 1) {
-    if (typeof switchHotelPage === "function") switchHotelPage(1, false);
-  } else if (vMode === "rooms2" && currentHotelId !== 2) {
-    if (typeof switchHotelPage === "function") switchHotelPage(2, false);
+  // 雙向連動飯店
+  if (vMode === "rooms1") {
+    currentHotelId = 1;
+  } else if (vMode === "rooms2") {
+    currentHotelId = 2;
   }
 
   renderRoomSheetTablePage();
@@ -4057,8 +4081,16 @@ window.clearHighlightTarget = function() {
 
 function renderRoomSheetTablePage() {
   try {
-    const cData = sheetData[currentSheetClass] || {
-      className: currentSheetClass,
+    const metaBar = document.querySelector(".sheet-meta-bar");
+    const titleHeader = document.querySelector(".sheet-title-header");
+
+    // 控制標題與 Meta 列僅在實體座位表模式顯示，讓分組/查房卡片擁有最大可視高度
+    if (metaBar) metaBar.style.display = (sheetActiveView === "sheet") ? "flex" : "none";
+    if (titleHeader) titleHeader.style.display = (sheetActiveView === "sheet") ? "block" : "none";
+
+    const targetClass = (currentSheetClass === "all") ? "601" : currentSheetClass;
+    const cData = sheetData[targetClass] || {
+      className: targetClass,
       teacher: "",
       totalCount: 0,
       boys: generateEmptySlots(),
@@ -4069,8 +4101,14 @@ function renderRoomSheetTablePage() {
     const totalInput = document.getElementById("sheetInputTotalPage");
     const teacherInput = document.getElementById("sheetInputTeacherPage");
 
-    const classNum = parseInt(currentSheetClass.replace(/^60?/, ""), 10) || currentSheetClass;
-    if (classDisplay) classDisplay.textContent = `6年${classNum}班 (${currentSheetClass}班)`;
+    const classNum = parseInt(targetClass.replace(/^60?/, ""), 10) || targetClass;
+    if (classDisplay) {
+      if (currentSheetClass === "all") {
+        classDisplay.textContent = `全校六年級 (目前顯示 601 班實體雙欄座位表)`;
+      } else {
+        classDisplay.textContent = `6年${classNum}班 (${targetClass}班)`;
+      }
+    }
     if (totalInput) totalInput.value = cData.totalCount || "";
     // 導師姓名自動去識別化
     if (teacherInput) teacherInput.value = maskPersonName(cData.teacher) || "";
@@ -4100,7 +4138,7 @@ function renderRoomSheetTablePage() {
     }
 
     // 始終同步構建實體座位表 (男女雙欄)，保證資料與 DOM 100% 同步
-    const { room1Map, room2Map, tableMap } = getClassColorMaps(currentSheetClass);
+    const { room1Map, room2Map, tableMap } = getClassColorMaps(targetClass);
 
     function renderStudentRow(st, gender, idx) {
       const r1 = (st.room1 || "").trim();
@@ -4229,10 +4267,40 @@ function renderRoomSheetTablePage() {
 function renderGroupCardsView(container, cData) {
   try {
     if (!container) return;
-    const { room1Map, room2Map, tableMap, tbList, allSt } = getClassColorMaps(currentSheetClass);
     const defaultColor = (BEIGE_PALETTE && BEIGE_PALETTE[0]) || { key: "yellow", name: "米黃", bg: "#fef9c3", border: "#fde047", badgeBg: "#fef08a", text: "#854d0e", tagBg: "#fefce8" };
 
     if (sheetActiveView === "tables") {
+      // 用餐桌號分組
+      if (currentSheetClass === "all") {
+        let fullHtml = `
+          <div style="margin-bottom:12px; font-weight:800; color:#334155; font-size:0.95rem; display:flex; align-items:center; justify-content:space-between;">
+            <span>🍽️ 【全校六年級全部班級】用餐桌號分組一覽</span>
+          </div>
+        `;
+        initialClasses.forEach(cKey => {
+          const { tableMap, tbList, allSt } = getClassColorMaps(cKey);
+          const groups = tbList.map(t => {
+            const col = tableMap[t] || defaultColor;
+            const students = allSt.filter(s => s.table === t && s.name);
+            return { key: `第 ${t} 桌`, color: col, badgeText: `${students.length} 人`, students };
+          });
+          fullHtml += `
+            <div class="class-patrol-section" id="patrol_class_${cKey}">
+              <div class="class-patrol-header">
+                <span style="font-size:1rem; font-weight:800; color:#1e293b;">🏫 ${cKey} 班 用餐分桌</span>
+                <span style="font-size:0.75rem; color:#64748b;">共 ${groups.length} 桌</span>
+              </div>
+              <div class="group-cards-grid">
+                ${renderTableCardsHtml(groups, defaultColor)}
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = fullHtml;
+        return;
+      }
+
+      const { tableMap, tbList, allSt } = getClassColorMaps(currentSheetClass);
       const title = `🍽️ 【${currentSheetClass}班】用餐桌號分組一覽（同桌同米色色塊）`;
       const groups = tbList.map(t => {
         const col = tableMap[t] || defaultColor;
@@ -4252,124 +4320,184 @@ function renderGroupCardsView(container, cData) {
         </div>
 
         <div class="group-cards-grid">
-          ${groups.map(g => {
-            const col = g.color || defaultColor;
-            return `
-              <div class="group-card" style="border-top: 6px solid ${col.border}; background: #ffffff;">
-                <div class="group-card-header" style="background: ${col.bg};">
-                  <div style="display:flex; align-items:center; gap:6px;">
-                    <span style="font-size:1.1rem;">🍽️</span>
-                    <span style="font-size:1rem; font-weight:800; color:${col.text};">${g.key}</span>
-                    <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">${col.name}</span>
-                  </div>
-                  <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
-                    ${g.badgeText}
-                  </span>
-                </div>
-                <div class="group-card-body">
-                  <div class="group-student-tags">
-                    ${g.students.map(s => `
-                      <span class="group-student-tag" title="第 ${s.no} 號 ${s.genderText || ''}生">
-                        <span class="gender-dot ${s.gender === 'boys' ? 'boy' : 'girl'}"></span>
-                        <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
-                        <span>${maskPersonName(s.name)}</span>
-                      </span>
-                    `).join("")}
-                  </div>
-                </div>
-              </div>
-            `;
-          }).join("")}
+          ${renderTableCardsHtml(groups, defaultColor)}
         </div>
       `;
       return;
     }
 
-    // 第一晚或第二晚房間分組檢視：與夜間查房點名系統全面結合
+    // 第一晚或第二晚房間分組檢視：完全合而為一的夜間查房點名系統
     const hotelNum = sheetActiveView === "rooms1" ? 1 : 2;
     const hotelName = (hotelInfo[hotelNum] && hotelInfo[hotelNum].name) || `第 ${hotelNum} 晚`;
     const icon = hotelNum === 1 ? "🏨" : "🏰";
 
-    const classRooms = getPatrolRoomsForPage(hotelNum, currentSheetClass);
+    const allRooms = getPatrolRoomsForPage(hotelNum, currentSheetClass);
     const hotelChecks = checkState[hotelNum] || {};
 
-    const totalCount = classRooms.length;
-    const checkedCount = classRooms.filter(r => {
+    const totalCount = allRooms.length;
+    const checkedCount = allRooms.filter(r => {
       const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId];
       return itemState && itemState.status === "checked";
     }).length;
     const pct = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
 
+    let bodyHtml = "";
+
+    if (currentSheetClass === "all") {
+      // 全校六年級全部班級：依班級分區呈現，支援快速跳轉錨點
+      bodyHtml = initialClasses.map(cKey => {
+        const classRooms = allRooms.filter(r => r.class === cKey);
+        const cTotal = classRooms.length;
+        const cChecked = classRooms.filter(r => {
+          const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId];
+          return itemState && itemState.status === "checked";
+        }).length;
+        const cPct = cTotal > 0 ? Math.round((cChecked / cTotal) * 100) : 0;
+
+        return `
+          <div class="class-patrol-section" id="patrol_class_${cKey}">
+            <div class="class-patrol-header">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.05rem; font-weight:800; color:#1e293b;">🏫 ${cKey} 班</span>
+                <span style="font-size:0.78rem; color:#64748b;">(導師: ${maskPersonName(sheetData[cKey]?.teacher || '')} · 共 ${cTotal} 間房 · 已查 ${cChecked} 間 / ${cPct}%)</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <button class="patrol-quick-clear-btn" onclick="openClearPatrolModal('${cKey}', ${hotelNum})" title="清除此班查房紀錄">
+                  🧹 清除本班
+                </button>
+              </div>
+            </div>
+            <div class="group-cards-grid">
+              ${classRooms.map(r => renderSingleRoomCardHtml(r, hotelNum, hotelChecks, defaultColor, icon)).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    } else {
+      // 單一班級呈現
+      bodyHtml = `
+        <div class="group-cards-grid">
+          ${allRooms.map(r => renderSingleRoomCardHtml(r, hotelNum, hotelChecks, defaultColor, icon)).join("")}
+        </div>
+      `;
+    }
+
     container.innerHTML = `
-      <!-- 頂部查房進度摘要與快捷操作列 -->
+      <!-- 頂部飯店一鍵切換標籤列 (手機單手直覺點選，免開下拉選單) -->
+      <div class="unified-hotel-bar">
+        <button class="hotel-tab-btn ${hotelNum === 1 ? 'active' : ''}" onclick="setSheetViewMode('rooms1')">
+          🏨 第一晚：今埔里渡假大酒店
+        </button>
+        <button class="hotel-tab-btn ${hotelNum === 2 ? 'active' : ''}" onclick="setSheetViewMode('rooms2')">
+          🏰 第二晚：麗寶福容大飯店
+        </button>
+      </div>
+
+      <!-- 查房進度摘要與快捷操作列 -->
       <div class="room-patrol-summary-bar">
         <div class="summary-left">
-          <span class="summary-title">${icon} 【${currentSheetClass}班】${hotelNum === 1 ? '第一晚 (今埔里)' : '第二晚 (麗寶福容)'} 查房點名：</span>
+          <span class="summary-title">${icon} ${currentSheetClass === 'all' ? '【全校六年級】' : `【${currentSheetClass}班】`}${hotelNum === 1 ? '今埔里' : '麗寶福容'} 查房進度：</span>
           <span class="summary-stat">已查房 <b>${checkedCount}</b> / ${totalCount} 間 (${pct}%)</span>
           <div class="summary-progress-bg">
             <div class="summary-progress-fill" style="width: ${pct}%;"></div>
           </div>
         </div>
         <div class="summary-actions">
-          <button class="patrol-quick-clear-btn" onclick="openClearPatrolModal('${currentSheetClass}', ${hotelNum})" title="清除本班查房點名紀錄">
-            🧹 清除本班點名
+          <button class="patrol-quick-clear-btn" onclick="openClearPatrolModal('${currentSheetClass}', ${hotelNum})" title="清除查房點名紀錄">
+            🧹 清除點名
           </button>
-          <button class="patrol-quick-jump-btn" onclick="scrollToPatrolSection()" title="直達下方全校夜間巡房區">
-            ⬇️ 夜間查房系統
+          <button class="patrol-quick-jump-btn" onclick="setSheetViewMode('sheet')" title="切換至實體雙欄座位表">
+            📋 雙欄名冊
           </button>
         </div>
       </div>
 
-      <div class="group-cards-grid">
-        ${classRooms.map(r => {
-          const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId] || { status: "pending", note: "" };
-          const statusClass = itemState.status === "checked" ? "checked" : (itemState.status === "absent" ? "absent" : "");
-          const statusText = itemState.status === "checked" ? "✅ 已查房 (已就寢)" : (itemState.status === "absent" ? "⚠️ 待確認 (缺席/未歸)" : "⏳ 待查房 (點此標記)");
-
-          const col = (hotelNum === 1 ? (room1Map[`${r.gender}_${r.room}`] || room1Map[r.room]) : (room2Map[`${r.gender}_${r.room}`] || room2Map[r.room])) || defaultColor;
-
-          return `
-            <div class="group-card ${statusClass}" style="border-top: 6px solid ${col.border}; background: #ffffff;">
-              <div class="group-card-header" style="background: ${col.bg};">
-                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                  <span style="font-size:1.05rem;">${icon}</span>
-                  <span style="font-size:1.05rem; font-weight:800; color:${col.text};">${r.room} 房</span>
-                  <span class="room-gender-badge ${r.genderClass}">${r.genderBadge}</span>
-                  <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">🏷️ ${col.name}</span>
-                </div>
-                <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
-                  ${r.students.length} 人
-                </span>
-              </div>
-              <div class="group-card-body">
-                <div class="group-student-tags">
-                  ${r.students.map(s => `
-                    <span class="group-student-tag" title="第 ${s.no} 號 ${r.genderText}生">
-                      <span class="gender-dot ${s.genderClass}"></span>
-                      <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
-                      <span>${s.name}</span>
-                    </span>
-                  `).join("")}
-                </div>
-
-                <div style="margin-top:10px;">
-                  <input type="text" class="room-note-field" data-room-id="${r.id}" placeholder="點此輸入查房備註（如：已吃藥）" value="${itemState.note || ''}" onchange="saveRoomNotePage('${r.id}', this.value, ${hotelNum})">
-                </div>
-
-                <div class="room-action-row">
-                  <button class="room-status-btn ${statusClass}" onclick="toggleRoomStatusPage('${r.id}', ${hotelNum})">
-                    ${statusText}
-                  </button>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("")}
-      </div>
+      <!-- 房間卡片內容區塊 -->
+      ${bodyHtml}
     `;
   } catch (err) {
     console.error("renderGroupCardsView error:", err);
   }
+}
+
+function renderSingleRoomCardHtml(r, hotelNum, hotelChecks, defaultColor, icon) {
+  const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId] || { status: "pending", note: "" };
+  const statusClass = itemState.status === "checked" ? "checked" : (itemState.status === "absent" ? "absent" : "");
+  const statusText = itemState.status === "checked" ? "✅ 已查房 (已就寢)" : (itemState.status === "absent" ? "⚠️ 待確認 (缺席/未歸)" : "⏳ 待查房 (點此標記)");
+
+  const { room1Map, room2Map } = getClassColorMaps(r.class);
+  const col = (hotelNum === 1 ? (room1Map[`${r.gender}_${r.room}`] || room1Map[r.room]) : (room2Map[`${r.gender}_${r.room}`] || room2Map[r.room])) || defaultColor;
+
+  return `
+    <div class="group-card ${statusClass}" style="border-top: 6px solid ${col.border}; background: #ffffff;">
+      <div class="group-card-header" style="background: ${col.bg};">
+        <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+          <span style="font-size:1.05rem;">${icon}</span>
+          <span style="font-size:1.05rem; font-weight:800; color:${col.text};">${r.room} 房</span>
+          <span class="room-gender-badge ${r.genderClass}">${r.genderBadge}</span>
+          <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">🏷️ ${col.name}</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:5px;">
+          <span style="font-size:0.75rem; color:#64748b; font-weight:700;">${r.class}班</span>
+          <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
+            ${r.students.length} 人
+          </span>
+        </div>
+      </div>
+      <div class="group-card-body">
+        <div class="group-student-tags">
+          ${r.students.map(s => `
+            <span class="group-student-tag" title="第 ${s.no} 號 ${r.genderText}生">
+              <span class="gender-dot ${s.genderClass}"></span>
+              <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
+              <span>${s.name}</span>
+            </span>
+          `).join("")}
+        </div>
+
+        <div style="margin-top:10px;">
+          <input type="text" class="room-note-field" data-room-id="${r.id}" placeholder="點此輸入查房備註（如：已吃藥）" value="${itemState.note || ''}" onchange="saveRoomNotePage('${r.id}', this.value, ${hotelNum})">
+        </div>
+
+        <div class="room-action-row">
+          <button class="room-status-btn ${statusClass}" onclick="toggleRoomStatusPage('${r.id}', ${hotelNum})">
+            ${statusText}
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderTableCardsHtml(groups, defaultColor) {
+  return groups.map(g => {
+    const col = g.color || defaultColor;
+    return `
+      <div class="group-card" style="border-top: 6px solid ${col.border}; background: #ffffff;">
+        <div class="group-card-header" style="background: ${col.bg};">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:1.1rem;">🍽️</span>
+            <span style="font-size:1rem; font-weight:800; color:${col.text};">${g.key}</span>
+            <span style="font-size:0.75rem; background:${col.badgeBg}; color:${col.text}; border:1px solid ${col.border}; padding:1px 6px; border-radius:4px; font-weight:700;">🏷️ ${col.name}</span>
+          </div>
+          <span style="font-size:0.8rem; font-weight:700; color:${col.text}; background:white; padding:2px 8px; border-radius:12px; border:1px solid ${col.border};">
+            ${g.badgeText}
+          </span>
+        </div>
+        <div class="group-card-body">
+          <div class="group-student-tags">
+            ${g.students.map(s => `
+              <span class="group-student-tag" title="第 ${s.no} 號 ${s.genderText || ''}生">
+                <span class="gender-dot ${s.gender === 'boys' ? 'boy' : 'girl'}"></span>
+                <span style="color:#64748b; font-size:0.75rem;">${s.no}.</span>
+                <span>${maskPersonName(s.name)}</span>
+              </span>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
 window.updateStudentFieldPage = function(className, gender, idx, field, value) {
@@ -4470,101 +4598,15 @@ function getPatrolRoomsForPage(hotelNum, classFilter = activePatrolClassFilter) 
   });
 }
 
-window.switchHotelPage = function(hotelId, syncUpperView = false) {
+window.switchHotelPage = function(hotelId) {
   currentHotelId = hotelId;
-  const t1 = document.getElementById("tabHotel1Page");
-  const t2 = document.getElementById("tabHotel2Page");
-  if (t1) t1.classList.toggle("active", hotelId === 1);
-  if (t2) t2.classList.toggle("active", hotelId === 2);
-  renderPatrolGridPage();
-
-  if (syncUpperView) {
-    if (sheetActiveView === "rooms1" || sheetActiveView === "rooms2") {
-      setSheetViewMode(hotelId === 1 ? "rooms1" : "rooms2");
-    }
-  } else if (sheetActiveView === "rooms1" || sheetActiveView === "rooms2") {
-    renderRoomSheetTablePage();
-  }
+  setSheetViewMode(hotelId === 1 ? "rooms1" : "rooms2");
 };
 
 function renderPatrolGridPage() {
-  const grid = document.getElementById("roomsGridPage");
-  if (!grid) return;
-
-  const allRooms = getPatrolRoomsForPage(currentHotelId, activePatrolClassFilter);
-  const hotelChecks = checkState[currentHotelId] || {};
-
-  const totalCount = allRooms.length;
-  const checkedCount = allRooms.filter(r => {
-    const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId];
-    return itemState && itemState.status === "checked";
-  }).length;
-  const pct = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
-
-  const countEl = document.getElementById("checkedCountPage");
-  const totalEl = document.getElementById("totalRoomsCountPage");
-  const pctEl = document.getElementById("progressPctPage");
-  const barEl = document.getElementById("progressBarFillPage");
-
-  if (countEl) countEl.textContent = checkedCount;
-  if (totalEl) totalEl.textContent = totalCount;
-  if (pctEl) pctEl.textContent = `${pct}%`;
-  if (barEl) barEl.style.width = `${pct}%`;
-
-  if (allRooms.length === 0) {
-    grid.innerHTML = `
-      <div style="grid-column:1 / -1; text-align:center; padding:30px; color:#94a3b8; font-size:0.9rem;">
-        查無符合條件的房間資料
-      </div>
-    `;
-    return;
+  if (sheetActiveView === "rooms1" || sheetActiveView === "rooms2") {
+    renderRoomSheetTablePage();
   }
-
-  grid.innerHTML = allRooms.map(r => {
-    const itemState = hotelChecks[r.id] || hotelChecks[r.legacyId] || { status: "pending", note: "" };
-    const statusClass = itemState.status === "checked" ? "checked" : (itemState.status === "absent" ? "absent" : "");
-    const statusText = itemState.status === "checked" ? "✅ 已查房 (已就寢)" : (itemState.status === "absent" ? "⚠️ 待確認 (缺席/未歸)" : "⏳ 待查房 (點此標記)");
-
-    // 取得該班級與房間的專屬米色色塊 (支援男女獨立 key)
-    const { room1Map, room2Map } = getClassColorMaps(r.class);
-    const roomCol = (currentHotelId === 1 ? (room1Map[`${r.gender}_${r.room}`] || room1Map[r.room]) : (room2Map[`${r.gender}_${r.room}`] || room2Map[r.room])) || BEIGE_PALETTE[0];
-
-    return `
-      <div class="room-card ${statusClass}" id="card_${r.id}" style="border-top: 5px solid ${roomCol.border};">
-        <div class="room-card-header">
-          <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-            <span class="room-num-badge" style="background:${roomCol.badgeBg}; border:1px solid ${roomCol.border}; color:${roomCol.text}; padding:2px 8px; border-radius:6px;">
-              ${r.room} 房
-            </span>
-            <span class="room-gender-badge ${r.genderClass}">${r.genderBadge}</span>
-            <span style="font-size:0.75rem; color:#64748b;">(${r.students.length}人)</span>
-            <span style="background:${roomCol.bg}; border:1px solid ${roomCol.border}; color:${roomCol.text}; font-size:0.7rem; padding:1px 5px; border-radius:4px; font-weight:700;">
-              🏷️ ${roomCol.name}
-            </span>
-          </div>
-          <span class="room-class-tag">${r.class} 班</span>
-        </div>
-
-        <div class="room-students-list">
-          ${r.students.map(s => `
-            <span class="student-pill" title="第 ${s.no} 號 ${r.genderText}生">
-              <span class="gender-dot ${s.genderClass}"></span>
-              <span style="font-size:0.72rem; color:#64748b; margin-right:2px;">${s.no}.</span>
-              <span>${s.name}</span>
-            </span>
-          `).join("")}
-        </div>
-
-        <input type="text" class="room-note-field" data-room-id="${r.id}" placeholder="點此輸入查房備註（如：已吃藥）" value="${itemState.note || ""}" onchange="saveRoomNotePage('${r.id}', this.value, ${currentHotelId})">
-
-        <div class="room-action-row">
-          <button class="room-status-btn ${statusClass}" onclick="toggleRoomStatusPage('${r.id}', ${currentHotelId})">
-            ${statusText}
-          </button>
-        </div>
-      </div>
-    `;
-  }).join("");
 }
 
 window.toggleRoomStatusPage = function(roomId, hotelId = currentHotelId) {
