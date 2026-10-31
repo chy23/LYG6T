@@ -942,3 +942,38 @@ window.gradeBookQuiz3 = function() {
   banner.style.display = "block";
   banner.textContent = `🎉 麗寶樂園學習單測驗結果：${score} / ${total} 題正確！`;
 };
+
+/* --------------------------------------------------------------------------
+   麗寶樂園探索世界官方地圖全螢幕燈箱互動
+   -------------------------------------------------------------------------- */
+window.openParkMapModal = function(src = "assets/images/real/lihpao_park_map.jpg") {
+  const modal = document.getElementById("mapModal");
+  const img = document.getElementById("mapModalImg");
+  if (modal) {
+    if (img) img.src = src;
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    if (window.AppleFeedback) window.AppleFeedback.light();
+  }
+};
+
+window.closeParkMapModal = function(e) {
+  if (e && e.target && e.target.id !== "mapModal" && !e.target.closest("#btnCloseMapModal")) {
+    return;
+  }
+  const modal = document.getElementById("mapModal");
+  if (modal) {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+    if (window.AppleFeedback) window.AppleFeedback.light();
+  }
+};
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const modal = document.getElementById("mapModal");
+    if (modal && modal.classList.contains("open")) {
+      window.closeParkMapModal();
+    }
+  }
+});

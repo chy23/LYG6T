@@ -24,7 +24,7 @@
   <meta name="google" content="notranslate">
   <title>新北市林口區麗園國小 115學年度六年級戶外教育參觀活動 電子手冊</title>
   <meta name="description" content="新北市林口區麗園國民小學 115學年度六年級戶外教育參觀活動電子手冊書，手機最佳化閱讀體驗，完整收錄三天兩夜行程、真實景點照片輔助、行李打包清單、線上學習單與緊急聯絡資訊。">
-  <link rel="stylesheet" href="css/style.css?v=20261031_2250">
+  <link rel="stylesheet" href="css/style.css?v=20261031_2305">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 </head>
 <body>
@@ -107,9 +107,28 @@
     <div class="toc-list" id="tocList"></div>
   </aside>
 
+  <!-- Fullscreen Park Map Modal (麗寶探索世界官方全區地圖全螢幕檢視器) -->
+  <div class="map-modal-backdrop" id="mapModal" role="dialog" aria-label="麗寶樂園探索世界官方地圖全螢幕檢視" onclick="closeParkMapModal(event)">
+    <div class="map-modal-topbar" onclick="event.stopPropagation()">
+      <div style="display:flex; align-items:center; gap:8px; min-width:0;">
+        <span style="font-size:1.2rem;">🗺️</span>
+        <span style="font-weight:800; font-size:0.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">麗寶樂園探索世界 · 官方全區導覽地圖</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+        <a href="assets/docs/lihpao_discover_map.pdf" download="麗寶樂園探索世界全區地圖.pdf" class="park-map-btn" style="background:rgba(255,255,255,0.18); color:white; border-color:rgba(255,255,255,0.35); padding:4px 8px;" target="_blank">
+          <span>📥 下載 PDF</span>
+        </a>
+        <button class="header-btn" id="btnCloseMapModal" onclick="closeParkMapModal()" style="padding:4px 10px; font-weight:800;" aria-label="關閉全螢幕地圖">✕</button>
+      </div>
+    </div>
+    <div class="map-modal-content">
+      <img id="mapModalImg" class="map-modal-img notranslate" translate="no" src="assets/images/real/lihpao_park_map.jpg" alt="麗寶樂園探索世界官方全區地圖高清版" onclick="event.stopPropagation()">
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="js/quiz-data.js?v=20261031_2250"></script>
-  <script src="js/pages-content.js?v=20261031_2250"></script>
-  <script src="js/book-reader.js?v=20261031_2250"></script>
+  <script src="js/quiz-data.js?v=20261031_2305"></script>
+  <script src="js/pages-content.js?v=20261031_2305"></script>
+  <script src="js/book-reader.js?v=20261031_2305"></script>
 </body>
 </html>

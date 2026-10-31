@@ -582,6 +582,40 @@ const pagesContent = [
         </div>
       </div>
 
+      <!-- 麗寶樂園探索世界官方全區導覽地圖 (官方最新高解析版) -->
+      <div class="park-map-card">
+        <div class="park-map-header">
+          <div class="park-map-title">
+            <span style="font-size:1.15rem;">🗺️</span>
+            <span>麗寶樂園探索世界 · 官方全區導覽地圖</span>
+          </div>
+          <div class="park-map-actions">
+            <button type="button" class="park-map-btn primary" onclick="openParkMapModal('assets/images/real/lihpao_park_map.jpg')">
+              <span>🔍 點擊放大地圖</span>
+            </button>
+            <a href="assets/docs/lihpao_discover_map.pdf" download="麗寶樂園探索世界全區地圖.pdf" class="park-map-btn" target="_blank" title="下載官方 PDF 向量地圖">
+              <span>📥 下載 PDF</span>
+            </a>
+            <a href="https://www.lihpaoresort.com/LihpaolandApp/parkmap/DownloadMapByDiscover" target="_blank" rel="noopener noreferrer" class="park-map-btn" title="前往麗寶樂園官網原檔">
+              <span>🌐 官網原檔</span>
+            </a>
+          </div>
+        </div>
+        <div class="park-map-preview-wrap" onclick="openParkMapModal('assets/images/real/lihpao_park_map.jpg')" title="點擊開啟全螢幕高解析度地圖 (支援雙指縮放)">
+          <picture>
+            <source srcset="assets/images/real/lihpao_park_map.webp" type="image/webp">
+            <img src="assets/images/real/lihpao_park_map.jpg" alt="麗寶樂園探索世界官方全區導覽地圖（涵蓋冒險天堂、魔法森林、POPA歡樂王國三大分區設施）" class="park-map-preview-img notranslate" translate="no" loading="lazy">
+          </picture>
+          <div class="park-map-zoom-hint">
+            <span>🔍 點此開啟全螢幕高解析地圖</span>
+          </div>
+        </div>
+        <div class="park-map-footer-guide">
+          <span>📍 探索世界三大主題分區：<b>⚡ 冒險天堂</b> ｜ <b>🌲 魔法森林</b> ｜ <b>👑 POPA歡樂王國</b></span>
+          <span style="color:#ea580c; font-weight:700;">★ 官方地圖來源：lihpaoresort.com</span>
+        </div>
+      </div>
+
       <div class="book-photo-card">
         <img src="assets/images/lihpao_handbook_overview.jpg" alt="麗寶樂園手冊照片" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
@@ -598,6 +632,22 @@ const pagesContent = [
     category: "主題樂園",
     render: () => `
       <div class="page-title">探索世界三大分區設施</div>
+
+      <!-- 麗寶樂園探索世界官方園區地圖對照條 -->
+      <div style="background:#fff7ed; border:1px solid #fdba74; border-radius:8px; padding:8px 12px; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:6px; font-weight:800; color:#9a3412; font-size:0.86rem;">
+          <span>🗺️</span>
+          <span>探索世界全區設施位置對照地圖</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <button type="button" class="park-map-btn primary" onclick="openParkMapModal('assets/images/real/lihpao_park_map.jpg')" style="font-size:0.75rem; padding:4px 8px;">
+            <span>🔍 放大查看地圖</span>
+          </button>
+          <a href="assets/docs/lihpao_discover_map.pdf" download="麗寶樂園探索世界全區地圖.pdf" class="park-map-btn" style="font-size:0.75rem; padding:4px 8px;" target="_blank">
+            <span>📥 PDF</span>
+          </a>
+        </div>
+      </div>
 
       <!-- 網路精選真實照片：搶救地心斷軌雲霄飛車 -->
       <div class="book-photo-card">
