@@ -355,6 +355,11 @@ body {
 /* 頁面內容階層 */
 .book-page-body {
   flex: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .page-title {
@@ -531,18 +536,20 @@ body {
   left: 0;
   right: 0;
   z-index: 900;
-  background: rgba(15, 23, 42, 0.85) !important;
+  background: rgba(15, 23, 42, 0.88) !important;
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-top: 1px solid rgba(255, 255, 255, 0.18) !important; /* Catch edge */
-  padding: 8px 10px;
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
+  width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
   box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
 }
 
 @media (min-width: 1024px) {
@@ -564,19 +571,22 @@ body {
   color: white;
   border: none;
   border-radius: var(--radius-full);
-  padding: 12px 18px;
-  font-size: 0.92rem;
+  padding: 8px 12px;
+  font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
   transition: all 0.2s ease;
-  flex: 1;
-  max-width: 130px;
-  height: 44px;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  min-width: 78px;
+  max-width: 110px;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .nav-arrow-btn:active {
@@ -594,16 +604,22 @@ body {
   background: #1e293b;
   color: #f8fafc;
   border: 1px solid #475569;
-  padding: 10px 14px;
+  padding: 6px 8px;
   border-radius: var(--radius-full);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   outline: none;
   cursor: pointer;
-  flex: 2;
-  height: 44px;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 40px;
   text-align: center;
-  max-width: 280px;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  box-sizing: border-box;
 }
 
 /* ==================== 章節目錄抽屜 ==================== */
@@ -2374,18 +2390,57 @@ body {
    全站手機解析度自適應防破版防超出版面 (Universal Responsive Auto-Fit)
    ========================================================================== */
 @media (max-width: 600px) {
+  /* 根舞台與書頁邊界精簡化：消弭多層 padding 疊加，釋出超過 50px 橫向視野 */
   .book-stage {
-    padding: 6px 4px 85px;
+    padding: 4px 4px 75px !important;
   }
   .book-page {
-    padding: 14px 8px 20px;
+    padding: 10px 4px 16px !important;
   }
   .sheet-container {
-    padding: 8px 6px;
+    padding: 4px 2px !important;
+    border: none !important;
   }
   .class-patrol-section {
-    padding: 8px 6px;
+    padding: 6px 4px !important;
   }
+
+  /* 頂部 Header 緊湊光學排版：保證標題「六年級戶外教育」完整可見，不再被「六...」截斷 */
+  .book-header {
+    padding: 6px 8px !important;
+  }
+  .header-inner {
+    gap: 4px !important;
+  }
+  .book-title-group {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+  .book-main-title {
+    font-size: 0.88rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .school-tag {
+    padding: 2px 5px !important;
+    font-size: 0.72rem !important;
+  }
+  .header-controls {
+    gap: 3px !important;
+    flex-shrink: 0 !important;
+  }
+  .header-btn {
+    padding: 5px 7px !important;
+    font-size: 0.74rem !important;
+    gap: 3px !important;
+  }
+  /* 手機窄螢幕下暫時隱藏 A-/A+ 按鈕，空間優先保留給標題與核心導覽功能 */
+  .font-size-btn {
+    display: none !important;
+  }
+
+  /* 表格工具列堆疊 */
   .sheet-unified-toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -2409,10 +2464,12 @@ body {
     width: 100%;
     justify-content: center;
   }
+
+  /* 查房進度與操作條自適應 */
   .room-patrol-summary-bar {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 6px;
     padding: 8px 10px;
   }
   .room-patrol-summary-bar .summary-left {
@@ -2420,21 +2477,65 @@ body {
     width: 100%;
   }
   .room-patrol-summary-bar .summary-actions {
-    justify-content: flex-end;
+    display: flex;
+    gap: 6px;
     width: 100%;
   }
+  .patrol-quick-clear-btn,
+  .patrol-quick-jump-btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    padding: 6px 4px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* 底部固定導航列：嚴格防止按鈕直向折字或被擠出螢幕外 */
   .book-nav-bar {
-    padding: 6px 8px;
-    gap: 6px;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+    gap: 6px !important;
   }
   .nav-arrow-btn {
-    padding: 6px 10px;
-    font-size: 0.76rem;
+    flex: 0 0 auto !important;
+    min-width: 74px !important;
+    max-width: 86px !important;
+    padding: 6px 6px !important;
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+    height: 38px !important;
   }
   .page-jump-select {
-    font-size: 0.76rem;
-    padding: 5px 6px;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    font-size: 0.78rem !important;
+    padding: 4px 6px !important;
+    height: 38px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
   }
+
+  /* 房間卡片與分組標籤 */
+  .group-card {
+    margin-bottom: 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .group-card-header {
+    padding: 6px 8px !important;
+    font-size: 0.85rem !important;
+  }
+  .group-card-body {
+    padding: 8px 6px !important;
+  }
+  .group-student-tag {
+    font-size: 0.76rem !important;
+    padding: 2px 5px !important;
+  }
+
   .teacher-notice-banner {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -2446,17 +2547,28 @@ body {
   }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 480px) {
   .unified-hotel-bar {
-    gap: 4px;
-    padding: 3px;
+    gap: 3px !important;
+    padding: 2px !important;
   }
   .unified-hotel-bar .hotel-tab-btn {
-    font-size: 0.76rem;
-    padding: 6px 2px;
+    font-size: 0.78rem !important;
+    padding: 7px 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
   .hotel-tab-suffix {
     display: none;
+  }
+  .nav-arrow-btn {
+    min-width: 68px !important;
+    padding: 5px 4px !important;
+    font-size: 0.74rem !important;
+  }
+  .page-jump-select {
+    font-size: 0.74rem !important;
   }
 }
 

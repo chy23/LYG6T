@@ -242,12 +242,12 @@ function updateNavControls(activePage, rightPage) {
   const jumpSelect = document.getElementById("pageJumpSelect");
 
   if (prevBtn) {
-    prevBtn.innerHTML = "<span>◀ 上一頁</span>";
+    prevBtn.innerHTML = "<span style=\"white-space:nowrap;\">◀ 上一頁</span>";
     prevBtn.onclick = null;
     prevBtn.disabled = activePage <= 1;
   }
   if (nextBtn) {
-    nextBtn.innerHTML = "<span>下一頁 ▶</span>";
+    nextBtn.innerHTML = "<span style=\"white-space:nowrap;\">下一頁 ▶</span>";
     nextBtn.onclick = null;
     nextBtn.disabled = isMobile ? (activePage >= pagesContent.length) : (rightPage >= pagesContent.length);
   }
@@ -332,13 +332,15 @@ function initBookNavigation() {
     });
   }
 
-  // Populate Dropdown
+  // Populate Dropdown (手機端智慧精簡長標題，防止撐爆 select 最小寬度)
   if (jumpSelect) {
     jumpSelect.innerHTML = "";
     pagesContent.forEach(p => {
       const opt = document.createElement("option");
       opt.value = p.num;
-      opt.textContent = `第 ${p.num} 頁：${p.title}`;
+      const displayTitle = (window.innerWidth <= 600 && p.title.length > 9) ? (p.title.substring(0, 8) + "…") : p.title;
+      opt.textContent = `第 ${p.num} 頁 · ${displayTitle}`;
+      opt.title = `第 ${p.num} 頁：${p.title}`;
       jumpSelect.appendChild(opt);
     });
 

@@ -452,23 +452,38 @@ const pagesContent = [
     render: () => `
       <div class="page-title">第二天行程景點導覽</div>
 
-      <!-- 第二天上午行程精選景點：薰衣草森林九九峰園區 -->
-      <div style="background:#ecfdf5; border-left:4px solid #10b981; border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:14px;">
+      <!-- 第二天上午行程精選景點：薰衣草森林・南投九九峰園區（Hi & High 氦氣球樂園） -->
+      <div style="background:#f5f3ff; border-left:4px solid #8b5cf6; border-radius:0 10px 10px 0; padding:14px 16px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:1.1rem;">🌿</span>
-          <b style="color:#065f46; font-size:1.02rem;">第二天上午：薰衣草森林九九峰園區</b>
+          <span style="font-size:1.2rem;">🎈</span>
+          <b style="color:#6d28d9; font-size:1.05rem;">第二天上午：薰衣草森林・南投九九峰園區（全台唯一觀光氦氣球樂園）</b>
         </div>
-        <div style="font-size:0.92rem; color:#334155; margin-top:6px; line-height:1.7;">
-          告別南投埔里後，上午造訪坐落於南投草屯九九峰山腳下的<b>「薰衣草森林南投九九峰園區」</b>。園區依傍九九峰秀麗群山，規劃有豐富的香草花園、森林散步步道、香氛美學選物與自然綠意空間。讓師生們漫步在清新的山林芬多精與微風花香中，盡情享受大自然的放鬆與療癒之美。
+        <div style="font-size:0.92rem; color:#334155; margin-top:8px; line-height:1.75;">
+          告別南投埔里後，上午造訪全台矚目的全新地標<b>「薰衣草森林・南投九九峰園區」</b>（南投縣草屯鎮平林里藝術路258號）。園區坐落於巍峨秀麗的九九峰群山腳下，結合森林生態、當代美學與極致空中飛行體驗：
+          <ul style="margin:6px 0 0 18px; padding:0; line-height:1.7;">
+            <li><b>🎈 Hi & High 飛翔提案所：</b> 引進與巴黎奧運同款的法國 Aero30NG 繫留式觀光氦氣球，帶領師生垂直升空 168 至 300 公尺高空，以 360 度無死角上帝視角俯瞰九九峰鋸齒火炎山礫岩稜線與烏溪山水全貌。</li>
+            <li><b>🌿 薰衣草純露迎賓洗塵：</b> 入園時以普羅旺斯薰衣草純露微霧洗滌塵囂，展開香氛五感療癒旅程。</li>
+            <li><b>🌲 15度森林草原與原生林步道：</b> 順應丘陵地貌完整保留 300 株原生喬木，漫步於綠意高空棧道與共學草皮。</li>
+            <li><b>☕ 香草生活美學與當代藝術：</b> 匯聚森彥咖啡（MORIHICO.）海外首店、Healing & Something 藝文展館與森林風土餐桌。</li>
+          </ul>
         </div>
       </div>
 
-      <!-- 網路精選真實照片：南投草屯九九峰山巒與雙十吊橋全景 -->
-      <div class="book-photo-card" style="margin-bottom:18px;">
-        <img src="assets/images/real/jiujiufeng.jpg" alt="南投草屯九九峰自然山巒風光" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
+      <!-- 官方真實照片：薰衣草森林九九峰園區 Hi & High 觀光氦氣球昇空俯瞰景觀 -->
+      <div class="book-photo-card" style="margin-bottom:14px;">
+        <img src="assets/images/real/jiujiufeng.jpg" alt="薰衣草森林南投九九峰園區與觀光氦氣球" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
         <div class="book-photo-caption">
-          <span>⛰️ 南投草屯九九峰秀麗山巒與雙十吊橋壯麗全景</span>
-          <span class="photo-source-badge">南投自然生態實景</span>
+          <span>🎈 薰衣草森林・南投九九峰園區：全台唯一 Aero30NG 觀光氦氣球與九九峰山稜</span>
+          <span class="photo-source-badge">官方實景 lavenderforest-nantou99.com.tw</span>
+        </div>
+      </div>
+
+      <!-- 官方真實照片：15度森林步道與園區綠意 -->
+      <div class="book-photo-card" style="margin-bottom:18px;">
+        <img src="assets/images/real/jiujiufeng_forest.jpg" alt="薰衣草森林九九峰園區森林草原與木棧步道" loading="eager" decoding="async" translate="no" class="notranslate" onerror="handleImgError(this)">
+        <div class="book-photo-caption">
+          <span>🌿 順應地貌的原生林木棧道與香草生活美學空間</span>
+          <span class="photo-source-badge">官方實景 lavenderforest-nantou99.com.tw</span>
         </div>
       </div>
 

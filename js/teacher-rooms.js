@@ -3357,7 +3357,7 @@ function sanitizeSheetData(data) {
 }
 
 // 資料版本控管：確保更新官方資料、導師去識別化與下拉漢堡選單時，使用者端自動升級至最新版本
-const OFFICIAL_DATA_VERSION = "20261026_v6_responsive_fit";
+const OFFICIAL_DATA_VERSION = "20261031_v7_mobile_optical_hig";
 
 function getInitialSheetData() {
   const savedVersion = localStorage.getItem("ly_room_table_version");
@@ -4402,10 +4402,10 @@ function renderGroupCardsView(container, cData) {
       <!-- 頂部飯店一鍵切換標籤列 (手機單手直覺點選，免開下拉選單) -->
       <div class="unified-hotel-bar">
         <button class="hotel-tab-btn ${hotelNum === 1 ? 'active' : ''}" onclick="setSheetViewMode('rooms1')">
-          🏨 第 1 晚：今埔里<span class="hotel-tab-suffix">渡假大酒店</span>
+          🏨 第 1 晚 · 今埔里<span class="hotel-tab-suffix">渡假大酒店</span>
         </button>
         <button class="hotel-tab-btn ${hotelNum === 2 ? 'active' : ''}" onclick="setSheetViewMode('rooms2')">
-          🏰 第 2 晚：麗寶福容<span class="hotel-tab-suffix">大飯店</span>
+          🏰 第 2 晚 · 麗寶福容<span class="hotel-tab-suffix">大飯店</span>
         </button>
       </div>
 
