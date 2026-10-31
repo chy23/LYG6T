@@ -38,7 +38,8 @@
 
   /* Fluid Font Scale */
   --base-font-size: 16px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", sans-serif;
 }
 
 *, *::before, *::after {
@@ -86,9 +87,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15, 23, 42, 0.82) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   padding: 8px 12px;
   color: white;
@@ -96,6 +97,7 @@ body {
   max-width: 100vw;
   box-sizing: border-box;
   overflow-x: hidden;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.28);
 }
 
 .header-inner {
@@ -529,10 +531,10 @@ body {
   left: 0;
   right: 0;
   z-index: 900;
-  background: rgba(15, 23, 42, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.18) !important; /* Catch edge */
   padding: 8px 10px;
   display: flex;
   align-items: center;
@@ -540,7 +542,7 @@ body {
   gap: 8px;
   max-width: 100vw;
   box-sizing: border-box;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.32);
 }
 
 @media (min-width: 1024px) {
@@ -2467,6 +2469,146 @@ body {
     font-size: 16px !important;
   }
 }
+
+/* ==========================================================================
+   Apple HIG & Apple Design 系統級流體動效、材質與光學排版落地規範
+   ========================================================================== */
+
+/* 1. 光學排版 (Optical Typography & Tabular Numerals) */
+.sheet-main-heading,
+.page-title,
+.book-main-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.22;
+}
+
+.room-gender-badge,
+.school-tag,
+.privacy-compact-badge,
+.summary-stat,
+.font-size-btn,
+.room-num-badge {
+  letter-spacing: 0.015em;
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 2. Apple 物理按壓反饋：瞬間響應 (80-120ms ease-out)，釋放平滑回彈 */
+button,
+.header-btn,
+.nav-arrow-btn,
+.view-pill-btn,
+.hotel-tab-btn,
+.room-status-btn,
+.patrol-quick-clear-btn,
+.empty-rows-toggle-btn,
+.sheet-drawer-toggle-btn,
+.color-legend-pill,
+.toc-item,
+.switch-to-patrol-btn,
+.clear-highlight-btn {
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s ease, box-shadow 0.15s ease !important;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:active,
+.header-btn:active,
+.nav-arrow-btn:active,
+.view-pill-btn:active,
+.hotel-tab-btn:active,
+.room-status-btn:active,
+.patrol-quick-clear-btn:active,
+.empty-rows-toggle-btn:active,
+.sheet-drawer-toggle-btn:active,
+.color-legend-pill:active,
+.toc-item:active,
+.switch-to-patrol-btn:active,
+.clear-highlight-btn:active {
+  transform: scale(0.96) translateY(0.5px) !important;
+}
+
+/* 3. Apple HIG 44×44 pt 隱形觸控熱區擴展 (Touch Hit Padding) */
+.header-btn,
+.view-pill-btn,
+.hotel-tab-btn,
+.patrol-quick-clear-btn,
+.switch-to-patrol-btn,
+.sheet-drawer-close-btn,
+.patrol-modal-close,
+.empty-rows-toggle-btn {
+  position: relative;
+}
+
+.header-btn::before,
+.view-pill-btn::before,
+.hotel-tab-btn::before,
+.patrol-quick-clear-btn::before,
+.switch-to-patrol-btn::before,
+.sheet-drawer-close-btn::before,
+.patrol-modal-close::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 44px;
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* 4. 支援系統「減少動態效果 (Reduce Motion)」偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .class-patrol-section.flash-highlight {
+    animation: none !important;
+    box-shadow: 0 0 0 3px #facc15 !important;
+  }
+  .sheet-drawer,
+  .toc-drawer {
+    transition: none !important;
+  }
+}
+
+/* 5. 支援系統「減少透明度 (Reduce Transparency)」偏好 */
+@media (prefers-reduced-transparency: reduce) {
+  .book-header,
+  .book-nav-bar,
+  .sheet-unified-toolbar,
+  .room-modal-backdrop,
+  .toc-backdrop,
+  .sheet-drawer-backdrop {
+    background: #0f172a !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* 6. 支援系統「增強對比 (Increase Contrast)」偏好 */
+@media (prefers-contrast: more) {
+  .header-btn,
+  .view-pill-btn,
+  .hotel-tab-btn,
+  .room-card,
+  .group-card {
+    border-width: 2px !important;
+    border-color: #0f172a !important;
+  }
+  .header-btn {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+  }
+}
+
 
 
 

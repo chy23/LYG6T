@@ -4050,6 +4050,9 @@ window.setSheetColorMode = function(mode) {
 };
 
 window.setSheetViewMode = function(vMode) {
+  if (sheetActiveView !== vMode && window.AppleFeedback) {
+    window.AppleFeedback.selection();
+  }
   sheetActiveView = vMode;
   const select = document.getElementById("sheetViewSelect");
   if (select) select.value = vMode;
@@ -4630,6 +4633,12 @@ window.toggleRoomStatusPage = function(roomId, hotelId = currentHotelId) {
   if (current.status === "checked") nextStatus = "absent";
   else if (current.status === "absent") nextStatus = "pending";
 
+  if (window.AppleFeedback) {
+    if (nextStatus === "checked") window.AppleFeedback.success();
+    else if (nextStatus === "absent") window.AppleFeedback.warning();
+    else window.AppleFeedback.lightTap();
+  }
+
   checkState[hotelId][roomId] = {
     ...current,
     status: nextStatus
@@ -4701,6 +4710,9 @@ window.closeClearPatrolModal = closeClearPatrolModal;
 
 function executeClearPatrol(scope, targetClass, hotelId = currentHotelId) {
   closeClearPatrolModal();
+  if (window.AppleFeedback) {
+    window.AppleFeedback.warning();
+  }
 
   if (!checkState[hotelId]) checkState[hotelId] = {};
   const hotelName = (hotelInfo[hotelId] && hotelInfo[hotelId].name) || `第 ${hotelId} 晚`;

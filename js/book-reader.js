@@ -21,6 +21,37 @@ let isContinuousMode = localStorage.getItem("ly_reading_mode") === "continuous";
 let fontScale = 1.0;
 let scrollSpyObserver = null;
 
+// ============================================================================
+// Apple HIG & Design 多感官觸覺反饋系統 (Audio-Haptic & Multimodal Feedback)
+// ============================================================================
+window.AppleFeedback = {
+  lightTap() {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(8); } catch(e){}
+    }
+  },
+  mediumTap() {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(12); } catch(e){}
+    }
+  },
+  success() {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(16); } catch(e){}
+    }
+  },
+  warning() {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate([20, 50, 20]); } catch(e){}
+    }
+  },
+  selection() {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
+      try { navigator.vibrate(6); } catch(e){}
+    }
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   // Easter egg console log
   console.log(
@@ -331,6 +362,9 @@ function initBookNavigation() {
 }
 
 function goToPage(pageNum) {
+  if (currentPage !== pageNum && window.AppleFeedback) {
+    window.AppleFeedback.selection();
+  }
   currentPage = pageNum;
   localStorage.setItem("ly_handbook_page", currentPage);
   const teacherBanner = document.getElementById("teacherPageNoticeBanner");
