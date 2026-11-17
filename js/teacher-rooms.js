@@ -75,84 +75,84 @@ const officialSheetData = {
         "no": 1,
         "name": "潘Ｏ達",
         "room1": "2005",
-        "room2": "B",
+        "room2": "230",
         "table": "2"
       },
       {
         "no": 2,
         "name": "曾Ｏ群",
         "room1": "2006",
-        "room2": "C",
+        "room2": "232",
         "table": "2"
       },
       {
         "no": 3,
         "name": "謝Ｏ逸",
         "room1": "2003",
-        "room2": "A",
+        "room2": "228",
         "table": "2"
       },
       {
         "no": 4,
         "name": "胡Ｏ仁",
         "room1": "2005",
-        "room2": "B",
+        "room2": "230",
         "table": "2"
       },
       {
         "no": 5,
         "name": "陳Ｏ旭",
         "room1": "2005",
-        "room2": "B",
+        "room2": "230",
         "table": "3"
       },
       {
         "no": 6,
         "name": "陳Ｏ安",
         "room1": "2003",
-        "room2": "A",
+        "room2": "228",
         "table": "2"
       },
       {
         "no": 7,
         "name": "林Ｏ宇",
         "room1": "2003",
-        "room2": "A",
+        "room2": "228",
         "table": "3"
       },
       {
         "no": 8,
         "name": "吳Ｏ揚",
         "room1": "2006",
-        "room2": "C",
+        "room2": "232",
         "table": "2"
       },
       {
         "no": 9,
         "name": "蘇Ｏ朋",
         "room1": "2003",
-        "room2": "A",
+        "room2": "228",
         "table": "2"
       },
       {
         "no": 10,
         "name": "陳Ｏ杰",
         "room1": "2005",
-        "room2": "B",
+        "room2": "230",
         "table": "2"
       },
       {
         "no": 11,
         "name": "蕭Ｏ方",
         "room1": "2006",
-        "room2": "C",
+        "room2": "232",
         "table": "2"
       },
       {
         "no": 12,
         "name": "陳Ｏ恩",
         "room1": "2006",
-        "room2": "C",
+        "room2": "232",
         "table": "2"
       },
       {
@@ -252,70 +252,70 @@ const officialSheetData = {
         "no": 1,
         "name": "賴Ｏ孜",
         "room1": "5018",
-        "room2": "1",
+        "room2": "266",
         "table": "1"
       },
       {
         "no": 2,
         "name": "王Ｏ芮",
         "room1": "5018",
-        "room2": "1",
+        "room2": "266",
         "table": "1"
       },
       {
         "no": 3,
         "name": "蒲Ｏ宇",
         "room1": "5017",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
         "no": 4,
         "name": "李Ｏ穎",
         "room1": "5018",
-        "room2": "1",
+        "room2": "266",
         "table": "1"
       },
       {
         "no": 5,
         "name": "王Ｏ羽",
         "room1": "5017",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
         "no": 6,
         "name": "廖Ｏ墨",
         "room1": "5017",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
         "no": 7,
         "name": "周Ｏ霏",
         "room1": "5018",
-        "room2": "1",
+        "room2": "266",
         "table": "1"
       },
       {
         "no": 8,
         "name": "蘇Ｏ葳",
         "room1": "5021",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
         "no": 9,
         "name": "蘇Ｏ蓁",
         "room1": "5021",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
         "no": 10,
         "name": "黃Ｏ頤",
         "room1": "5021",
-        "room2": "2",
+        "room2": "261",
         "table": "1"
       },
       {
@@ -434,105 +434,105 @@ const officialSheetData = {
         "no": 1,
         "name": "吳Ｏ安",
         "room1": "2009",
-        "room2": "A",
+        "room2": "202",
         "table": "5"
       },
       {
         "no": 2,
         "name": "楊Ｏ賢",
         "room1": "2012",
-        "room2": "A",
+        "room2": "202",
         "table": "5"
       },
       {
         "no": 3,
         "name": "王Ｏ程",
         "room1": "2012",
-        "room2": "A",
+        "room2": "202",
         "table": "5"
       },
       {
         "no": 4,
-        "name": "賴Ｏ栯",
+        "name": "賴Ｏ楨",
         "room1": "2010",
-        "room2": "B",
+        "room2": "201",
         "table": "4"
       },
       {
         "no": 5,
         "name": "葉Ｏ衡",
         "room1": "2010",
-        "room2": "B",
+        "room2": "201",
         "table": "4"
       },
       {
         "no": 6,
-        "name": "蔡Ｏ鐿",
+        "name": "蔡Ｏ驄",
         "room1": "2010",
-        "room2": "B",
+        "room2": "201",
         "table": "4"
       },
       {
         "no": 7,
         "name": "楊Ｏ樂",
         "room1": "2010",
-        "room2": "B",
+        "room2": "201",
         "table": "4"
       },
       {
         "no": 8,
         "name": "林Ｏ皓",
         "room1": "2011",
-        "room2": "C",
+        "room2": "203",
         "table": "4"
       },
       {
         "no": 9,
         "name": "洪Ｏ呈",
         "room1": "2012",
-        "room2": "C",
+        "room2": "203",
         "table": "5"
       },
       {
         "no": 10,
         "name": "曾Ｏ祥",
         "room1": "2009",
-        "room2": "C",
+        "room2": "203",
         "table": "4"
       },
       {
         "no": 11,
-        "name": "楊Ｏ筳",
+        "name": "楊Ｏ筵",
         "room1": "2011",
-        "room2": "C",
+        "room2": "203",
         "table": "4"
       },
       {
         "no": 12,
         "name": "陳Ｏ漢",
         "room1": "2011",
-        "room2": "C",
+        "room2": "203",
         "table": "4"
       },
       {
         "no": 13,
         "name": "王Ｏ巽",
         "room1": "2011",
-        "room2": "C",
+        "room2": "203",
         "table": "4"
       },
       {
         "no": 14,
         "name": "邱Ｏ賢",
         "room1": "2009",
-        "room2": "B",
+        "room2": "201",
         "table": "4"
       },
       {
         "no": 15,
         "name": "陳Ｏ成",
         "room1": "2012",
-        "room2": "A",
+        "room2": "202",
         "table": "5"
       },
       {
@@ -611,49 +611,49 @@ const officialSheetData = {
         "no": 1,
         "name": "盧Ｏ涵",
         "room1": "5019",
-        "room2": "1",
+        "room2": "258",
         "table": "5"
       },
       {
         "no": 2,
         "name": "葉Ｏ安",
         "room1": "5020",
-        "room2": "2",
+        "room2": "260",
         "table": "3"
       },
       {
         "no": 3,
         "name": "葉Ｏ希",
         "room1": "5020",
-        "room2": "2",
+        "room2": "260",
         "table": "3"
       },
       {
         "no": 4,
         "name": "楊Ｏ珈",
         "room1": "5019",
-        "room2": "1",
+        "room2": "258",
         "table": "5"
       },
       {
         "no": 5,
         "name": "林Ｏ晴",
         "room1": "5019",
-        "room2": "1",
+        "room2": "258",
         "table": "5"
       },
       {
         "no": 6,
         "name": "范Ｏ菲",
         "room1": "5020",
-        "room2": "2",
+        "room2": "260",
         "table": "5"
       },
       {
         "no": 7,
         "name": "張Ｏ昕",
         "room1": "5020",
-        "room2": "2",
+        "room2": "260",
         "table": "5"
       },
       {
@@ -793,98 +793,98 @@ const officialSheetData = {
         "no": 1,
         "name": "陳Ｏ翔",
         "room1": "2020",
-        "room2": "A4-2",
+        "room2": "206",
         "table": "6"
       },
       {
         "no": 2,
         "name": "徐Ｏ睿",
         "room1": "2019",
-        "room2": "A6",
+        "room2": "205",
         "table": "6"
       },
       {
         "no": 3,
         "name": "游Ｏ鈞",
         "room1": "2017",
-        "room2": "A6",
+        "room2": "205",
         "table": "6"
       },
       {
         "no": 4,
         "name": "楊Ｏ瑜",
         "room1": "2018",
-        "room2": "A6",
+        "room2": "205",
         "table": "6"
       },
       {
         "no": 5,
         "name": "牛Ｏ安",
         "room1": "2017",
-        "room2": "A6",
+        "room2": "205",
         "table": "6"
       },
       {
         "no": 6,
         "name": "陳Ｏ昕",
         "room1": "2019",
-        "room2": "A4-1",
+        "room2": "208",
         "table": "6"
       },
       {
         "no": 7,
         "name": "許Ｏ銘",
         "room1": "2019",
-        "room2": "A4-1",
+        "room2": "208",
         "table": "6"
       },
       {
         "no": 8,
         "name": "莊Ｏ禾",
         "room1": "2017",
-        "room2": "A6",
+        "room2": "205",
         "table": "7"
       },
       {
         "no": 9,
         "name": "王Ｏ丞",
         "room1": "2018",
-        "room2": "A6",
+        "room2": "205",
         "table": "7"
       },
       {
         "no": 10,
         "name": "張Ｏ博",
         "room1": "2020",
-        "room2": "A4-2",
+        "room2": "206",
         "table": "7"
       },
       {
         "no": 11,
         "name": "吳Ｏ樺",
         "room1": "2019",
-        "room2": "A4-1",
+        "room2": "208",
         "table": "7"
       },
       {
         "no": 12,
         "name": "張Ｏ穎",
         "room1": "2020",
-        "room2": "A4-2",
+        "room2": "206",
         "table": "7"
       },
       {
         "no": 13,
         "name": "曹Ｏ銘",
         "room1": "2018",
-        "room2": "A4-1",
+        "room2": "208",
         "table": "7"
       },
       {
         "no": 14,
         "name": "吳Ｏ駿",
         "room1": "2020",
-        "room2": "A4-2",
+        "room2": "206",
         "table": "7"
       },
       {
@@ -970,77 +970,77 @@ const officialSheetData = {
         "no": 1,
         "name": "李Ｏ嫻",
         "room1": "6006",
-        "room2": "B6",
+        "room2": "257",
         "table": "3"
       },
       {
         "no": 2,
         "name": "范Ｏ馨",
         "room1": "6006",
-        "room2": "B5",
+        "room2": "255",
         "table": "3"
       },
       {
         "no": 3,
         "name": "黃Ｏ晨",
         "room1": "6006",
-        "room2": "B6",
+        "room2": "257",
         "table": "3"
       },
       {
         "no": 4,
         "name": "楊Ｏ琳",
         "room1": "6005",
-        "room2": "B5",
+        "room2": "255",
         "table": "3"
       },
       {
         "no": 5,
         "name": "吳Ｏ瞳",
         "room1": "6005",
-        "room2": "B5",
+        "room2": "255",
         "table": "3"
       },
       {
         "no": 6,
         "name": "吳Ｏ妮",
         "room1": "6003",
-        "room2": "B6",
+        "room2": "257",
         "table": "6"
       },
       {
         "no": 7,
         "name": "傅Ｏ霏",
         "room1": "6005",
-        "room2": "B5",
+        "room2": "255",
         "table": "6"
       },
       {
         "no": 8,
         "name": "林Ｏ儀",
         "room1": "6005",
-        "room2": "B5",
+        "room2": "255",
         "table": "6"
       },
       {
         "no": 9,
         "name": "翁Ｏ淇",
         "room1": "6006",
-        "room2": "B6",
+        "room2": "257",
         "table": "7"
       },
       {
         "no": 10,
         "name": "鄭Ｏ葳",
         "room1": "6003",
-        "room2": "B6",
+        "room2": "257",
         "table": "7"
       },
       {
         "no": 11,
         "name": "葉Ｏ妍",
         "room1": "6003",
-        "room2": "B6",
+        "room2": "257",
         "table": "7"
       },
       {
@@ -1152,92 +1152,92 @@ const officialSheetData = {
         "no": 1,
         "name": "嚴Ｏ彧",
         "room1": "3003",
-        "room2": "A",
+        "room2": "210",
         "table": "8"
       },
       {
         "no": 2,
         "name": "陳Ｏ",
         "room1": "3005",
-        "room2": "C",
+        "room2": "207",
         "table": "8"
       },
       {
         "no": 3,
         "name": "陳Ｏ翔",
         "room1": "3005",
-        "room2": "C",
+        "room2": "207",
         "table": "9"
       },
       {
         "no": 4,
         "name": "林Ｏ翰",
         "room1": "3007",
-        "room2": "B",
+        "room2": "212",
         "table": "9"
       },
       {
         "no": 5,
         "name": "李Ｏ勳",
         "room1": "3007",
-        "room2": "A",
+        "room2": "210",
         "table": "9"
       },
       {
         "no": 6,
         "name": "陳Ｏ齊",
         "room1": "3007",
-        "room2": "C",
+        "room2": "207",
         "table": "8"
       },
       {
         "no": 7,
         "name": "呂Ｏ誠",
         "room1": "3006",
-        "room2": "B",
+        "room2": "212",
         "table": "10"
       },
       {
         "no": 8,
         "name": "陳Ｏ博",
         "room1": "3006",
-        "room2": "B",
+        "room2": "212",
         "table": "8"
       },
       {
         "no": 9,
         "name": "儲Ｏ庭",
         "room1": "3003",
-        "room2": "A",
+        "room2": "210",
         "table": "9"
       },
       {
         "no": 10,
         "name": "林Ｏ廷",
         "room1": "3007",
-        "room2": "C",
+        "room2": "207",
         "table": "9"
       },
       {
         "no": 11,
         "name": "翁Ｏ碩",
         "room1": "3005",
-        "room2": "C",
+        "room2": "207",
         "table": "8"
       },
       {
         "no": 12,
         "name": "紀Ｏ諒",
         "room1": "3006",
-        "room2": "B",
+        "room2": "212",
         "table": "10"
       },
       {
         "no": 13,
         "name": "俞Ｏ太",
         "room1": "3003",
-        "room2": "A",
-        "table": "9"
+        "room2": "210",
+        "table": "9(素)"
       },
       {
         "no": 14,
@@ -1329,77 +1329,77 @@ const officialSheetData = {
         "no": 1,
         "name": "林Ｏ媛",
         "room1": "6007",
-        "room2": "D",
+        "room2": "251",
         "table": "9"
       },
       {
         "no": 2,
         "name": "李Ｏ晴",
         "room1": "6012",
-        "room2": "E",
+        "room2": "253",
         "table": "8"
       },
       {
         "no": 3,
         "name": "何Ｏ璇",
         "room1": "6007",
-        "room2": "E",
+        "room2": "253",
         "table": "8"
       },
       {
         "no": 4,
         "name": "鄭Ｏ亭",
         "room1": "6012",
-        "room2": "E",
+        "room2": "253",
         "table": "10"
       },
       {
         "no": 5,
         "name": "許Ｏ瑄",
         "room1": "6008",
-        "room2": "D",
+        "room2": "251",
         "table": "9"
       },
       {
         "no": 6,
-        "name": "温Ｏ萱",
+        "name": "溫Ｏ萱",
         "room1": "6008",
-        "room2": "D",
+        "room2": "251",
         "table": "9"
       },
       {
         "no": 7,
         "name": "邱Ｏ涵",
         "room1": "6008",
-        "room2": "D",
+        "room2": "251",
         "table": "10"
       },
       {
         "no": 8,
         "name": "張Ｏ云",
         "room1": "6012",
-        "room2": "E",
+        "room2": "253",
         "table": "8"
       },
       {
         "no": 9,
         "name": "陳Ｏ嵐",
         "room1": "6012",
-        "room2": "E",
+        "room2": "253",
         "table": "8"
       },
       {
         "no": 10,
         "name": "童Ｏ芃",
         "room1": "6008",
-        "room2": "D",
+        "room2": "251",
         "table": "9"
       },
       {
         "no": 11,
         "name": "邱Ｏ蓁",
         "room1": "6007",
-        "room2": "E",
+        "room2": "253",
         "table": "8"
       },
       {
@@ -1511,84 +1511,84 @@ const officialSheetData = {
         "no": 1,
         "name": "陳Ｏ東",
         "room1": "2001",
-        "room2": "A",
+        "room2": "225",
         "table": "13"
       },
       {
         "no": 2,
         "name": "陳Ｏ逸",
         "room1": "2008",
-        "room2": "B",
+        "room2": "227",
         "table": "14"
       },
       {
         "no": 3,
         "name": "陳Ｏ杰",
         "room1": "2001",
-        "room2": "A",
+        "room2": "225",
         "table": "14"
       },
       {
         "no": 4,
         "name": "陳Ｏ宇",
         "room1": "2001",
-        "room2": "A",
+        "room2": "225",
         "table": "14"
       },
       {
         "no": 5,
         "name": "黃Ｏ祐",
         "room1": "2008",
-        "room2": "B",
+        "room2": "227",
         "table": "15"
       },
       {
         "no": 6,
         "name": "李Ｏ碩",
         "room1": "2007",
-        "room2": "C",
+        "room2": "229",
         "table": "13"
       },
       {
         "no": 7,
         "name": "林Ｏ倫",
         "room1": "2007",
-        "room2": "C",
+        "room2": "229",
         "table": "13"
       },
       {
         "no": 8,
         "name": "凌Ｏ邑",
         "room1": "2008",
-        "room2": "B",
+        "room2": "227",
         "table": "14"
       },
       {
         "no": 9,
         "name": "劉Ｏ辰",
         "room1": "2001",
-        "room2": "A",
+        "room2": "225",
         "table": "13"
       },
       {
         "no": 10,
         "name": "王Ｏ澄",
         "room1": "2008",
-        "room2": "B",
+        "room2": "227",
         "table": "14"
       },
       {
         "no": 11,
         "name": "吳Ｏ宸",
         "room1": "2007",
-        "room2": "C",
+        "room2": "229",
         "table": "15"
       },
       {
         "no": 12,
         "name": "嚴Ｏ榮",
         "room1": "2007",
-        "room2": "C",
+        "room2": "229",
         "table": "13"
       },
       {
@@ -1688,77 +1688,77 @@ const officialSheetData = {
         "no": 1,
         "name": "嚴Ｏ宸",
         "room1": "6010",
-        "room2": "2",
+        "room2": "249",
         "table": "13"
       },
       {
         "no": 2,
         "name": "羅Ｏ洢",
         "room1": "6009",
-        "room2": "1",
+        "room2": "247",
         "table": "14"
       },
       {
         "no": 3,
         "name": "羅Ｏ婷",
         "room1": "6009",
-        "room2": "2",
+        "room2": "249",
         "table": "15"
       },
       {
         "no": 4,
         "name": "蕭Ｏ羚",
         "room1": "6010",
-        "room2": "2",
+        "room2": "249",
         "table": "13"
       },
       {
         "no": 5,
         "name": "張Ｏ慈",
         "room1": "6011",
-        "room2": "1",
+        "room2": "247",
         "table": "14"
       },
       {
         "no": 6,
         "name": "茅Ｏ芳",
         "room1": "6011",
-        "room2": "1",
+        "room2": "247",
         "table": "14"
       },
       {
         "no": 7,
         "name": "洪Ｏ晴",
         "room1": "6009",
-        "room2": "2",
+        "room2": "249",
         "table": "13"
       },
       {
         "no": 8,
         "name": "林Ｏ橙",
         "room1": "6010",
-        "room2": "2",
+        "room2": "249",
         "table": "13"
       },
       {
         "no": 9,
         "name": "周Ｏ妤",
         "room1": "6010",
-        "room2": "2",
+        "room2": "249",
         "table": "13"
       },
       {
         "no": 10,
         "name": "吳Ｏ妤",
         "room1": "6011",
-        "room2": "1",
+        "room2": "247",
         "table": "14"
       },
       {
         "no": 11,
         "name": "李Ｏ語",
         "room1": "6011",
-        "room2": "1",
+        "room2": "247",
         "table": "14"
       },
       {
@@ -1864,119 +1864,119 @@ const officialSheetData = {
   "606": {
     "className": "606",
     "teacher": "王Ｏ潔",
-    "totalCount": 27,
+    "totalCount": 26,
     "boys": [
       {
         "no": 1,
-        "name": "王Ｏ廷",
-        "room1": "3009",
-        "room2": "B",
-        "table": "17"
-      },
-      {
-        "no": 2,
         "name": "麥Ｏ林",
         "room1": "3010",
-        "room2": "A",
+        "room2": "216",
         "table": "15"
       },
       {
-        "no": 3,
+        "no": 2,
         "name": "劉Ｏ謙",
         "room1": "3012",
-        "room2": "B",
+        "room2": "209",
         "table": "17"
       },
       {
-        "no": 4,
+        "no": 3,
         "name": "任Ｏ叡",
         "room1": "3011",
-        "room2": "C",
+        "room2": "211",
+        "table": "16"
+      },
+      {
+        "no": 4,
+        "name": "許Ｏ騰",
+        "room1": "3011",
+        "room2": "211",
         "table": "16"
       },
       {
         "no": 5,
-        "name": "許Ｏ騰",
-        "room1": "3011",
-        "room2": "C",
-        "table": "16"
-      },
-      {
-        "no": 6,
         "name": "蘇Ｏ恩",
         "room1": "3009",
-        "room2": "B",
+        "room2": "209",
         "table": "17"
       },
       {
-        "no": 7,
+        "no": 6,
         "name": "周Ｏ宇",
         "room1": "3012",
-        "room2": "C",
+        "room2": "211",
+        "table": "16"
+      },
+      {
+        "no": 7,
+        "name": "蔡Ｏ希",
+        "room1": "3011",
+        "room2": "211",
         "table": "16"
       },
       {
         "no": 8,
-        "name": "蔡Ｏ希",
+        "name": "吳Ｏ駿",
         "room1": "3011",
-        "room2": "C",
+        "room2": "211",
         "table": "16"
       },
       {
         "no": 9,
-        "name": "吳Ｏ駿",
-        "room1": "3011",
-        "room2": "C",
+        "name": "杜Ｏ叡",
+        "room1": "3012",
+        "room2": "211",
         "table": "16"
       },
       {
         "no": 10,
-        "name": "杜Ｏ叡",
-        "room1": "3012",
-        "room2": "C",
-        "table": "16"
-      },
-      {
-        "no": 11,
         "name": "林Ｏ宏",
         "room1": "3009",
-        "room2": "B",
+        "room2": "209",
         "table": "17"
       },
       {
-        "no": 12,
+        "no": 11,
         "name": "施Ｏ碩",
         "room1": "3010",
-        "room2": "A",
+        "room2": "216",
+        "table": "15"
+      },
+      {
+        "no": 12,
+        "name": "陳Ｏ睿",
+        "room1": "3010",
+        "room2": "216",
         "table": "15"
       },
       {
         "no": 13,
-        "name": "陳Ｏ睿",
-        "room1": "3010",
-        "room2": "A",
+        "name": "張Ｏ章",
+        "room1": "3012",
+        "room2": "209",
         "table": "15"
       },
       {
         "no": 14,
-        "name": "張Ｏ章",
-        "room1": "3012",
-        "room2": "B",
+        "name": "潘Ｏ恩",
+        "room1": "3010",
+        "room2": "216",
         "table": "15"
       },
       {
         "no": 15,
-        "name": "潘Ｏ恩",
-        "room1": "3010",
-        "room2": "A",
-        "table": "15"
+        "name": "邱Ｏ洵",
+        "room1": "3009",
+        "room2": "209",
+        "table": "17"
       },
       {
         "no": 16,
-        "name": "邱Ｏ洵",
-        "room1": "3009",
-        "room2": "B",
-        "table": "17"
+        "name": "",
+        "room1": "",
+        "room2": "",
+        "table": ""
       },
       {
         "no": 17,
@@ -2047,77 +2047,77 @@ const officialSheetData = {
         "no": 1,
         "name": "蘇Ｏ閔",
         "room1": "6021",
-        "room2": "1",
+        "room2": "243",
         "table": "17"
       },
       {
         "no": 2,
         "name": "洪Ｏ倢",
         "room1": "6019",
-        "room2": "1",
+        "room2": "243",
         "table": "15"
       },
       {
         "no": 3,
         "name": "許Ｏ穎",
         "room1": "6019",
-        "room2": "1",
+        "room2": "243",
         "table": "16"
       },
       {
         "no": 4,
         "name": "傅Ｏ茜",
         "room1": "6020",
-        "room2": "2",
+        "room2": "245",
         "table": "15"
       },
       {
         "no": 5,
         "name": "賴Ｏ晨",
         "room1": "6020",
-        "room2": "2",
+        "room2": "245",
         "table": "17"
       },
       {
         "no": 6,
         "name": "張Ｏ筠",
         "room1": "6020",
-        "room2": "2",
+        "room2": "245",
         "table": "17"
       },
       {
         "no": 7,
         "name": "曾Ｏ筑",
         "room1": "6020",
-        "room2": "2",
+        "room2": "245",
         "table": "16"
       },
       {
         "no": 8,
         "name": "陳Ｏ蕎",
         "room1": "6021",
-        "room2": "2",
+        "room2": "245",
         "table": "17"
       },
       {
         "no": 9,
         "name": "林Ｏ宓",
         "room1": "6019",
-        "room2": "1",
+        "room2": "243",
         "table": "16"
       },
       {
         "no": 10,
         "name": "葉Ｏ萱",
         "room1": "6019",
-        "room2": "1",
+        "room2": "243",
         "table": "16"
       },
       {
         "no": 11,
         "name": "陳Ｏ琪",
         "room1": "6021",
-        "room2": "2",
+        "room2": "245",
         "table": "17"
       },
       {
@@ -2229,105 +2229,105 @@ const officialSheetData = {
         "no": 1,
         "name": "廖Ｏ傑",
         "room1": "3017",
-        "room2": "A",
+        "room2": "218",
         "table": "10"
       },
       {
         "no": 2,
         "name": "張Ｏ圖",
         "room1": "3019",
-        "room2": "C",
+        "room2": "217",
         "table": "10"
       },
       {
         "no": 3,
         "name": "林Ｏ恩",
         "room1": "3019",
-        "room2": "C",
+        "room2": "217",
         "table": "12"
       },
       {
         "no": 4,
         "name": "吳Ｏ樺",
         "room1": "3020",
-        "room2": "A",
+        "room2": "218",
         "table": "12"
       },
       {
         "no": 5,
         "name": "蘇Ｏ仁",
         "room1": "3020",
-        "room2": "C",
+        "room2": "217",
         "table": "12"
       },
       {
         "no": 6,
         "name": "林Ｏ廷",
         "room1": "3018",
-        "room2": "A",
+        "room2": "218",
         "table": "10"
       },
       {
         "no": 7,
         "name": "陳Ｏ祁",
         "room1": "3019",
-        "room2": "C",
+        "room2": "217",
         "table": "11"
       },
       {
         "no": 8,
         "name": "許Ｏ淮",
         "room1": "3019",
-        "room2": "C",
+        "room2": "217",
         "table": "10"
       },
       {
         "no": 9,
         "name": "顏Ｏ庭",
         "room1": "3018",
-        "room2": "B",
+        "room2": "215",
         "table": "11"
       },
       {
         "no": 10,
         "name": "陳Ｏ智",
         "room1": "3017",
-        "room2": "B",
+        "room2": "215",
         "table": "11"
       },
       {
         "no": 11,
-        "name": "張Ｏ瑒",
+        "name": "張Ｏ瑀",
         "room1": "3017",
-        "room2": "A",
+        "room2": "218",
         "table": "11"
       },
       {
         "no": 12,
         "name": "王Ｏ筌",
         "room1": "3018",
-        "room2": "B",
+        "room2": "215",
         "table": "11"
       },
       {
         "no": 13,
         "name": "董Ｏ綸",
         "room1": "3020",
-        "room2": "C",
+        "room2": "217",
         "table": "11"
       },
       {
         "no": 14,
         "name": "侯Ｏ廷",
         "room1": "3018",
-        "room2": "B",
+        "room2": "215",
         "table": "11"
       },
       {
         "no": 15,
         "name": "薛Ｏ文",
         "room1": "3020",
-        "room2": "B",
+        "room2": "215",
         "table": "12"
       },
       {
@@ -2404,79 +2404,79 @@ const officialSheetData = {
     "girls": [
       {
         "no": 1,
-        "name": "李Ｏ叡",
+        "name": "李Ｏ叙",
         "room1": "7019",
-        "room2": "2",
+        "room2": "241",
         "table": "11"
       },
       {
         "no": 2,
         "name": "顏Ｏ庭",
         "room1": "7019",
-        "room2": "2",
+        "room2": "241",
         "table": "11"
       },
       {
         "no": 3,
         "name": "潘Ｏ蒨",
         "room1": "7018",
-        "room2": "1",
+        "room2": "239",
         "table": "12"
       },
       {
         "no": 4,
         "name": "鄭Ｏ品",
         "room1": "7019",
-        "room2": "2",
+        "room2": "241",
         "table": "11"
       },
       {
         "no": 5,
         "name": "林Ｏ萱",
         "room1": "7019",
-        "room2": "2",
+        "room2": "241",
         "table": "10"
       },
       {
         "no": 6,
         "name": "王Ｏ涵",
         "room1": "7018",
-        "room2": "1",
+        "room2": "239",
         "table": "10"
       },
       {
         "no": 7,
         "name": "王Ｏ艾",
         "room1": "7017",
-        "room2": "1",
+        "room2": "239",
         "table": "12"
       },
       {
         "no": 8,
         "name": "劉Ｏ佑",
         "room1": "7018",
-        "room2": "1",
+        "room2": "239",
         "table": "12"
       },
       {
         "no": 9,
         "name": "林Ｏ晴",
         "room1": "7017",
-        "room2": "1",
+        "room2": "239",
         "table": "12"
       },
       {
         "no": 10,
         "name": "林Ｏ蓉",
         "room1": "7017",
-        "room2": "2",
+        "room2": "241",
         "table": "12"
       },
       {
         "no": 11,
         "name": "周Ｏ",
         "room1": "7018",
-        "room2": "2",
+        "room2": "241",
         "table": "12"
       },
       {
@@ -2587,92 +2587,92 @@ const officialSheetData = {
       {
         "no": 1,
         "name": "廖Ｏ佑",
-        "room1": "505",
-        "room2": "A",
+        "room1": "5005",
+        "room2": "220",
         "table": "20"
       },
       {
         "no": 2,
         "name": "李Ｏ宸",
-        "room1": "503",
-        "room2": "A",
+        "room1": "5003",
+        "room2": "220",
         "table": "20"
       },
       {
         "no": 3,
         "name": "徐Ｏ城",
-        "room1": "507",
-        "room2": "C",
+        "room1": "5007",
+        "room2": "219",
         "table": "18"
       },
       {
         "no": 4,
         "name": "吳Ｏ儁",
-        "room1": "507",
-        "room2": "C",
+        "room1": "5007",
+        "room2": "219",
         "table": "19"
       },
       {
         "no": 5,
         "name": "蘇Ｏ凱",
-        "room1": "507",
-        "room2": "C",
+        "room1": "5007",
+        "room2": "219",
         "table": "18"
       },
       {
         "no": 6,
-        "name": "阮Ｏ樺",
-        "room1": "507",
-        "room2": "C",
+        "name": "阮Ｏ祥",
+        "room1": "5007",
+        "room2": "219",
         "table": "19"
       },
       {
         "no": 7,
         "name": "張Ｏ正",
-        "room1": "505",
-        "room2": "C",
+        "room1": "5005",
+        "room2": "219",
         "table": "18"
       },
       {
         "no": 8,
         "name": "趙Ｏ翰",
-        "room1": "506",
-        "room2": "B",
+        "room1": "5006",
+        "room2": "222",
         "table": "19"
       },
       {
         "no": 9,
         "name": "袁Ｏ謙",
-        "room1": "506",
-        "room2": "B",
+        "room1": "5006",
+        "room2": "222",
         "table": "18"
       },
       {
         "no": 10,
         "name": "顏Ｏ敏",
-        "room1": "505",
-        "room2": "B",
+        "room1": "5005",
+        "room2": "222",
         "table": "19"
       },
       {
         "no": 11,
         "name": "林Ｏ睿",
-        "room1": "503",
-        "room2": "A",
+        "room1": "5003",
+        "room2": "220",
         "table": "20"
       },
       {
         "no": 12,
         "name": "李Ｏ安",
-        "room1": "506",
-        "room2": "B",
+        "room1": "5006",
+        "room2": "222",
         "table": "18"
       },
       {
         "no": 13,
         "name": "陳Ｏ杰",
-        "room1": "503",
-        "room2": "A",
+        "room1": "5003",
+        "room2": "220",
         "table": "20"
       },
       {
@@ -2765,77 +2765,77 @@ const officialSheetData = {
         "no": 1,
         "name": "陳Ｏ菁",
         "room1": "6018",
-        "room2": "B",
+        "room2": "237",
         "table": "18"
       },
       {
         "no": 2,
         "name": "林Ｏ倢",
         "room1": "6017",
-        "room2": "B",
+        "room2": "237",
         "table": "19"
       },
       {
         "no": 3,
         "name": "李Ｏ欣",
         "room1": "6018",
-        "room2": "B",
+        "room2": "237",
         "table": "18"
       },
       {
         "no": 4,
         "name": "劉Ｏ蓉",
         "room1": "6017",
-        "room2": "B",
+        "room2": "237",
         "table": "19"
       },
       {
         "no": 5,
         "name": "黃Ｏ心",
         "room1": "6001",
-        "room2": "A",
+        "room2": "235",
         "table": "18"
       },
       {
         "no": 6,
         "name": "蔡Ｏ心",
         "room1": "6001",
-        "room2": "A",
+        "room2": "235",
         "table": "19"
       },
       {
         "no": 7,
         "name": "王Ｏ晴",
         "room1": "6001",
-        "room2": "A",
+        "room2": "235",
         "table": "18"
       },
       {
         "no": 8,
-        "name": "蔡Ｏ淣",
+        "name": "蔡Ｏ況",
         "room1": "6001",
-        "room2": "A",
+        "room2": "235",
         "table": "19"
       },
       {
         "no": 9,
         "name": "王Ｏ希",
         "room1": "6017",
-        "room2": "B",
+        "room2": "237",
         "table": "18"
       },
       {
         "no": 10,
         "name": "陳Ｏ睿",
         "room1": "6018",
-        "room2": "A",
+        "room2": "235",
         "table": "19"
       },
       {
         "no": 11,
         "name": "林Ｏ樂",
         "room1": "6018",
-        "room2": "B",
+        "room2": "237",
         "table": "19"
       },
       {
@@ -2947,105 +2947,105 @@ const officialSheetData = {
         "no": 1,
         "name": "李Ｏ熙",
         "room1": "5011",
-        "room2": "B",
+        "room2": "221",
         "table": "21"
       },
       {
         "no": 2,
         "name": "陳Ｏ睿",
         "room1": "5011",
-        "room2": "C",
+        "room2": "223",
         "table": "20"
       },
       {
         "no": 3,
         "name": "黃Ｏ凱",
         "room1": "5010",
-        "room2": "B",
+        "room2": "221",
         "table": "21"
       },
       {
         "no": 4,
         "name": "范Ｏ禾",
         "room1": "5011",
-        "room2": "C",
+        "room2": "223",
         "table": "20"
       },
       {
         "no": 5,
         "name": "賴Ｏ穎",
         "room1": "5008",
-        "room2": "C",
+        "room2": "223",
         "table": "20"
       },
       {
         "no": 6,
         "name": "謝Ｏ易",
         "room1": "5010",
-        "room2": "B",
+        "room2": "221",
         "table": "21"
       },
       {
         "no": 7,
         "name": "李Ｏ俊",
         "room1": "5009",
-        "room2": "A",
+        "room2": "226",
         "table": "21"
       },
       {
         "no": 8,
         "name": "林Ｏ軒",
         "room1": "5010",
-        "room2": "B",
+        "room2": "221",
         "table": "21"
       },
       {
         "no": 9,
         "name": "張Ｏ睿",
         "room1": "5011",
-        "room2": "C",
+        "room2": "223",
         "table": "20"
       },
       {
         "no": 10,
         "name": "謝Ｏ澄",
         "room1": "5009",
-        "room2": "A",
+        "room2": "226",
         "table": "21"
       },
       {
         "no": 11,
         "name": "郭Ｏ語",
         "room1": "5009",
-        "room2": "A",
+        "room2": "226",
         "table": "21"
       },
       {
         "no": 12,
         "name": "黃Ｏ翔",
         "room1": "5009",
-        "room2": "A",
+        "room2": "226",
         "table": "21"
       },
       {
         "no": 13,
         "name": "陳Ｏ儒",
         "room1": "5010",
-        "room2": "B",
+        "room2": "221",
         "table": "21"
       },
       {
         "no": 14,
         "name": "曹Ｏ軒",
         "room1": "5008",
-        "room2": "C",
+        "room2": "223",
         "table": "20"
       },
       {
         "no": 15,
         "name": "宋Ｏ旭",
         "room1": "5008",
-        "room2": "C",
+        "room2": "223",
         "table": "21"
       },
       {
@@ -3124,77 +3124,77 @@ const officialSheetData = {
         "no": 1,
         "name": "洪Ｏ凌",
         "room1": "7009",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 2,
         "name": "黃Ｏ菲",
         "room1": "7011",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 3,
         "name": "黃Ｏ喬",
         "room1": "7011",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 4,
         "name": "楊Ｏ瑜",
         "room1": "7009",
-        "room2": "A",
+        "room2": "359",
         "table": "22"
       },
       {
         "no": 5,
         "name": "陳Ｏ彤",
         "room1": "7010",
-        "room2": "A",
+        "room2": "359",
         "table": "20"
       },
       {
         "no": 6,
         "name": "秦Ｏ綺",
         "room1": "7010",
-        "room2": "A",
+        "room2": "359",
         "table": "22"
       },
       {
         "no": 7,
         "name": "黃Ｏ宇",
         "room1": "7011",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 8,
-        "name": "汪Ｏ馷",
+        "name": "汪Ｏ驕",
         "room1": "7010",
-        "room2": "A",
+        "room2": "359",
         "table": "22"
       },
       {
         "no": 9,
         "name": "蔡Ｏ函",
         "room1": "7011",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 10,
         "name": "顧Ｏ菱",
         "room1": "7009",
-        "room2": "B",
+        "room2": "361",
         "table": "22"
       },
       {
         "no": 11,
         "name": "蕭Ｏ璇",
         "room1": "7010",
-        "room2": "A",
+        "room2": "359",
         "table": "22"
       },
       {
@@ -3357,7 +3357,7 @@ function sanitizeSheetData(data) {
 }
 
 // 資料版本控管：確保更新官方資料、導師去識別化與下拉漢堡選單時，使用者端自動升級至最新版本
-const OFFICIAL_DATA_VERSION = "20261031_v7_mobile_optical_hig";
+const OFFICIAL_DATA_VERSION = "20261117_v8_official_all_rooms";
 
 function getInitialSheetData() {
   const savedVersion = localStorage.getItem("ly_room_table_version");
